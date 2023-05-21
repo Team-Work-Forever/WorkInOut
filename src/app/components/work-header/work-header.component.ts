@@ -1,8 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { IonicModule, NavController } from '@ionic/angular';
-import { Data, loadTourismPoints } from '../services/api';
-import { WorkHeaderComponent } from '../components/work-header/work-header.component';
+import {
+    Component,
+    ContentChildren,
+    Input,
+    OnInit,
+    QueryList,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { Data, loadTourismPoints } from 'src/app/services/api';
 
 export interface Card {
     title: string;
@@ -12,17 +18,26 @@ export interface Card {
 }
 
 @Component({
-    selector: 'app-home',
-    templateUrl: 'home.page.html',
-    styleUrls: ['home.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, WorkHeaderComponent],
+    imports: [CommonModule, IonicModule, FormsModule],
+    selector: 'app-work-header',
+    templateUrl: './work-header.component.html',
+    styleUrls: ['./work-header.component.scss'],
 })
-export class HomePage {
+export class WorkHeaderComponent implements OnInit {
+    @Input()
+    isNested: boolean = false;
+
+    @Input()
+    title: string = 'Bem Vindo';
+
+    @ContentChildren('widget')
+    widgets: QueryList<Component>;
+
     results: any[];
     cards: Card[];
 
-    constructor(private nav: NavController) {
+    constructor() {
         this.cards = [
             {
                 title: 'Pontos de interesse turísticos',
@@ -35,6 +50,8 @@ export class HomePage {
 
         this.results = this.cards;
     }
+
+    ngOnInit() {}
 
     handleChange(event: any) {
         const searchTerm = event.target.value;
@@ -49,9 +66,5 @@ export class HomePage {
         } else {
             this.results = this.cards;
         }
-    }
-
-    handleClick(card: Card) {
-        // this.nav.navigateForward('/detalhe', { state: card });
     }
 }

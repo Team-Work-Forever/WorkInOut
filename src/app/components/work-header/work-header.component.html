@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons *ngIf="isNested" slot="start">
+            <ion-back-button default-href="#"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon
+                    slot="icon-only"
+                    name="help-circle-outline"
+                ></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar>
+        <h1>{{ title }}</h1>
+    </ion-toolbar>
+
+    <ion-toolbar class="custom-toolbar">
+        <ion-searchbar
+            [debounce]="1000"
+            (ionInput)="handleChange($event)"
+        ></ion-searchbar>
+    </ion-toolbar>
+
+    <div #widget></div>
+    <!--
+    <ion-toolbar class="custom-toolbar">
+        <ion-grid>
+            <ion-row>
+                <ion-col size-sm="5.9" size="5.9">
+                    <ion-button class="custom-button-1">
+                        Meus Planos
+                    </ion-button>
+                </ion-col>
+                <ion-col size-sm="5.9" size="5.9">
+                    <ion-button class="custom-button-2">
+                        Planos de Treino
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar> -->
+</ion-header>

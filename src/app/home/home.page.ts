@@ -7,8 +7,9 @@ import { WorkHeaderComponent } from '../components/work-header/work-header.compo
 export interface Card {
     title: string;
     image: string;
-    description: string;
+    time: string;
     list: Data[];
+    isFavorite: boolean;
 }
 
 @Component({
@@ -25,11 +26,53 @@ export class HomePage {
     constructor(private nav: NavController) {
         this.cards = [
             {
-                title: 'Pontos de interesse turísticos',
-                image: '/assets/pontosTuristicos.png',
-                description:
-                    'Póvoa de Varzim é uma cidade costeira situada no norte de Portugal, que apresenta uma variedade de pontos turísticos.',
+                title: 'Treino',
+                image: '/assets/workType/alongamentos.png',
+                time: '2 min',
                 list: loadTourismPoints(),
+                isFavorite: false,
+            },
+            {
+                title: 'Treino',
+                image: '/assets/workType/cardio.png',
+                time: '1 min',
+                list: loadTourismPoints(),
+                isFavorite: false,
+            },
+            {
+                title: 'Treino',
+                image: '/assets/workType/forca.png',
+                time: '20 min',
+                list: loadTourismPoints(),
+                isFavorite: false,
+            },
+            {
+                title: 'Treino',
+                image: '/assets/workType/forca.png',
+                time: '20 min',
+                list: loadTourismPoints(),
+                isFavorite: false,
+            },
+            {
+                title: 'Treino',
+                image: '/assets/workType/forca.png',
+                time: '20 min',
+                list: loadTourismPoints(),
+                isFavorite: false,
+            },
+            {
+                title: 'Treino',
+                image: '/assets/workType/forca.png',
+                time: '20 min',
+                list: loadTourismPoints(),
+                isFavorite: false,
+            },
+            {
+                title: 'Treino',
+                image: '/assets/workType/forca.png',
+                time: '20 min',
+                list: loadTourismPoints(),
+                isFavorite: false,
             },
         ];
 
@@ -53,5 +96,9 @@ export class HomePage {
 
     handleClick(card: Card) {
         // this.nav.navigateForward('/detalhe', { state: card });
+    }
+
+    toggleFavorite(card: Card) {
+        card.isFavorite = !card.isFavorite;
     }
 }

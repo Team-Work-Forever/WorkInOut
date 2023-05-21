@@ -1,0 +1,32 @@
+.card-row {
+    margin-left: -3px;
+    margin-right: -3px;
+}
+
+.card-item {
+    margin: 6px 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+ion-card {
+    width: 164px;
+}
+
+ion-card-title {
+    font-size: 16px;
+    text-align: left;
+}
+
+.button-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px;
+}
+
+.favorite-button {
+    color: white;
+}
+
+

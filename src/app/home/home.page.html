@@ -1,17 +1,48 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Bem-vindo</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar class="custom-toolbar">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleChange($event)"></ion-searchbar>
+  </ion-toolbar>
+
+  <ion-toolbar class="custom-toolbar">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="5.9" size="5.9">
+          <ion-button class="custom-button-1">
+            Meus Planos
+          </ion-button>
+        </ion-col>
+        <ion-col size-sm="5.9" size="5.9">
+          <ion-button class="custom-button-2">
+            Planos de Treino
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4">
+        <ion-card (click)="handleClick(card)" *ngFor="let card of results">
+          <img [src]="card.image" />
+          <ion-card-content>
+            <ion-card-title color="primary">{{ card.title }}</ion-card-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

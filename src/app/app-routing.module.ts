@@ -15,24 +15,36 @@ const routes: Routes = [
     {
         path: 'settings',
         loadChildren: () =>
-            import('./settings/settings.module').then(
+            import('./pages/tabs/settings/settings.module').then(
                 (m) => m.SettingsPageModule
             ),
     },
     {
         path: 'account',
         loadChildren: () =>
-            import('./account/account.module').then((m) => m.AccountPageModule),
+            import('./pages/tabs/account/account.module').then(
+                (m) => m.AccountPageModule
+            ),
     },
     {
         path: 'login',
         loadChildren: () =>
             import('./pages/login/login.module').then((m) => m.LoginPageModule),
-    },  {
-    path: 'category-plan',
-    loadChildren: () => import('./pages/category-plan/category-plan.module').then( m => m.CategoryPlanPageModule)
-  },
-
+    },
+    {
+        path: 'category-plan',
+        loadChildren: () =>
+            import('./pages/category-plan/category-plan.module').then(
+                (m) => m.CategoryPlanPageModule
+            ),
+    },
+    {
+        path: 'my-plan',
+        loadChildren: () =>
+            import('./pages/my-plan/my-plan.module').then(
+                (m) => m.MyPlanPageModule
+            ),
+    },
 ];
 @NgModule({
     imports: [

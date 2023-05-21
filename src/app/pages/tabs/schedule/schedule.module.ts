@@ -5,9 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { SchedulePage } from './schedule.page';
 
 import { SchedulePageRoutingModule } from './schedule-routing.module';
+import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.component';
 
 @NgModule({
-  imports: [IonicModule, CommonModule, FormsModule, SchedulePageRoutingModule],
-  declarations: [SchedulePage],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        SchedulePageRoutingModule,
+        WorkHeaderComponent,
+    ],
+    declarations: [SchedulePage],
 })
 export class SchedulePageModule {}

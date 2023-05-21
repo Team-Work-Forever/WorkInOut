@@ -7,9 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { AccountPageRoutingModule } from './account-routing.module';
 
 import { AccountPage } from './account.page';
+import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, AccountPageRoutingModule],
-  declarations: [AccountPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AccountPageRoutingModule,
+        WorkHeaderComponent,
+    ],
+    declarations: [AccountPage],
 })
 export class AccountPageModule {}

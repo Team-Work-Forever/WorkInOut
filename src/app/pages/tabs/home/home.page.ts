@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
-import { Data, loadTourismPoints } from '../services/api';
-import { WorkHeaderComponent } from '../components/work-header/work-header.component';
+import { Data, loadTourismPoints } from '../../../services/api';
+import { WorkHeaderComponent } from '../../../components/work-header/work-header.component';
 
 export interface Card {
     title: string;

@@ -16,7 +16,7 @@ import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.
         IonicModule,
         MyPlanPageRoutingModule,
         WorkHeaderComponent,
+        MyPlanPage,
     ],
-    declarations: [MyPlanPage],
 })
 export class MyPlanPageModule {}

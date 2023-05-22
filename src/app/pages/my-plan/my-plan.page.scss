@@ -1,0 +1,26 @@
+.separator {
+    height: 3px;
+    background-color: #f6f6f6;
+}
+
+.separator-bar {
+    margin-top: 26px;
+    margin-bottom: 10px;
+    margin-left: 22px;
+    margin-right: 22px;
+}
+
+.ion-buttons-end {
+    justify-content: flex-end;
+  }
+
+ion-buttons {
+    color: #6A778A;
+}
+
+ion-fab {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}

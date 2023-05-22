@@ -45,6 +45,13 @@ const routes: Routes = [
                 (m) => m.MyPlanPageModule
             ),
     },
+    {
+        path: 'info-plan',
+        loadChildren: () =>
+            import('./pages/info-plan/info-plan.module').then(
+                (m) => m.InfoPlanPageModule
+            ),
+    },
 ];
 @NgModule({
     imports: [

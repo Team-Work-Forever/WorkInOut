@@ -1,4 +1,13 @@
 import { Data } from '../interfaces/card.inteface';
+import { Material } from '../interfaces/imageContent.interface';
+
+export function getMaterial(): Material[] {
+    return [
+        {
+            name: 'Tapete',
+        },
+    ];
+}
 
 export function loadTourismPoints(): Data[] {
     return [

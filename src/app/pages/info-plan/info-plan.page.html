@@ -1,0 +1,33 @@
+<app-work-header title="Plano 1"></app-work-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+        <ion-row class="center">
+            <ion-col
+                *ngFor="let imageContainer of results; let i = index"
+                class="card-container"
+            >
+                <div class="container">
+                    <ng-container *ngIf="i === 0">
+                        <img [src]="imageContainer.image" />
+                        <div class="image-text">{{ imageContainer.title }}</div>
+                        <div class="image-subtext">
+                            {{ imageContainer.qt }} Calorias
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="i === 1">
+                        <div
+                            class="clickable container"
+                            (click)="handleClick()"
+                        >
+                            <img [src]="imageContainer.image" />
+                            <div class="image-text-button">
+                                {{ imageContainer.title }}
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

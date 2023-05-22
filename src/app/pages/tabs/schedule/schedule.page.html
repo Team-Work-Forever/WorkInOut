@@ -1,3 +1,13 @@
 <app-work-header title="Agenda"></app-work-header>
 
-<ion-content [fullscreen]="true"> </ion-content>
+<ion-content [fullscreen]="true">
+    <div class="schedule">
+        <ion-datetime
+            presentation="date"
+            value="2022-04-21T00:00:00"
+            [min]="getMinDate()"
+            max="2028-05-31T23:59:59"
+            (ionChange)="getSelectedDate($event)"
+        ></ion-datetime>
+    </div>
+</ion-content>

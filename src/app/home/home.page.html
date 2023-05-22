@@ -3,7 +3,7 @@
 <ion-content [fullscreen]="true">
     <ion-grid>
       <ion-row class="card-row card-wrapper">
-        <ion-col size="6" size-md="4" size-lg="3" *ngFor="let card of results">
+        <ion-col size="6" size-md="3" size-lg="3" *ngFor="let card of results">
           <ion-card (click)="handleClick(card)" class="card-container">
             <img [src]="card.image" />
                 <ion-card-content>

@@ -1,0 +1,52 @@
+.radius {
+    border-radius: 10px;
+  }
+
+  .image-text {
+    position: absolute;
+    color: white;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+  .image-text-button {
+      position: absolute;
+      color: white;
+      top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.image-subtext {
+    position: absolute;
+    color: white;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 318px;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .clickable {
+    cursor: pointer;
+  }

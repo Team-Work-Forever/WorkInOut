@@ -9,6 +9,7 @@ import { PlayPlanPageRoutingModule } from './play-plan-routing.module';
 import { PlayPlanPage } from './play-plan.page';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
+import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-disp
         PlayPlanPageRoutingModule,
         WorkHeaderModule,
         FlagDisplayerModule,
+        ItemVisualizerModule,
     ],
     declarations: [PlayPlanPage],
 })

@@ -19,6 +19,9 @@ export class WorkHeaderComponent implements OnInit {
     @Input()
     editable: boolean = false;
 
+    @Input()
+    search: boolean = true;
+
     @Output()
     result: EventEmitter<Card[]> = new EventEmitter<Card[]>();
 

@@ -4,6 +4,7 @@ import {
     Component,
     ContentChildren,
     ElementRef,
+    Input,
     OnInit,
     ViewChild,
 } from '@angular/core';
@@ -20,10 +21,11 @@ export class SwiperComponent implements OnInit {
 
     public currentIndex: number = 0;
 
+    @Input() public isTopDown: boolean = false;
+
     @ContentChildren(SwiperPageDirective) widgets;
 
-    @ViewChild('swiper')
-    public swiperRef: ElementRef | undefined;
+    @ViewChild('swiper') public swiperRef: ElementRef | undefined;
 
     constructor() {}
 

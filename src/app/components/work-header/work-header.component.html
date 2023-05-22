@@ -18,7 +18,7 @@
         <text-field [value]="title" *ngIf="editable"></text-field>
     </ion-toolbar>
 
-    <ion-toolbar *ngIf="!editable" class="custom-toolbar">
+    <ion-toolbar *ngIf="!editable && search" class="custom-toolbar">
         <ion-searchbar
             [debounce]="1000"
             (ionInput)="handleChange($event)"

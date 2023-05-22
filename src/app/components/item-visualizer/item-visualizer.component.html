@@ -1,0 +1,14 @@
+<div class="item">
+    <div *ngIf="isOpen" class="content">
+        <swiper [isTopDown]="true">
+            <div *swiperPage></div>
+            <div *swiperPage class="video-view">
+                <img src="./assets/workType/alongamentos.png" />
+            </div>
+        </swiper>
+    </div>
+    <div (click)="handleClick()" class="header">
+        <span>Alongamento Cobra</span>
+        <span>00:20</span>
+    </div>
+</div>

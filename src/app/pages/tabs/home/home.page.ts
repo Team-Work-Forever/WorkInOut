@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
                 image: '/assets/workType/alongamentos.png',
                 time: '2 min',
                 list: loadTourismPoints(),
-                isFavorite: false,
+                isFavorite: true,
             },
             {
                 title: 'Treino',

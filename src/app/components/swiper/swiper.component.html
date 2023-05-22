@@ -1,5 +1,16 @@
-<swiper-container class="w-full h-full" [modules]="swiperModules">
-    <swiper-slide> Slider 1 </swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide>
-    <swiper-slide>Slide 3</swiper-slide>
+<swiper-container
+    #swiper
+    class="w-full h-full"
+    [modules]="swiperModules"
+    (slidechange)="onSlideChange()"
+>
+    <swiper-slide *ngFor="let widget of widgets">
+        <ng-container *ngTemplateOutlet="widget.templateRef"></ng-container>
+    </swiper-slide>
 </swiper-container>
+<div #footer class="footer">
+    <span
+        *ngFor="let widget of widgets; let i = index"
+        [ngClass]="{ active: i === currentIndex }"
+    ></span>
+</div>

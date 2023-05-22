@@ -2,20 +2,15 @@ import { CommonModule } from '@angular/common';
 import {
     Component,
     ContentChildren,
+    EventEmitter,
     Input,
     OnInit,
+    Output,
     QueryList,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Data, loadTourismPoints } from 'src/app/services/api';
-
-export interface Card {
-    title: string;
-    image: string;
-    description: string;
-    list: Data[];
-}
+import { Card } from 'src/app/interfaces/card.inteface';
 
 @Component({
     standalone: true,
@@ -26,6 +21,9 @@ export interface Card {
 })
 export class WorkHeaderComponent implements OnInit {
     @Input()
+    arrayList: Card[];
+
+    @Input()
     isNested: boolean = false;
 
     @Input()
@@ -34,37 +32,26 @@ export class WorkHeaderComponent implements OnInit {
     @ContentChildren('widget')
     widgets: QueryList<Component>;
 
-    results: any[];
-    cards: Card[];
+    @Output()
+    result: EventEmitter<Card[]> = new EventEmitter<Card[]>();
 
-    constructor() {
-        this.cards = [
-            {
-                title: 'Pontos de interesse turísticos',
-                image: '/assets/pontosTuristicos.png',
-                description:
-                    'Póvoa de Varzim é uma cidade costeira situada no norte de Portugal, que apresenta uma variedade de pontos turísticos.',
-                list: loadTourismPoints(),
-            },
-        ];
-
-        this.results = this.cards;
-    }
+    constructor() {}
 
     ngOnInit() {}
 
     handleChange(event: any) {
         const searchTerm = event.target.value;
         if (searchTerm && searchTerm.trim() !== '') {
-            this.results = this.cards.filter((card) => {
+            const filteredResults = this.arrayList.filter((card) => {
                 return (
                     card.title
                         .toLowerCase()
                         .indexOf(searchTerm.toLowerCase()) !== -1
                 );
             });
+            this.result.emit(filteredResults);
         } else {
-            this.results = this.cards;
+            this.result.emit(this.arrayList);
         }
     }
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.component';
+import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { ImageContent } from 'src/app/interfaces/imageContent.interface';
 import { getMaterial } from 'src/app/services/api';
 
@@ -10,7 +10,7 @@ import { getMaterial } from 'src/app/services/api';
     templateUrl: './info-plan.page.html',
     styleUrls: ['./info-plan.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, WorkHeaderComponent],
+    imports: [IonicModule, CommonModule, WorkHeaderModule],
 })
 export class InfoPlanPage implements OnInit {
     imageContainer: ImageContent[];

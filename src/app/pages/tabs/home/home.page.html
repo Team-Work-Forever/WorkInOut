@@ -19,26 +19,6 @@
 
 <ion-content [fullscreen]="true">
     <swiper>
-            <ion-grid>
-                <ion-row class="card-row card-wrapper">
-                    <ion-col
-                        size="6"
-                        size-md="3"
-                        size-lg="3"
-                        *ngFor="let card of results"
-                    >
-                        <app-card
-                            (click)="handleClick(card)"
-                            [image]="card.image"
-                            [title]="card.title"
-                            [time]="card.time"
-                            [isFavorite]="card.isFavorite"
-                            icon="star"
-                        ></app-card>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-content>
         <ion-content *swiperPage>
             <ion-grid>
                 <ion-row class="card-row card-wrapper">
@@ -81,6 +61,26 @@
                 </ion-row>
             </ion-grid>
         </ion-content>
-        </div>
+        <ion-content *swiperPage>
+            <ion-grid>
+                <ion-row class="card-row card-wrapper">
+                    <ion-col
+                        size="6"
+                        size-md="3"
+                        size-lg="3"
+                        *ngFor="let card of results"
+                    >
+                        <app-card
+                            (click)="handleClick(card)"
+                            [image]="card.image"
+                            [title]="card.title"
+                            [time]="card.time"
+                            [isFavorite]="card.isFavorite"
+                            icon="star"
+                        ></app-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-content>
     </swiper>
 </ion-content>

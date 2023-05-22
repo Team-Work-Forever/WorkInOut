@@ -50,3 +50,38 @@
   .clickable {
     cursor: pointer;
   }
+
+  .separator {
+    height: 3px;
+    background-color: #f6f6f6;
+}
+
+.separator-bar {
+    margin-top: 4px;
+    margin-bottom: 10px;
+    margin-left: 22px;
+    margin-right: 22px;
+}
+
+  .list-wrapper {
+    padding: 20px 20px;
+}
+
+.ion-buttons-end {
+    justify-content: flex-end;
+}
+
+ion-reorder-group {
+    gap: 12px;
+}
+
+.create-btn {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+ion-list {
+    margin-bottom: 100px;
+}

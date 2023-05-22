@@ -9,7 +9,7 @@
             >
                 <div class="container">
                     <ng-container *ngIf="i === 0">
-                        <img [src]="imageContainer.image" />
+                        <img class="radius" [src]="imageContainer.image" />
                         <div class="image-text">{{ imageContainer.title }}</div>
                         <div class="image-subtext">
                             {{ imageContainer.qt }} Calorias
@@ -20,7 +20,7 @@
                             class="clickable container"
                             (click)="handleClick()"
                         >
-                            <img [src]="imageContainer.image" />
+                            <img class="radius" [src]="imageContainer.image" />
                             <div class="image-text-button">
                                 {{ imageContainer.title }}
                             </div>
@@ -30,4 +30,25 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+    <div class="separator-bar">
+        <ion-buttons slot="end" class="ion-buttons-end">
+            <ion-button color="">
+                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+            <ion-button color="">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <div class="separator"></div>
+    </div>
+    <div class="list-wrapper">
+        <ion-list>
+            <item-visualizer> </item-visualizer>
+            <item-visualizer> </item-visualizer>
+            <item-visualizer> </item-visualizer>
+            <item-visualizer> </item-visualizer>
+        </ion-list>
+    </div>
+
+    <ion-button class="create-btn" expand="block">Começar</ion-button>
 </ion-content>

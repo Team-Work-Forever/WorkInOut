@@ -1,16 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { ImageContent } from 'src/app/interfaces/imageContent.interface';
 import { getMaterial } from 'src/app/services/api';
-
 @Component({
     selector: 'app-info-plan',
     templateUrl: './info-plan.page.html',
     styleUrls: ['./info-plan.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, WorkHeaderModule],
+    imports: [
+        IonicModule,
+        CommonModule,
+        WorkHeaderModule,
+        ItemVisualizerModule,
+    ],
 })
 export class InfoPlanPage implements OnInit {
     imageContainer: ImageContent[];
@@ -38,7 +43,9 @@ export class InfoPlanPage implements OnInit {
         this.calculateMaxCardsPerRow();
     }
 
-    handleClick() {}
+    handleClick() {
+        console.log('Oi!, WOW');
+    }
 
     calculateMaxCardsPerRow(): void {
         const containerWidth =

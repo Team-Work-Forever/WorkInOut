@@ -1,0 +1,10 @@
+<button
+    (click)="handleClick()"
+    [class.checked]="isChecked"
+    [style.background-color]="mainColor"
+>
+    {{ content }}
+    <div *ngIf="isChecked" [class.checked]="isChecked" class="overlay">
+        <ion-icon size="small" name="checkmark-outline"></ion-icon>
+    </div>
+</button>

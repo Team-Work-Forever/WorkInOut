@@ -1,5 +1,10 @@
 .schedule {
-    padding: 22px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    padding: 22px;
+}
+
+ion-text {
+    padding: 0 20px;
 }

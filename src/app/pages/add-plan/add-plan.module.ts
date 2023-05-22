@@ -11,6 +11,7 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
 import { ReorderItemModule } from 'src/app/components/reorder-item/reorder-item.module';
 import { HorizontalSliderModule } from 'src/app/components/horizontal-slider/horizontal-slider.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
+import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { CheckButtonModule } from 'src/app/components/check-button/components.mo
         ReorderItemModule,
         HorizontalSliderModule,
         CheckButtonModule,
+        FlagDisplayerModule,
     ],
     declarations: [AddPlanPage],
 })

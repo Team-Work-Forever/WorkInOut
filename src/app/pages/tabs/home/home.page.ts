@@ -4,7 +4,6 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { loadTourismPoints } from '../../../services/api';
 import { WorkHeaderComponent } from '../../../components/work-header/work-header.component';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
-
 import { CardComponent } from '../../../components/card/card.component';
 import { Card } from 'src/app/interfaces/card.inteface';
 
@@ -34,7 +33,7 @@ export class HomePage implements OnInit {
                 image: '/assets/workType/alongamentos.png',
                 time: '2 min',
                 list: loadTourismPoints(),
-                isFavorite: false,
+                isFavorite: true,
             },
             {
                 title: 'Treino',

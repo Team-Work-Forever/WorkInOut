@@ -5,10 +5,10 @@
 ></app-work-header>
 
 <ion-content [fullscreen]="true">
-    <swiper>
+    <!-- <swiper>
         <div *swiperPage>God</div>
         <div *swiperPage>Cralho</div>
-    </swiper>
+    </swiper> -->
     <ion-grid>
         <ion-row class="card-row card-wrapper">
             <ion-col
@@ -23,6 +23,7 @@
                     [title]="card.title"
                     [time]="card.time"
                     [isFavorite]="card.isFavorite"
+                    icon="star"
                 ></app-card>
             </ion-col>
         </ion-row>

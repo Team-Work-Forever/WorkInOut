@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Card } from 'src/app/interfaces/card.inteface';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -10,9 +10,9 @@ import { CommonModule } from '@angular/common';
     templateUrl: 'card.component.html',
     styleUrls: ['card.component.scss'],
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
     @Input()
-    isFavorite: boolean = false;
+    isFavorite: boolean;
 
     @Input()
     image: string = '';
@@ -23,11 +23,25 @@ export class CardComponent {
     @Input()
     time: string = '';
 
+    @Input()
+    icon: string;
+
+    option: string;
+
+    ngOnInit(): void {
+        this.option = this.isFavorite
+            ? this.icon + '-sharp'
+            : this.icon + '-outline';
+    }
+
     handleClick(card: Card) {
         // this.nav.navigateForward('/detalhe', { state: card });
     }
 
     toggleFavorite() {
         this.isFavorite = !this.isFavorite;
+        this.option = this.isFavorite
+            ? this.icon + '-sharp'
+            : this.icon + '-outline';
     }
 }

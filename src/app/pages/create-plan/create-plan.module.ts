@@ -9,6 +9,7 @@ import { CreatePlanPageRoutingModule } from './create-plan-routing.module';
 import { CreatePlanPage } from './create-plan.page';
 import { TextFieldModule } from 'src/app/components/text-field/text-field.module';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
+import { ReorderItemModule } from 'src/app/components/reorder-item/reorder-item.module';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
         CreatePlanPageRoutingModule,
         WorkHeaderModule,
         TextFieldModule,
+        ReorderItemModule,
     ],
     declarations: [CreatePlanPage],
 })

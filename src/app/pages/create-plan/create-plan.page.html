@@ -5,4 +5,43 @@
     </div>
 </app-work-header>
 
-<ion-content [fullscreen]="true"> </ion-content>
+<ion-content [fullscreen]="true">
+    <div class="separator-bar">
+        <ion-buttons slot="end" class="ion-buttons-end">
+            <ion-button color="">
+                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+            <ion-button color="">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <div class="separator"></div>
+    </div>
+    <div class="list-wrapper">
+        <ion-list>
+            <ion-reorder-group
+                [disabled]="false"
+                (ionItemReorder)="handleReorder($any($event))"
+            >
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+            </ion-reorder-group>
+        </ion-list>
+    </div>
+
+    <ion-button class="create-btn" expand="block">Criar Plano</ion-button>
+</ion-content>

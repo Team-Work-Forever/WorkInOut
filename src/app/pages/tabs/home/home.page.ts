@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
 import { loadTourismPoints } from '../../../services/api';
-import { WorkHeaderComponent } from '../../../components/work-header/work-header.component';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { CardComponent } from '../../../components/card/card.component';
 import { Card } from 'src/app/interfaces/card.inteface';
+import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 
 @Component({
     selector: 'app-home',
@@ -16,8 +16,8 @@ import { Card } from 'src/app/interfaces/card.inteface';
     imports: [
         IonicModule,
         CommonModule,
-        WorkHeaderComponent,
         SwiperModule,
+        WorkHeaderModule,
         CheckButtonModule,
         CardComponent,
     ],

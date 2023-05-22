@@ -13,33 +13,19 @@
         </ion-buttons>
     </ion-toolbar>
 
-    <ion-toolbar>
-        <h1>{{ title }}</h1>
+    <ion-toolbar class="text-header">
+        <h1 *ngIf="!editable">{{ title }}</h1>
+        <text-field [value]="title" *ngIf="editable"></text-field>
     </ion-toolbar>
 
-    <ion-toolbar class="custom-toolbar">
+    <ion-toolbar *ngIf="!editable" class="custom-toolbar">
         <ion-searchbar
             [debounce]="1000"
             (ionInput)="handleChange($event)"
         ></ion-searchbar>
     </ion-toolbar>
 
-    <div #widget></div>
-    <!--
-    <ion-toolbar class="custom-toolbar">
-        <ion-grid>
-            <ion-row>
-                <ion-col size-sm="5.9" size="5.9">
-                    <ion-button class="custom-button-1">
-                        Meus Planos
-                    </ion-button>
-                </ion-col>
-                <ion-col size-sm="5.9" size="5.9">
-                    <ion-button class="custom-button-2">
-                        Planos de Treino
-                    </ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar> -->
+    <ion-toolbar class="content">
+        <ng-content></ng-content>
+    </ion-toolbar>
 </ion-header>

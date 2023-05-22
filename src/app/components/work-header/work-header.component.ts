@@ -1,20 +1,7 @@
-import { CommonModule } from '@angular/common';
-import {
-    Component,
-    ContentChildren,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    QueryList,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from 'src/app/interfaces/card.inteface';
 
 @Component({
-    standalone: true,
-    imports: [CommonModule, IonicModule, FormsModule],
     selector: 'app-work-header',
     templateUrl: './work-header.component.html',
     styleUrls: ['./work-header.component.scss'],
@@ -27,17 +14,20 @@ export class WorkHeaderComponent implements OnInit {
     isNested: boolean = false;
 
     @Input()
-    title: string = 'Bem Vindo';
+    title: string = 'Novo Treino';
 
-    @ContentChildren('widget')
-    widgets: QueryList<Component>;
+    @Input()
+    editable: boolean = false;
 
     @Output()
     result: EventEmitter<Card[]> = new EventEmitter<Card[]>();
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.editable) {
+        }
+    }
 
     handleChange(event: any) {
         const searchTerm = event.target.value;

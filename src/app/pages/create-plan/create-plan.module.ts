@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CategoryPlanPageRoutingModule } from './category-plan-routing.module';
+import { CreatePlanPageRoutingModule } from './create-plan-routing.module';
 
-import { CategoryPlanPage } from './category-plan.page';
+import { CreatePlanPage } from './create-plan.page';
+import { TextFieldModule } from 'src/app/components/text-field/text-field.module';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 
 @NgModule({
@@ -14,9 +15,10 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
         CommonModule,
         FormsModule,
         IonicModule,
-        CategoryPlanPageRoutingModule,
+        CreatePlanPageRoutingModule,
         WorkHeaderModule,
+        TextFieldModule,
     ],
-    declarations: [CategoryPlanPage],
+    declarations: [CreatePlanPage],
 })
-export class CategoryPlanPageModule {}
+export class CreatePlanPageModule {}

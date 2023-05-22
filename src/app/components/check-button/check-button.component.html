@@ -2,6 +2,9 @@
     (click)="handleClick()"
     [class.checked]="isChecked"
     [style.background-color]="mainColor"
+    [ngStyle]="{
+        'border-color': isChecked ? '#888888' : mainColor
+    }"
 >
     {{ content }}
     <div *ngIf="isChecked" [class.checked]="isChecked" class="overlay">

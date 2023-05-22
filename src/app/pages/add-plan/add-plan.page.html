@@ -1,0 +1,42 @@
+<app-work-header [isNested]="true" title="Novo Treino" [editable]="true">
+    <flag-displayer></flag-displayer>
+</app-work-header>
+
+<ion-content [fullscreen]="true">
+    <ion-searchbar placeholder="Pesquisar" [debounce]="1000"></ion-searchbar>
+
+    <horizontal-slider>
+        <check-button></check-button>
+        <check-button></check-button>
+        <check-button></check-button>
+        <check-button></check-button>
+        <check-button></check-button>
+    </horizontal-slider>
+
+    <div class="list-wrapper">
+        <ion-list>
+            <ion-reorder-group
+                [disabled]="false"
+                (ionItemReorder)="handleReorder($any($event))"
+            >
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+                <reorder-item
+                    title="Alongamento Cobra"
+                    time="00:20"
+                ></reorder-item>
+            </ion-reorder-group>
+        </ion-list>
+    </div>
+    <ion-button class="create-btn" expand="block">Adicionar</ion-button>
+</ion-content>

@@ -1,0 +1,18 @@
+<app-work-header [isNested]="true" title="Plano 1" [search]="false">
+    <flag-displayer></flag-displayer>
+</app-work-header>
+
+<ion-content [fullscreen]="true">
+    <div class="list-wrapper">
+        <ion-list>
+            <item-visualizer [isOpen]="true"> </item-visualizer>
+            <item-visualizer> </item-visualizer>
+        </ion-list>
+    </div>
+
+    <ion-fab class="create-btn">
+        <ion-fab-button olor="primary">
+            <ion-icon name="pause-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

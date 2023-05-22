@@ -1,0 +1,13 @@
+.wrapper {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    overflow-x: scroll;
+    --offset-bottom: auto !important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

@@ -5,20 +5,20 @@ swiper-container {
 
 swiper-slide {
     display: flex;
-    position: relative;
+    // position: relative;
 
-    flex-direction: column;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
+    // flex-direction: column;
+    // flex-shrink: 0;
+    // align-items: center;
+    // justify-content: center;
 
     width: 100%;
     height: 100%;
 
     font-size: 18px;
 
-    text-align: center;
-    box-sizing: border-box;
+    // text-align: center;
+    // box-sizing: border-box;
 }
 
 swiper-slide img {
@@ -29,15 +29,18 @@ swiper-slide img {
 }
 
 .footer {
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-around;
+    gap: 10px;
     align-items: start;
     width: 100%;
     height: 2%;
+    padding: 0 10px;
 
     span {
-        height: 25%;
-        width: 25%;
+        height: 35%;
+        width: 100%;
         background-color: #d6d6d6;
         border-radius: 10px;
         transition: background-color 250ms ease-in;

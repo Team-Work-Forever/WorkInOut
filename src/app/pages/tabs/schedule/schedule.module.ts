@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SchedulePage } from './schedule.page';
 
 import { SchedulePageRoutingModule } from './schedule-routing.module';
-import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.component';
+import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 
 @NgModule({
     imports: [
@@ -13,7 +13,7 @@ import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.
         CommonModule,
         FormsModule,
         SchedulePageRoutingModule,
-        WorkHeaderComponent,
+        WorkHeaderModule,
     ],
     declarations: [SchedulePage],
 })

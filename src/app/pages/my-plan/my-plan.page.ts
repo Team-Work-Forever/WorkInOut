@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
 import { CardComponent } from 'src/app/components/card/card.component';
-import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.component';
+import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { Card } from 'src/app/interfaces/card.inteface';
 import { loadTourismPoints } from 'src/app/services/api';
 
@@ -11,7 +11,7 @@ import { loadTourismPoints } from 'src/app/services/api';
     templateUrl: './my-plan.page.html',
     styleUrls: ['./my-plan.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, WorkHeaderComponent, CardComponent],
+    imports: [IonicModule, CommonModule, WorkHeaderModule, CardComponent],
 })
 export class MyPlanPage implements OnInit {
     results: Card[];

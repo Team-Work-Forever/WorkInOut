@@ -45,7 +45,19 @@ const routes: Routes = [
                 (m) => m.MyPlanPageModule
             ),
     },
-    {
+  {
+    path: 'create-plan',
+    loadChildren: () => import('./pages/create-plan/create-plan.module').then( m => m.CreatePlanPageModule)
+  },
+  {
+    path: 'add-plan',
+    loadChildren: () => import('./pages/add-plan/add-plan.module').then( m => m.AddPlanPageModule)
+  },
+  {
+    path: 'play-plan',
+    loadChildren: () => import('./pages/play-plan/play-plan.module').then( m => m.PlayPlanPageModule)
+  },
+   {
         path: 'info-plan',
         loadChildren: () =>
             import('./pages/info-plan/info-plan.module').then(
@@ -53,6 +65,7 @@ const routes: Routes = [
             ),
     },
 ];
+
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
@@ -60,3 +73,5 @@ const routes: Routes = [
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+

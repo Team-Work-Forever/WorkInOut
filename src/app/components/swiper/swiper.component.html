@@ -1,3 +1,10 @@
+<div *ngIf="isTopDown" #footer class="footer">
+    <span
+        *ngFor="let widget of widgets; let i = index"
+        [ngClass]="{ active: i === currentIndex }"
+    >
+    </span>
+</div>
 <swiper-container
     #swiper
     class="w-full h-full"
@@ -8,7 +15,7 @@
         <ng-container *ngTemplateOutlet="widget.templateRef"></ng-container>
     </swiper-slide>
 </swiper-container>
-<div #footer class="footer">
+<div *ngIf="!isTopDown" #footer class="footer">
     <span
         *ngFor="let widget of widgets; let i = index"
         [ngClass]="{ active: i === currentIndex }"

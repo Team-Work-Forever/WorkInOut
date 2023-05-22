@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CategoryPlanPageRoutingModule } from './category-plan-routing.module';
 
 import { CategoryPlanPage } from './category-plan.page';
-import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.component';
+import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 
 @NgModule({
     imports: [
@@ -15,7 +15,7 @@ import { WorkHeaderComponent } from 'src/app/components/work-header/work-header.
         FormsModule,
         IonicModule,
         CategoryPlanPageRoutingModule,
-        WorkHeaderComponent,
+        WorkHeaderModule,
     ],
     declarations: [CategoryPlanPage],
 })

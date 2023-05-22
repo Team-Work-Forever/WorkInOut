@@ -4,6 +4,7 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { Data, loadTourismPoints } from '../../../services/api';
 import { WorkHeaderComponent } from '../../../components/work-header/work-header.component';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
+import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 
 export interface Card {
     title: string;
@@ -18,7 +19,13 @@ export interface Card {
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, WorkHeaderComponent, SwiperModule],
+    imports: [
+        IonicModule,
+        CommonModule,
+        WorkHeaderComponent,
+        SwiperModule,
+        CheckButtonModule,
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {

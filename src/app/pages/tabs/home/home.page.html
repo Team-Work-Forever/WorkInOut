@@ -2,43 +2,10 @@
 
 <ion-content [fullscreen]="true">
     <swiper>
-        <div *swiperPage>God</div>
+        <div *swiperPage>
+            <check-button> </check-button>
+        </div>
+        <div *swiperPage>Adeus</div>
         <div *swiperPage>Cralho</div>
     </swiper>
-    <!-- <ion-grid>
-                <ion-row class="card-row card-wrapper">
-                    <ion-col
-                        size="6"
-                        size-md="3"
-                        size-lg="3"
-                        *ngFor="let card of results"
-                    >
-                        <ion-card
-                            (click)="handleClick(card)"
-                            class="card-container"
-                        >
-                            <img [src]="card.image" />
-                            <ion-card-content>
-                                <ion-card-subtitle color="primary"
-                                    >{{ card.time }}</ion-card-subtitle
-                                >
-                                <ion-card-title color="primary"
-                                    >{{ card.title }}</ion-card-title
-                                >
-                            </ion-card-content>
-                            <div class="button-container">
-                                <ion-buttons>
-                                    <ion-button (click)="toggleFavorite(card)">
-                                        <ion-icon
-                                            class="favorite-button"
-                                            slot="icon-only"
-                                            [name]="card.isFavorite ? 'star-sharp' : 'star-outline'"
-                                        ></ion-icon>
-                                    </ion-button>
-                                </ion-buttons>
-                            </div>
-                        </ion-card>
-                    </ion-col>
-                </ion-row> </ion-grid
-        > -->
 </ion-content>

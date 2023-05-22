@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
 import { Data, loadTourismPoints } from '../../../services/api';
 import { WorkHeaderComponent } from '../../../components/work-header/work-header.component';
-import { SwiperComponent } from 'src/app/components/swiper/swiper.component';
+import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 
 export interface Card {
     title: string;
@@ -18,7 +18,7 @@ export interface Card {
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, WorkHeaderComponent, SwiperComponent],
+    imports: [IonicModule, CommonModule, WorkHeaderComponent, SwiperModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {

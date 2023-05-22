@@ -1,5 +1,36 @@
 <app-work-header title="Meus Planos"></app-work-header>
 
 <ion-content [fullscreen]="true">
-    <ion-icon name="trash"></ion-icon>
+    <div class="separator-bar">
+        <ion-buttons slot="end" class="ion-buttons-end">
+            <ion-button color="">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <div class="separator"></div>
+    </div>
+    <ion-grid>
+        <ion-row class="card-row card-wrapper">
+            <ion-col
+                size="6"
+                size-md="3"
+                size-lg="3"
+                *ngFor="let card of results"
+            >
+                <app-card
+                    (click)="handleClick(card)"
+                    [image]="card.image"
+                    [title]="card.title"
+                    [time]="card.time"
+                    [isFavorite]="card.isFavorite"
+                    icon="star"
+                ></app-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-fab>
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

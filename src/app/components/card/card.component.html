@@ -1,0 +1,19 @@
+<ion-card class="card-container">
+    <img [src]="image" />
+    <ion-card-content>
+        <ion-card-subtitle color="primary">{{ time }}</ion-card-subtitle>
+        <ion-card-title color="primary">{{ title }}</ion-card-title>
+    </ion-card-content>
+    <div class="button-container">
+        <ion-buttons>
+            <!-- <div class="geometric-figure"></div> -->
+            <ion-button (click)="toggleFavorite()">
+                <ion-icon
+                    class="favorite-button"
+                    slot="icon-only"
+                    [name]="option"
+                ></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </div>
+</ion-card>

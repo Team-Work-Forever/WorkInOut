@@ -1,18 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
-import { Data, loadTourismPoints } from '../../../services/api';
+import { loadTourismPoints } from '../../../services/api';
 import { WorkHeaderComponent } from '../../../components/work-header/work-header.component';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
-
-export interface Card {
-    title: string;
-    image: string;
-    time: string;
-    list: Data[];
-    isFavorite: boolean;
-}
+import { CardComponent } from '../../../components/card/card.component';
+import { Card } from 'src/app/interfaces/card.inteface';
 
 @Component({
     selector: 'app-home',
@@ -25,11 +19,12 @@ export interface Card {
         WorkHeaderComponent,
         SwiperModule,
         CheckButtonModule,
+        CardComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
-    results: any[];
+    results: Card[];
     cards: Card[];
     maxCardsPerRow: number;
 
@@ -40,19 +35,12 @@ export class HomePage implements OnInit {
                 image: '/assets/workType/alongamentos.png',
                 time: '2 min',
                 list: loadTourismPoints(),
-                isFavorite: false,
+                isFavorite: true,
             },
             {
                 title: 'Treino',
                 image: '/assets/workType/cardio.png',
                 time: '1 min',
-                list: loadTourismPoints(),
-                isFavorite: false,
-            },
-            {
-                title: 'Treino',
-                image: '/assets/workType/forca.png',
-                time: '20 min',
                 list: loadTourismPoints(),
                 isFavorite: false,
             },
@@ -100,27 +88,12 @@ export class HomePage implements OnInit {
         this.calculateMaxCardsPerRow();
     }
 
-    handleChange(event: any) {
-        const searchTerm = event.target.value;
-        if (searchTerm && searchTerm.trim() !== '') {
-            this.results = this.cards.filter((card) => {
-                return (
-                    card.title
-                        .toLowerCase()
-                        .indexOf(searchTerm.toLowerCase()) !== -1
-                );
-            });
-        } else {
-            this.results = this.cards;
-        }
+    handleResult(filteredResults: Card[]) {
+        this.results = filteredResults;
     }
 
     handleClick(card: Card) {
         // this.nav.navigateForward('/detalhe', { state: card });
-    }
-
-    toggleFavorite(card: Card) {
-        card.isFavorite = !card.isFavorite;
     }
 
     calculateMaxCardsPerRow(): void {

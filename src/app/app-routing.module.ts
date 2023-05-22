@@ -48,6 +48,10 @@ const routes: Routes = [
     path: 'create-plan',
     loadChildren: () => import('./pages/create-plan/create-plan.module').then( m => m.CreatePlanPageModule)
   },
+  {
+    path: 'add-plan',
+    loadChildren: () => import('./pages/add-plan/add-plan.module').then( m => m.AddPlanPageModule)
+  },
 
 ];
 @NgModule({

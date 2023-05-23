@@ -4,7 +4,16 @@
             <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Agendar</ion-button>
+            <ion-button
+                (click)="confirm()"
+                (click)="
+                    selectedDate
+                        ? presentToast('top', 'O plano de treino foi agendado!')
+                        : presentToast('top', 'Selecione uma data!')
+                "
+                [strong]="true"
+                >Agendar</ion-button
+            >
         </ion-buttons>
     </ion-toolbar>
 </ion-header>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
     selector: 'schedual-selection',
@@ -9,7 +9,10 @@ import { ModalController } from '@ionic/angular';
 export class SchedualSelectionComponent {
     selectedDate: boolean;
 
-    constructor(private modalCtrl: ModalController) {}
+    constructor(
+        private modalCtrl: ModalController,
+        public toastController: ToastController
+    ) {}
 
     cancel() {
         return this.modalCtrl.dismiss(null, 'cancel');
@@ -59,5 +62,14 @@ export class SchedualSelectionComponent {
         console.log('Dia:', day);
         console.log('Hora:', hour);
         console.log('Minutos:', minute);
+    }
+
+    async presentToast(position, title) {
+        const toast = await this.toastController.create({
+            message: title,
+            duration: 2000,
+            position: position,
+        });
+        toast.present();
     }
 }

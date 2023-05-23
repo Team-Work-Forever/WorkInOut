@@ -3,7 +3,11 @@
     <span> 2 min </span>
 
     <div class="container" *ngIf="hasAgenda">
-        <ion-icon size="large" name="calendar-outline"></ion-icon>
-        <ion-icon size="large" name="star-outline"></ion-icon>
+        <ion-icon
+            slot="icon-only"
+            size="large"
+            name="calendar-outline"
+            (click)="openSchedule()"
+        ></ion-icon>
     </div>
 </div>

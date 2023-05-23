@@ -34,6 +34,13 @@ const routes: Routes = [
                                         '../pages/create-plan/create-plan.module'
                                     ).then((m) => m.CreatePlanPageModule),
                             },
+                            {
+                                path: 'add',
+                                loadChildren: () =>
+                                    import(
+                                        '../pages/add-plan/add-plan.module'
+                                    ).then((m) => m.AddPlanPageModule),
+                            },
                         ],
                     },
                     {

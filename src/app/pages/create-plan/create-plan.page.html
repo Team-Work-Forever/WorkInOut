@@ -1,6 +1,6 @@
 <app-work-header
     [isNested]="true"
-    title="Novo Treino"
+    [title]="planTitle"
     [editable]="true"
     (editValue)="planTitleChanged($event)"
 >
@@ -10,7 +10,7 @@
 <ion-content [fullscreen]="true">
     <div class="separator-bar">
         <ion-buttons slot="end" class="ion-buttons-end">
-            <ion-button color="">
+            <ion-button (click)="addExercise()" color="">
                 <ion-icon slot="icon-only" name="add-outline"></ion-icon>
             </ion-button>
             <ion-button color="">
@@ -26,20 +26,9 @@
                 (ionItemReorder)="handleReorder($any($event))"
             >
                 <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
-                ></reorder-item>
-                <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
-                ></reorder-item>
-                <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
-                ></reorder-item>
-                <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
+                    *ngFor="let item of choosenExercises"
+                    [title]="item.title"
+                    [time]="item.duration"
                 ></reorder-item>
             </ion-reorder-group>
         </ion-list>

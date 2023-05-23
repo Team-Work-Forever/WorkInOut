@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemReorderEventDetail, ToastController } from '@ionic/angular';
+import {
+    ItemReorderEventDetail,
+    NavController,
+    ToastController,
+} from '@ionic/angular';
+import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
+import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { Exercise } from 'src/app/interfaces/exercise.interface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
 import { CategoryService } from 'src/app/services/category.service';
+import { ExerciseService } from 'src/app/services/exercise.service';
 
 @Component({
     selector: 'app-add-plan',
@@ -10,41 +17,34 @@ import { CategoryService } from 'src/app/services/category.service';
     styleUrls: ['./add-plan.page.scss'],
 })
 export class AddPlanPage implements OnInit {
-    selectedItems: Exercise[] = [];
+    title: string;
+
+    selectedItems: ExerciseItem[] = [];
     categories: HorizontalItem[];
-    exercices: Exercise[];
-    results: Exercise[];
+    exercices: ExerciseItem[];
+    results: ExerciseItem[];
 
     constructor(
         public toastController: ToastController,
-        private categoryService: CategoryService
-    ) {
-        this.exercices = [
-            {
-                id: 1,
-                title: 'Alongamento Cobra',
-                duration: '2:00 min',
-                videoUrl: '',
-            },
-            {
-                id: 2,
-                title: 'Alongamento Braços',
-                duration: '4:00 min',
-                videoUrl: '',
-            },
-            {
-                id: 3,
-                title: 'Alongamento Pernas',
-                duration: '1:00 min',
-                videoUrl: '',
-            },
-        ];
-
-        this.results = this.exercices;
-    }
+        private categoryService: CategoryService,
+        private exerciseService: ExerciseService,
+        private nav: NavController
+    ) {}
 
     async ngOnInit() {
+        var data = history.state as CreateRouteProps;
+
+        const exercices = await this.exerciseService.getAllExercises();
         const categories = await this.categoryService.getAllCategories();
+
+        this.exercices = exercices.map((exe) => {
+            return {
+                id: exe.id,
+                title: exe.title,
+                duration: exe.duration + ':00 min',
+                video_url: exe.video_url,
+            } as ExerciseItem;
+        });
 
         this.categories = categories.map((cat) => {
             return {
@@ -52,6 +52,10 @@ export class AddPlanPage implements OnInit {
                 color: cat.color,
             } as HorizontalItem;
         });
+
+        this.title = data.title;
+        this.selectedItems = data.exercises ? data.exercises : [];
+        this.results = this.exercices;
     }
 
     handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
@@ -65,7 +69,7 @@ export class AddPlanPage implements OnInit {
         ev.detail.complete();
     }
 
-    addToSelected(exercise: Exercise) {
+    addToSelected(exercise: ExerciseItem) {
         const index = this.selectedItems.findIndex(
             (item) => item.id === exercise.id
         );
@@ -88,6 +92,16 @@ export class AddPlanPage implements OnInit {
             duration: 2000,
             position: position,
         });
+
         toast.present();
+
+        if (this.selectedItems.length === 0) return;
+
+        this.nav.navigateForward('/tabs/home/mine/create', {
+            state: {
+                title: this.title,
+                exercises: this.selectedItems,
+            } as CreateRouteProps,
+        });
     }
 }

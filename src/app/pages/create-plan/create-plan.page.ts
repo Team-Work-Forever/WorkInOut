@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import {
     ItemReorderEventDetail,
     NavController,
@@ -8,11 +7,6 @@ import {
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { Exercise } from 'src/app/models/exercise.model';
-=======
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ItemReorderEventDetail } from '@ionic/angular';
->>>>>>> pages
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
 import { PlanService } from 'src/app/services/plan-service.service';
@@ -26,15 +20,11 @@ export class CreatePlanPage implements OnInit {
     planTitle: string = 'Novo Treino';
     choosenExercises: ExerciseItem[] = [];
 
-<<<<<<< HEAD
     constructor(
         public toastController: ToastController,
         private planService: PlanService,
         private nav: NavController
     ) {}
-=======
-    constructor(private planService: PlanService, private router: Router) {}
->>>>>>> pages
 
     ngOnInit() {
         var data = history.state as CreateRouteProps;

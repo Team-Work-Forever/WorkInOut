@@ -2,25 +2,28 @@
     <div class="layout">
         <ion-img src="./assets/loginImage.png"></ion-img>
 
-        <form action="">
+        <form [formGroup]="authForm" (ngSubmit)="handleClick()" action="">
             <ion-text color="darkblue">
                 <h1>Welcome</h1>
             </ion-text>
 
             <ion-input
+                formControlName="email"
                 label="e-mail"
                 label-placement="floating"
                 fill="outline"
                 placeholder="Enter text"
-                error-text="Please enter a valid email"
+                error-text="authForm.controls['email'].errors?.['required']"
             ></ion-input>
 
             <ion-input
+                formControlName="password"
+                type="password"
                 label="palavra-passe"
                 label-placement="floating"
                 fill="outline"
                 placeholder="Enter text"
-                error-text="Please enter a valid email"
+                error-text="authForm.controls['password'].errors?.['required']"
             ></ion-input>
 
             <ion-button>Entrar</ion-button>
@@ -29,7 +32,7 @@
             </ion-text>
         </form>
         <div>
-            <ion-button>o</ion-button>
+            <ion-button (click)="handleGoogle()">o</ion-button>
             <ion-button>o</ion-button>
             <ion-button>o</ion-button>
         </div>

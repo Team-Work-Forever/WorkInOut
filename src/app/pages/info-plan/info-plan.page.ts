@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { IonicModule, ModalController } from '@ionic/angular';
-=======
-import { IonicModule } from '@ionic/angular';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
->>>>>>> supabase/connection
 import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
 import { SchedualSelectionComponent } from 'src/app/components/schedule-selection/schedual-selection.component';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';

@@ -10,7 +10,7 @@ export class CategoryService {
     constructor(private supabaseService: SupabaseService) {}
 
     public async getAllCategories(): Promise<Category[]> {
-        const { data, error } = await this.supabaseService
+        const { data, error, status } = await this.supabaseService
             .getClient()
             .from('category')
             .select('*');

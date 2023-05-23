@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ItemReorderEventDetail } from '@ionic/angular';
+import { Plan } from 'src/app/models/plan.model';
+import { User } from 'src/app/models/user.model';
+import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
     selector: 'app-create-plan',
@@ -7,7 +11,9 @@ import { ItemReorderEventDetail } from '@ionic/angular';
     styleUrls: ['./create-plan.page.scss'],
 })
 export class CreatePlanPage implements OnInit {
-    constructor() {}
+    private planTitle: string = '';
+
+    constructor(private planService: PlanService) {}
 
     ngOnInit() {}
 
@@ -20,5 +26,24 @@ export class CreatePlanPage implements OnInit {
         // where the gesture ended. This method can also be called directly
         // by the reorder group
         ev.detail.complete();
+    }
+
+    planTitleChanged(event: string) {
+        this.planTitle = event;
+    }
+
+    async createPlan() {
+        await this.planService.createPlan(
+            {
+                badge: 'xdasdas',
+                color: '#000',
+                duration: 2,
+                is_favourite: false,
+                title: this.planTitle,
+            } as Plan,
+            {
+                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+            } as User
+        );
     }
 }

@@ -1,4 +1,9 @@
-<app-work-header [isNested]="true" title="Novo Treino" [editable]="true">
+<app-work-header
+    [isNested]="true"
+    title="Novo Treino"
+    [editable]="true"
+    (editValue)="planTitleChanged($event)"
+>
     <flag-displayer></flag-displayer>
 </app-work-header>
 
@@ -40,5 +45,7 @@
         </ion-list>
     </div>
 
-    <ion-button class="create-btn" expand="block">Criar Plano</ion-button>
+    <ion-button (click)="createPlan()" class="create-btn" expand="block"
+        >Criar Plano</ion-button
+    >
 </ion-content>

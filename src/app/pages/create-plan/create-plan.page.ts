@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ItemReorderEventDetail } from '@ionic/angular';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
@@ -13,7 +14,7 @@ import { PlanService } from 'src/app/services/plan-service.service';
 export class CreatePlanPage implements OnInit {
     private planTitle: string = '';
 
-    constructor(private planService: PlanService) {}
+    constructor(private planService: PlanService, private router: Router) {}
 
     ngOnInit() {}
 

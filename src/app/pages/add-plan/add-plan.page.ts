@@ -38,6 +38,48 @@ export class AddPlanPage implements OnInit {
                 duration: '1:00 min',
                 videoUrl: '',
             },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
         ];
 
         this.results = this.exercices;

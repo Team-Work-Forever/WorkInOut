@@ -12,6 +12,7 @@ import { ReorderItemModule } from 'src/app/components/reorder-item/reorder-item.
 import { HorizontalSliderModule } from 'src/app/components/horizontal-slider/horizontal-slider.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
+import { ExerciseModule } from 'src/app/components/exercise/exercise.module';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-disp
         HorizontalSliderModule,
         CheckButtonModule,
         FlagDisplayerModule,
+        ExerciseModule,
     ],
     declarations: [AddPlanPage],
 })

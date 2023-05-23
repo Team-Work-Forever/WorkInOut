@@ -14,34 +14,19 @@
     </horizontal-slider>
 
     <div class="list-wrapper">
-        <ion-list>
-            <ion-reorder-group
-                [disabled]="false"
-                (ionItemReorder)="handleReorder($any($event))"
-            >
-                <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
-                ></reorder-item>
-                <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
-                ></reorder-item>
-                <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
-                ></reorder-item>
-                <reorder-item
-                    title="Alongamento Cobra"
-                    time="00:20"
-                ></reorder-item>
-            </ion-reorder-group>
+        <ion-list *ngFor="let exercise of results">
+            <exercise
+                [title]="exercise.title"
+                [duration]="exercise.duration"
+                (click)="addToSelected(exercise)"
+            ></exercise>
         </ion-list>
     </div>
+
     <ion-button
         (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : presentToast('top', 'Os exercícios foram adicionados ao Plano!')"
         class="create-btn"
         expand="block"
-        >Adicionar ao Plano</ion-button
+        >Adicionar</ion-button
     >
 </ion-content>

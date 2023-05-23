@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f7f9fd;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #5f5f5f;
+    font-size: 18px;
+}
+
+.container.selected {
+    border: 2px solid #6a778a;
+}
+
+
+.container.selected > div {
+    border-color: #6a778a;
+}

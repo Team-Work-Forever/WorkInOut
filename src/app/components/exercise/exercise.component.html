@@ -1,0 +1,11 @@
+<div
+    class="container"
+    [ngClass]="{ selected: selected }"
+    (click)="handleClick()"
+>
+    <div>
+        <span>{{ title }}</span>
+    </div>
+
+    <span>{{ duration }}</span>
+</div>

@@ -9,8 +9,33 @@ import { Exercise } from 'src/app/interfaces/exercise.interface';
 })
 export class AddPlanPage implements OnInit {
     selectedItems: Exercise[] = [];
+    exercices: Exercise[];
+    results: Exercise[];
 
-    constructor(public toastController: ToastController) {}
+    constructor(public toastController: ToastController) {
+        this.exercices = [
+            {
+                id: 1,
+                title: 'Alongamento Cobra',
+                duration: '2:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 2,
+                title: 'Alongamento Braços',
+                duration: '4:00 min',
+                videoUrl: '',
+            },
+            {
+                id: 3,
+                title: 'Alongamento Pernas',
+                duration: '1:00 min',
+                videoUrl: '',
+            },
+        ];
+
+        this.results = this.exercices;
+    }
 
     ngOnInit() {}
 
@@ -23,6 +48,19 @@ export class AddPlanPage implements OnInit {
         // where the gesture ended. This method can also be called directly
         // by the reorder group
         ev.detail.complete();
+    }
+
+    addToSelected(exercise: Exercise) {
+        const index = this.selectedItems.findIndex(
+            (item) => item.id === exercise.id
+        );
+
+        if (index !== -1) {
+            this.selectedItems.splice(index, 1); // Remove o exercício se ele já estiver selecionado
+        } else {
+            this.selectedItems.push(exercise); // Adiciona o exercício se ele ainda não estiver selecionado
+        }
+        console.log(this.selectedItems);
     }
 
     isEmpty() {

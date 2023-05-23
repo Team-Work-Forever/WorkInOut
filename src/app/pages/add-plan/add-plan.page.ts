@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemReorderEventDetail } from '@ionic/angular';
+import { ItemReorderEventDetail, ToastController } from '@ionic/angular';
+import { Exercise } from 'src/app/interfaces/exercise.interface';
 
 @Component({
     selector: 'app-add-plan',
@@ -7,7 +8,9 @@ import { ItemReorderEventDetail } from '@ionic/angular';
     styleUrls: ['./add-plan.page.scss'],
 })
 export class AddPlanPage implements OnInit {
-    constructor() {}
+    selectedItems: Exercise[] = [];
+
+    constructor(public toastController: ToastController) {}
 
     ngOnInit() {}
 
@@ -20,5 +23,18 @@ export class AddPlanPage implements OnInit {
         // where the gesture ended. This method can also be called directly
         // by the reorder group
         ev.detail.complete();
+    }
+
+    isEmpty() {
+        return this.selectedItems.length === 0;
+    }
+
+    async presentToast(position, title) {
+        const toast = await this.toastController.create({
+            message: title,
+            duration: 2000,
+            position: position,
+        });
+        toast.present();
     }
 }

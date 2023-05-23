@@ -38,5 +38,10 @@
             </ion-reorder-group>
         </ion-list>
     </div>
-    <ion-button class="create-btn" expand="block">Adicionar</ion-button>
+    <ion-button
+        (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : presentToast('top', 'Os exercícios foram adicionados ao Plano!')"
+        class="create-btn"
+        expand="block"
+        >Adicionar ao Plano</ion-button
+    >
 </ion-content>

@@ -1,10 +1,22 @@
 .schedule {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 22px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-top: 0px;
 }
 
 ion-text {
     padding: 0 20px;
+}
+
+.date-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+  }
+
+.date-picker {
+    max-width: 300px;
+    width: 100%;
 }

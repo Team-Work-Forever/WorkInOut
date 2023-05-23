@@ -1,5 +1,5 @@
 <app-work-header title="Plano 1">
-    <flag-displayer [hasAgenda]="true"></flag-displayer>
+    <flag-displayer [hasAgenda]="true" (open)="openModal()"></flag-displayer>
 </app-work-header>
 
 <ion-content [fullscreen]="true">
@@ -34,7 +34,7 @@
     </ion-grid>
     <div class="separator-bar">
         <ion-buttons slot="end" class="ion-buttons-end">
-            <ion-button color="" (click)="openModal()">
+            <ion-button color="">
                 <ion-icon slot="icon-only" name="add-outline"></ion-icon>
             </ion-button>
             <ion-button color="">

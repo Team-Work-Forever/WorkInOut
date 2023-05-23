@@ -12,6 +12,9 @@ import { CommonModule } from '@angular/common';
 })
 export class CardComponent implements OnInit {
     @Input()
+    hasFavorite: boolean = true;
+
+    @Input()
     isFavorite: boolean;
 
     @Input()

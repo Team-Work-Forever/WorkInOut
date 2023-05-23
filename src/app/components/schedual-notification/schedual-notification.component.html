@@ -1,4 +1,8 @@
-<div (click)="toggleButton()" class="notify">
+<div
+    (click)="toggleButton()"
+    (click)="presentToast('top', 'O plano de treino foi desmarcado!')"
+    class="notify"
+>
     <div class="content">
         <span>Plano1</span>
         <span>10h - 10h02m</span>

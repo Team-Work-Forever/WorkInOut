@@ -5,13 +5,7 @@
 <ion-content [fullscreen]="true">
     <ion-searchbar placeholder="Pesquisar" [debounce]="1000"></ion-searchbar>
 
-    <horizontal-slider>
-        <check-button></check-button>
-        <check-button></check-button>
-        <check-button></check-button>
-        <check-button></check-button>
-        <check-button></check-button>
-    </horizontal-slider>
+    <horizontal-slider [arrayList]="categories"> </horizontal-slider>
 
     <div class="list-wrapper">
         <ion-list *ngFor="let exercise of results">

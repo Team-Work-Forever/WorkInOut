@@ -14,7 +14,7 @@
 </app-work-header>
 
 <ion-content [fullscreen]="true">
-    <swiper>
+    <swiper (realIndex)="handleChangeIndex($event)">
         <ion-content *swiperPage>
             <ion-text>
                 <h1>Planos Favoritos</h1>
@@ -26,7 +26,7 @@
                         size="6"
                         size-md="3"
                         size-lg="3"
-                        *ngFor="let card of results"
+                        *ngFor="let card of planFav"
                     >
                         <app-card
                             (click)="handleClick(card)"
@@ -51,7 +51,7 @@
                         size="6"
                         size-md="3"
                         size-lg="3"
-                        *ngFor="let card of results"
+                        *ngFor="let card of planRec"
                     >
                         <app-card
                             (click)="handleClick(card)"
@@ -76,7 +76,7 @@
                         size="6"
                         size-md="3"
                         size-lg="3"
-                        *ngFor="let card of results"
+                        *ngFor="let card of planPop"
                     >
                         <app-card
                             (click)="handleClick(card)"

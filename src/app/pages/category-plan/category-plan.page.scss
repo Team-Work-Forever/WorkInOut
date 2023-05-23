@@ -1,22 +1,3 @@
-// ion-col {
-//     margin: 15px;
-//     background-color: #135d54;
-//     border: solid 1px #fff;
-//     color: #fff;
-//     text-align: center;
-//     height: 100px;
-//     width: 100px;
-// }
-
-ion-grid {
-    margin-top: 6px;
-    gap: 2px;
-
-    ion-row {
-        gap: 1px;
-    }
-}
-
 ion-card {
     img {
         height: 100%;
@@ -25,4 +6,19 @@ ion-card {
 
 ion-card-header {
     text-align: center;
+}
+
+.card-row {
+    margin-left: -3px;
+    margin-right: -3px;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+ion-grid {
+    margin-bottom: 20px;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemReorderEventDetail, ToastController } from '@ionic/angular';
 import { Exercise } from 'src/app/interfaces/exercise.interface';
+import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
     selector: 'app-add-plan',
@@ -9,10 +11,14 @@ import { Exercise } from 'src/app/interfaces/exercise.interface';
 })
 export class AddPlanPage implements OnInit {
     selectedItems: Exercise[] = [];
+    categories: HorizontalItem[];
     exercices: Exercise[];
     results: Exercise[];
 
-    constructor(public toastController: ToastController) {
+    constructor(
+        public toastController: ToastController,
+        private categoryService: CategoryService
+    ) {
         this.exercices = [
             {
                 id: 1,
@@ -37,7 +43,16 @@ export class AddPlanPage implements OnInit {
         this.results = this.exercices;
     }
 
-    ngOnInit() {}
+    async ngOnInit() {
+        const categories = await this.categoryService.getAllCategories();
+
+        this.categories = categories.map((cat) => {
+            return {
+                title: cat.title,
+                color: cat.color,
+            } as HorizontalItem;
+        });
+    }
 
     handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
         // The `from` and `to` properties contain the index of the item

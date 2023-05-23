@@ -1,4 +1,12 @@
-<app-work-header title="Meus Planos"></app-work-header>
+<app-work-header
+    [arrayList]="cards"
+    title="Meus Planos"
+    (result)="handleResult($event)"
+>
+    <div class="container">
+        <horizontal-slider [arrayList]="categories"> </horizontal-slider>
+    </div>
+</app-work-header>
 
 <ion-content [fullscreen]="true">
     <div class="separator-bar">

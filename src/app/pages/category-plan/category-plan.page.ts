@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Card {
-    title: string;
-    color: string;
-}
+import { Card } from 'src/app/interfaces/card.inteface';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
     selector: 'app-category-plan',
@@ -13,26 +10,22 @@ interface Card {
 export class CategoryPlanPage implements OnInit {
     cards: Card[];
 
-    constructor() {
-        this.cards = [
-            {
-                title: 'Força',
-                color: '#C10A0A',
-            },
-            {
-                title: 'Alongamentos',
-                color: '#D881BE',
-            },
-            {
-                title: 'Cardio',
-                color: '#A2C17B',
-            },
-            {
-                title: 'Ioga',
-                color: '#F1AFAE',
-            },
-        ];
+    constructor(private categoryService: CategoryService) {}
+
+    handleClick(card: Card) {
+        // this.nav.navigateForward('/detalhe', { state: card });
     }
 
-    ngOnInit() {}
+    async ngOnInit() {
+        const categories = await this.categoryService.getAllCategories();
+
+        this.cards = categories.map((cat) => {
+            return {
+                id: cat.id,
+                title: cat.title,
+                image: cat.badge,
+                isFavorite: cat.isFavourite,
+            } as Card;
+        });
+    }
 }

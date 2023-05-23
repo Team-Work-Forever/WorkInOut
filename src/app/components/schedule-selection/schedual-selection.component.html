@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Agendar</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <div>
+        <h1>Selecione Dia e Hora</h1>
+        <ion-datetime
+            locale="en-GB"
+            [min]="getMinDate()"
+            max="2028-05-31T23:59:59"
+            (ionChange)="getSelectedDate($event)"
+        ></ion-datetime>
+    </div>
+</ion-content>

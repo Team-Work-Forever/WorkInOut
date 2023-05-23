@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { InfoPlanPageRoutingModule } from './info-plan-routing.module';
 
 import { InfoPlanPage } from './info-plan.page';
+import { SchedualSelectionModule } from 'src/app/components/schedule-selection/schedual-selection.module';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { InfoPlanPage } from './info-plan.page';
         IonicModule,
         InfoPlanPageRoutingModule,
         InfoPlanPage,
+        SchedualSelectionModule,
     ],
 })
 export class InfoPlanPageModule {}

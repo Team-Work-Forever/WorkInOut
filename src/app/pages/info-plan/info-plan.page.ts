@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
+import { SchedualSelectionComponent } from 'src/app/components/schedule-selection/schedual-selection.component';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { ImageContent } from 'src/app/interfaces/imageContent.interface';
 import { getMaterial } from 'src/app/services/api';
+
 @Component({
     selector: 'app-info-plan',
     templateUrl: './info-plan.page.html',
@@ -22,7 +24,7 @@ export class InfoPlanPage implements OnInit {
     results: ImageContent[];
     maxCardsPerRow: number;
 
-    constructor() {
+    constructor(private modalCtrl: ModalController) {
         this.imageContainer = [
             {
                 title: 'Estimativa de calorias gastas',
@@ -53,5 +55,12 @@ export class InfoPlanPage implements OnInit {
         const cardWidth = 318 + 2 + 24; // Largura fixa do card + 2px de espaçamento + 24px de margem
         const maxCards = Math.floor((containerWidth - 44) / cardWidth); // Subtrai as margens laterais do container
         this.maxCardsPerRow = Math.max(1, maxCards); // Define o mínimo de 1 card por linha
+    }
+
+    async openModal() {
+        const modal = await this.modalCtrl.create({
+            component: SchedualSelectionComponent,
+        });
+        modal.present();
     }
 }

@@ -6,9 +6,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt-PT';
 
 import { register } from 'swiper/element/bundle';
 
+registerLocaleData(localePt);
 register();
 
 @NgModule({

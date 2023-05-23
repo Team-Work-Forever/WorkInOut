@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="container">
+        <h1>Materiais</h1>
+        <ion-list *ngFor="let material of materials">
+            <ion-item> {{ material.name }} </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

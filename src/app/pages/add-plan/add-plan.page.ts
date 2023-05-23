@@ -6,7 +6,6 @@ import {
 } from '@ionic/angular';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
-import { Exercise } from 'src/app/interfaces/exercise.interface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
 import { CategoryService } from 'src/app/services/category.service';
 import { ExerciseService } from 'src/app/services/exercise.service';
@@ -21,7 +20,7 @@ export class AddPlanPage implements OnInit {
 
     selectedItems: ExerciseItem[] = [];
     categories: HorizontalItem[];
-    exercices: ExerciseItem[];
+    exercises: ExerciseItem[];
     results: ExerciseItem[];
 
     constructor(
@@ -37,7 +36,7 @@ export class AddPlanPage implements OnInit {
         const exercices = await this.exerciseService.getAllExercises();
         const categories = await this.categoryService.getAllCategories();
 
-        this.exercices = exercices.map((exe) => {
+        this.exercises = exercices.map((exe) => {
             return {
                 id: exe.id,
                 title: exe.title,
@@ -55,7 +54,7 @@ export class AddPlanPage implements OnInit {
 
         this.title = data.title;
         this.selectedItems = data.exercises ? data.exercises : [];
-        this.results = this.exercices;
+        this.results = this.exercises;
     }
 
     handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {

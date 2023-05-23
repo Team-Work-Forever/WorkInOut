@@ -1,4 +1,4 @@
-<app-work-header [search]="false" title="Plano 1">
+<app-work-header [isNested]="true" [search]="false" title="Plano 1">
     <flag-displayer [hasAgenda]="true" (open)="openModal()"></flag-displayer>
 </app-work-header>
 
@@ -20,7 +20,7 @@
                     <ng-container *ngIf="i === 1">
                         <div
                             class="clickable container"
-                            (click)="handleClick()"
+                            (click)="handleClick(imageContainer.material)"
                         >
                             <img class="radius" [src]="imageContainer.image" />
                             <div class="image-text-button">
@@ -37,20 +37,30 @@
             <ion-button color="">
                 <ion-icon slot="icon-only" name="add-outline"></ion-icon>
             </ion-button>
-            <ion-button color="">
+            <ion-button
+                color=""
+                (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : setOpen(true)"
+            >
                 <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
         <div class="separator"></div>
     </div>
     <div class="list-wrapper">
-        <ion-list>
-            <item-visualizer> </item-visualizer>
-            <item-visualizer> </item-visualizer>
-            <item-visualizer> </item-visualizer>
-            <item-visualizer> </item-visualizer>
+        <ion-list *ngFor="let exercise of exercises">
+            <exercise
+                [title]="exercise.title"
+                [duration]="exercise.duration"
+                (click)="addToSelected(exercise)"
+            ></exercise>
         </ion-list>
     </div>
 
     <ion-button class="create-btn" expand="block">Começar</ion-button>
+    <ion-action-sheet
+        [isOpen]="isActionSheetOpen"
+        header="Tem a certeza que deseja remover estes exercícios?"
+        [buttons]="actionSheetButtons"
+        (didDismiss)="setOpen(false)"
+    ></ion-action-sheet>
 </ion-content>

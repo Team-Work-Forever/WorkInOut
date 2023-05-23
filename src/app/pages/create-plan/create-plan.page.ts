@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ItemReorderEventDetail } from '@ionic/angular';
+import {
+    ItemReorderEventDetail,
+    NavController,
+    ToastController,
+} from '@ionic/angular';
+import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
+import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
+import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
 import { PlanService } from 'src/app/services/plan-service.service';
@@ -11,11 +17,25 @@ import { PlanService } from 'src/app/services/plan-service.service';
     styleUrls: ['./create-plan.page.scss'],
 })
 export class CreatePlanPage implements OnInit {
-    private planTitle: string = '';
+    planTitle: string = 'Novo Treino';
+    choosenExercises: ExerciseItem[] = [];
 
-    constructor(private planService: PlanService) {}
+    constructor(
+        public toastController: ToastController,
+        private planService: PlanService,
+        private nav: NavController
+    ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        var data = history.state as CreateRouteProps;
+
+        if (data) {
+            console.log(data.exercises);
+
+            this.choosenExercises = data.exercises ? data.exercises : [];
+            this.planTitle = data.title ? data.title : 'Novo Plano';
+        }
+    }
 
     handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
         // The `from` and `to` properties contain the index of the item
@@ -32,8 +52,37 @@ export class CreatePlanPage implements OnInit {
         this.planTitle = event;
     }
 
+    addExercise() {
+        this.nav.navigateForward('/tabs/home/mine/add', {
+            state: {
+                title: this.planTitle,
+                exercises: this.choosenExercises,
+            } as CreateRouteProps,
+        });
+    }
+
+    async showToast(title: string) {
+        const toast = await this.toastController.create({
+            message: title,
+            duration: 2000,
+            position: 'top',
+        });
+
+        toast.present();
+    }
+
     async createPlan() {
-        await this.planService.createPlan(
+        if (this.planTitle.length === 0) {
+            this.showToast('Não se esqueça de adicionar um titulo ao plano!');
+            return;
+        }
+
+        if (this.choosenExercises.length === 0) {
+            this.showToast('Não se esqueça de adicionar um exercício!');
+            return;
+        }
+
+        const createdPlan = await this.planService.createPlan(
             {
                 badge: 'xdasdas',
                 color: '#000',
@@ -44,6 +93,19 @@ export class CreatePlanPage implements OnInit {
             {
                 userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
             } as User
+        );
+
+        await this.planService.addExercises(
+            createdPlan,
+            this.choosenExercises.map((item) => {
+                return {
+                    id: item.id,
+                    title: item.title,
+                    video_url: item.video_url,
+                    duration: parseFloat(item.duration),
+                    index: 0,
+                } as Exercise;
+            })
         );
     }
 }

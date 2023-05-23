@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { User } from '../models/user.model';
 import { Plan } from '../models/plan.model';
+import { Exercise } from '../models/exercise.model';
 
 type CreatePlanProps = {
     plan_badge: string;
@@ -10,6 +11,12 @@ type CreatePlanProps = {
     plan_color: string;
     plan_is_favorite: boolean;
     user_id: string;
+};
+
+type AddExerciseProps = {
+    exercise_id: string;
+    exercise_index: number;
+    plan_id: string;
 };
 
 @Injectable({
@@ -47,8 +54,8 @@ export class PlanService {
         return data as Plan[];
     }
 
-    public async createPlan(plan: Plan, user: User): Promise<void> {
-        const {} = await this.supabaseService
+    public async createPlan(plan: Plan, user: User): Promise<Plan> {
+        const { data, error } = await this.supabaseService
             .getClient()
             .rpc('func_insert_plan', {
                 plan_badge: plan.badge,
@@ -57,6 +64,33 @@ export class PlanService {
                 plan_is_favorite: plan.is_favourite,
                 plan_title: plan.title,
                 user_id: user.userId,
-            } as CreatePlanProps);
+            } as CreatePlanProps)
+            .single();
+
+        if (error) return {} as Plan;
+
+        plan.id = data as string;
+        return plan;
+    }
+
+    public async addExercises(
+        plan: Plan,
+        exercises: Exercise[]
+    ): Promise<void> {
+        await Promise.all(
+            exercises.map((exercise) => this.addExercise(plan, exercise))
+        );
+    }
+
+    public async addExercise(plan: Plan, exercise: Exercise): Promise<void> {
+        const { error } = await this.supabaseService
+            .getClient()
+            .rpc('func_add_exe', {
+                exercise_id: exercise.id,
+                exercise_index: exercise.index,
+                plan_id: plan.id,
+            } as AddExerciseProps);
+
+        console.log(error);
     }
 }

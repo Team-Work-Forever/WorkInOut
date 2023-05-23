@@ -12,10 +12,15 @@
     font-size: 18px;
 }
 
+wrapper {
+    font-size: large;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
 .container.selected {
     border: 2px solid #6a778a;
 }
-
 
 .container.selected > div {
     border-color: #6a778a;

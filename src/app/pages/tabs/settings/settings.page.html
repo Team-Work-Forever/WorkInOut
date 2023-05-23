@@ -1,4 +1,4 @@
-<app-work-header title="Opções"></app-work-header>
+<app-work-header [search]="false" title="Opções"></app-work-header>
 
 <ion-content [fullscreen]="true">
     <ion-grid fixed>
@@ -6,7 +6,9 @@
             <ion-col size="12">
                 <ion-item>
                     <ion-label>Modo Escuro</ion-label>
-                    <ion-toggle (ionChange)="onToggleColorTheme($event)"></ion-toggle>
+                    <ion-toggle
+                        (ionChange)="onToggleColorTheme($event)"
+                    ></ion-toggle>
                 </ion-item>
             </ion-col>
         </ion-row>

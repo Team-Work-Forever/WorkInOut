@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'flat-button',
@@ -10,6 +10,13 @@ export class FlatButtonComponent implements OnInit {
 
     @Input()
     public bgColor: string;
+
+    @Output()
+    public eventClick: EventEmitter<any> = new EventEmitter();
+
+    handleClick() {
+        this.eventClick.emit();
+    }
 
     ngOnInit() {}
 }

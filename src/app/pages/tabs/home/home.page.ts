@@ -15,6 +15,7 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
 import { FlatButtonModule } from 'src/app/components/flat-button/flat-button.module';
 import { PlanService } from 'src/app/services/plan.service';
 import { SwiperComponent } from 'src/app/components/swiper/swiper.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -41,7 +42,11 @@ export class HomePage implements OnInit {
 
     results: Card[];
 
-    constructor(private nav: NavController, private planService: PlanService) {}
+    constructor(
+        private nav: NavController,
+        private planService: PlanService,
+        private router: Router
+    ) {}
 
     async ngOnInit() {
         const plans = await this.planService.getAllPlans();
@@ -60,6 +65,14 @@ export class HomePage implements OnInit {
 
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
+    }
+
+    goToMyPlans() {
+        this.router.navigate(['/tabs/home/mine']);
+    }
+
+    goToPlans() {
+        this.router.navigate(['/tabs/home/category']);
     }
 
     handleClick(card: Card) {

@@ -5,10 +5,14 @@
 >
     <div class="queue">
         <ion-toolbar>
-            <flat-button bgColor="#FF5400">Meus Planos</flat-button>
+            <flat-button (eventClick)="goToMyPlans()" bgColor="#FF5400"
+                >Meus Planos</flat-button
+            >
         </ion-toolbar>
         <ion-toolbar>
-            <flat-button bgColor="#004E89">Planos de Treino</flat-button>
+            <flat-button (eventClick)="goToPlans()" bgColor="#004E89"
+                >Planos de Treino</flat-button
+            >
         </ion-toolbar>
     </div>
 </app-work-header>

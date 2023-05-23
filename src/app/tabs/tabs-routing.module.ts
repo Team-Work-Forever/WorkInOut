@@ -9,10 +9,29 @@ const routes: Routes = [
         children: [
             {
                 path: 'home',
-                loadChildren: () =>
-                    import('../pages/tabs/home/home.module').then(
-                        (m) => m.HomePageModule
-                    ),
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('../pages/tabs/home/home.module').then(
+                                (m) => m.HomePageModule
+                            ),
+                    },
+                    {
+                        path: 'mine',
+                        loadChildren: () =>
+                            import('../pages/my-plan/my-plan.module').then(
+                                (m) => m.MyPlanPageModule
+                            ),
+                    },
+                    {
+                        path: 'category',
+                        loadChildren: () =>
+                            import(
+                                '../pages/category-plan/category-plan.module'
+                            ).then((m) => m.CategoryPlanPageModule),
+                    },
+                ],
             },
             {
                 path: 'statistics',

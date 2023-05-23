@@ -7,14 +7,26 @@ import { ModalController } from '@ionic/angular';
     styleUrls: ['./schedual-selection.component.scss'],
 })
 export class SchedualSelectionComponent {
+    selectedDate: boolean;
+
     constructor(private modalCtrl: ModalController) {}
 
     cancel() {
         return this.modalCtrl.dismiss(null, 'cancel');
     }
 
-    confirm() {
-        return this.modalCtrl.dismiss('confirm');
+    async confirm() {
+        if (!this.selectedDate) {
+            // Se nenhuma data foi selecionada, exiba uma mensagem de erro ou realize a ação adequada.
+            console.log('Selecione uma data para agendar o plano');
+            return;
+        }
+
+        await this.closeModal('confirm');
+    }
+
+    async closeModal(result?: string) {
+        await this.modalCtrl.dismiss(result);
     }
 
     getMinDate() {
@@ -37,6 +49,8 @@ export class SchedualSelectionComponent {
         const day = dateParts[2];
         const hour = timeParts[0];
         const minute = timeParts[1];
+
+        this.selectedDate = true;
 
         // Agora você tem todas as partes da data e da hora separadas.
         // Você pode usá-las para realizar as ações necessárias.

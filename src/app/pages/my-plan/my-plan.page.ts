@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
 import { CardComponent } from 'src/app/components/card/card.component';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
@@ -8,7 +9,7 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
 import { Card } from 'src/app/interfaces/card.inteface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
 import { CategoryService } from 'src/app/services/category.service';
-import { PlanService } from 'src/app/services/plan.service';
+import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
     selector: 'app-my-plan',
@@ -32,19 +33,28 @@ export class MyPlanPage implements OnInit {
 
     constructor(
         private nav: NavController,
+        private categoryService: CategoryService,
         private planService: PlanService,
-        private categoryService: CategoryService
+        private router: Router
     ) {}
 
     async ngOnInit() {
         const categories = await this.categoryService.getAllCategories();
-        const plans = await this.planService.getAllPlans();
+
+        const plans = await this.planService.getAllPlanOfUser({
+            userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+            email: '',
+        });
+
+        console.log(plans);
 
         this.cards = plans.map((plan) => {
             return {
                 id: plan.id,
                 title: plan.title,
+                image: plan.badge,
                 time: plan.duration.toString(),
+                isFavorite: plan.is_favourite,
             } as Card;
         });
 
@@ -60,6 +70,10 @@ export class MyPlanPage implements OnInit {
 
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
+    }
+
+    createPlan() {
+        this.router.navigate(['/tabs/home/mine/create']);
     }
 
     handleClick(card: Card) {

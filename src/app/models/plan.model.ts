@@ -1,7 +1,9 @@
 export interface Plan {
     id: string;
-    bagde: string;
+    authUser?: string;
+    badge: string;
     duration: number;
     title: string;
     color: string;
+    is_favourite: boolean;
 }

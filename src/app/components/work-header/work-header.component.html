@@ -15,7 +15,11 @@
 
     <ion-toolbar class="text-header">
         <h1 *ngIf="!editable">{{ title }}</h1>
-        <text-field [value]="title" *ngIf="editable"></text-field>
+        <text-field
+            [value]="title"
+            (input)="titleChanged($event)"
+            *ngIf="editable"
+        ></text-field>
     </ion-toolbar>
 
     <ion-toolbar *ngIf="!editable && search" class="custom-toolbar">

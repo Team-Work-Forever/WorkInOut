@@ -13,9 +13,10 @@ import { CardComponent } from '../../../components/card/card.component';
 import { Card } from 'src/app/interfaces/card.inteface';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { FlatButtonModule } from 'src/app/components/flat-button/flat-button.module';
-import { PlanService } from 'src/app/services/plan.service';
-import { SwiperComponent } from 'src/app/components/swiper/swiper.component';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { PlanService } from 'src/app/services/plan-service.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
     selector: 'app-home',
@@ -44,23 +45,30 @@ export class HomePage implements OnInit {
 
     constructor(
         private nav: NavController,
+        private authService: AuthenticationService,
         private planService: PlanService,
         private router: Router
     ) {}
 
     async ngOnInit() {
-        const plans = await this.planService.getAllPlans();
+        const plans = await this.planService.getAllPlanOfUserFavorite(
+            {} as User
+        );
 
-        this.cards = plans.map((plan) => {
+        this.results = plans.map((plan) => {
             return {
                 id: plan.id,
                 title: plan.title,
                 time: plan.duration.toString(),
-                isFavorite: false,
+                isFavorite: plan.is_favourite,
             } as Card;
         });
 
+        console.log(this.results);
+
+        this.handleChangeIndex(0);
         this.calculateMaxCardsPerRow();
+        this.results = this.cards;
     }
 
     handleResult(filteredResults: Card[]) {

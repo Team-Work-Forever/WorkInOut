@@ -28,11 +28,18 @@ export class WorkHeaderComponent implements OnInit {
     @Output()
     result: EventEmitter<Card[]> = new EventEmitter<Card[]>();
 
+    @Output()
+    editValue: EventEmitter<string> = new EventEmitter<string>();
+
     constructor() {}
 
     ngOnInit() {
         if (this.editable) {
         }
+    }
+
+    titleChanged(event) {
+        this.editValue.emit(event.target.value);
     }
 
     handleChange(event: any) {

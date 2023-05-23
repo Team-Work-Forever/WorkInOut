@@ -7,7 +7,6 @@ import { HorizontalSliderModule } from 'src/app/components/horizontal-slider/hor
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { Card } from 'src/app/interfaces/card.inteface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
-import { loadTourismPoints } from 'src/app/services/api';
 import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan.service';
 

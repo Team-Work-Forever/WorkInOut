@@ -17,11 +17,11 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-    <div>
+<ion-content class="ion-text-center">
+    <div class="date-picker-container">
         <h1>Selecione Dia e Hora</h1>
         <ion-datetime
-            locale="en-GB"
+            locale="pt-PT"
             [min]="getMinDate()"
             max="2028-05-31T23:59:59"
             (ionChange)="getSelectedDate($event)"

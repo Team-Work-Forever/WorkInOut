@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { Plan } from '../models/plan.model';
+import { User } from '@supabase/supabase-js';
 
 @Injectable({
     providedIn: 'root',
@@ -35,6 +36,8 @@ export class PlanService {
 
         return data as Plan;
     }
+
+    public async createPlan(plan: Plan, user: User) {}
 
     public async updatePlan(plan: Plan) {
         const { data, error } = await this.supabaseService

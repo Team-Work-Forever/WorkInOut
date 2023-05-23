@@ -1,7 +1,7 @@
 <app-work-header title="Agenda"></app-work-header>
 
 <ion-content [fullscreen]="true">
-    <div class="schedule">
+    <div class="date-picker-container">
         <ion-datetime
             locale="pt-PT"
             presentation="date"
@@ -10,6 +10,8 @@
             max="2028-05-31T23:59:59"
             (ionChange)="getSelectedDate($event)"
         ></ion-datetime>
+    </div>
+    <div class="schedule">
         <ion-text>
             <h1>Planos</h1>
             <schedual-notification></schedual-notification>

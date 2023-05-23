@@ -12,14 +12,14 @@ import { CategoryService } from 'src/app/services/category.service';
 export class AddPlanPage implements OnInit {
     selectedItems: Exercise[] = [];
     categories: HorizontalItem[];
-    exercices: Exercise[];
+    exercises: Exercise[];
     results: Exercise[];
 
     constructor(
         public toastController: ToastController,
         private categoryService: CategoryService
     ) {
-        this.exercices = [
+        this.exercises = [
             {
                 id: 1,
                 title: 'Alongamento Cobra',
@@ -82,7 +82,7 @@ export class AddPlanPage implements OnInit {
             },
         ];
 
-        this.results = this.exercices;
+        this.results = this.exercises;
     }
 
     async ngOnInit() {

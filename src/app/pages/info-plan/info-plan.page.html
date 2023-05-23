@@ -1,4 +1,4 @@
-<app-work-header [search]="false" title="Plano 1">
+<app-work-header [isNested]="true" [search]="false" title="Plano 1">
     <flag-displayer [hasAgenda]="true" (open)="openModal()"></flag-displayer>
 </app-work-header>
 
@@ -44,11 +44,12 @@
         <div class="separator"></div>
     </div>
     <div class="list-wrapper">
-        <ion-list>
-            <item-visualizer> </item-visualizer>
-            <item-visualizer> </item-visualizer>
-            <item-visualizer> </item-visualizer>
-            <item-visualizer> </item-visualizer>
+        <ion-list *ngFor="let exercise of exercises">
+            <exercise
+                [title]="exercise.title"
+                [duration]="exercise.duration"
+                (click)="addToSelected(exercise)"
+            ></exercise>
         </ion-list>
     </div>
 

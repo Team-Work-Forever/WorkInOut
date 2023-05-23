@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
 import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
+import { ModelItemComponent } from 'src/app/components/model-item/model-item.component';
 import { SchedualSelectionComponent } from 'src/app/components/schedule-selection/schedual-selection.component';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { ImageContent } from 'src/app/interfaces/imageContent.interface';
@@ -47,8 +48,14 @@ export class InfoPlanPage implements OnInit {
         this.calculateMaxCardsPerRow();
     }
 
-    handleClick() {
-        console.log('Oi!, WOW');
+    async handleClick(material) {
+        const modal = await this.modalCtrl.create({
+            component: ModelItemComponent,
+            componentProps: {
+                materials: material,
+            },
+        });
+        modal.present();
     }
 
     calculateMaxCardsPerRow(): void {

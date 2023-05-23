@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
 import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { ImageContent } from 'src/app/interfaces/imageContent.interface';
@@ -15,6 +16,7 @@ import { getMaterial } from 'src/app/services/api';
         CommonModule,
         WorkHeaderModule,
         ItemVisualizerModule,
+        FlagDisplayerModule,
     ],
 })
 export class InfoPlanPage implements OnInit {

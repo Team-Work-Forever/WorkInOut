@@ -20,6 +20,9 @@ export class WorkHeaderComponent implements OnInit {
     editable: boolean = false;
 
     @Input()
+    noContent: boolean = false;
+
+    @Input()
     search: boolean = true;
 
     @Output()

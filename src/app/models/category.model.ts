@@ -3,4 +3,5 @@ export interface Category {
     badge: string;
     title: string;
     color: string;
+    isFavourite: boolean;
 }

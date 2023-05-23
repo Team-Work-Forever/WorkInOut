@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
 import {
-    CUSTOM_ELEMENTS_SCHEMA,
     Component,
     ContentChildren,
     ElementRef,
+    EventEmitter,
     Input,
     OnInit,
+    Output,
     ViewChild,
 } from '@angular/core';
 import { IonicSlides } from '@ionic/angular';
@@ -23,6 +23,9 @@ export class SwiperComponent implements OnInit {
 
     @Input() public isTopDown: boolean = false;
 
+    @Output()
+    realIndex: EventEmitter<number> = new EventEmitter<number>();
+
     @ContentChildren(SwiperPageDirective) widgets;
 
     @ViewChild('swiper') public swiperRef: ElementRef | undefined;
@@ -35,5 +38,6 @@ export class SwiperComponent implements OnInit {
 
     public onSlideChange() {
         this.currentIndex = this.swiperRef?.nativeElement.swiper.activeIndex;
+        this.realIndex.emit(this.currentIndex);
     }
 }

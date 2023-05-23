@@ -1,24 +1,27 @@
-<app-work-header title="Plano de Treino"></app-work-header>
+<app-work-header
+    [noContent]="true"
+    [search]="true"
+    title="Plano de Treino"
+></app-work-header>
 
 <ion-content padding>
     <ion-content [fullscreen]="true">
         <ion-grid>
-            <ion-row>
+            <ion-row class="card-row card-wrapper">
                 <ion-col
-                    size="5.9"
-                    size-md="5.9"
+                    size="6"
+                    size-md="3"
                     size-lg="3"
                     *ngFor="let card of cards"
                 >
-                    <ion-card [style.]>
-                        <img
-                            alt="Silhouette of mountains"
-                            src="https://ionicframework.com/docs/img/demos/card-media.png"
-                        />
-                        <ion-card-header>
-                            <ion-card-title>{{ card.title }}</ion-card-title>
-                        </ion-card-header>
-                    </ion-card>
+                    <app-card
+                        (click)="handleClick(card)"
+                        [image]="card.image"
+                        [title]="card.title"
+                        [time]="card.time"
+                        [isFavorite]="card.isFavorite"
+                        icon="star"
+                    ></app-card>
                 </ion-col>
             </ion-row>
         </ion-grid>

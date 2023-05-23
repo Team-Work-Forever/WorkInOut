@@ -1,3 +1,7 @@
 <div class="wrapper">
-    <ng-content></ng-content>
+    <check-button
+        *ngFor="let btn of arrayList"
+        [content]="btn.title"
+        [mainColor]="btn.color"
+    ></check-button>
 </div>

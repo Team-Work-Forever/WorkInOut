@@ -1,3 +1,8 @@
+ion-header {
+    z-index: 99;
+    background-color: white;
+}
+
 ion-toolbar {
     display: flex;
     justify-content: space-between;

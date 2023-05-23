@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'flag-displayer',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlagDisplayerComponent implements OnInit {
     constructor() {}
+
+    @Input()
+    hasAgenda: boolean = false;
 
     ngOnInit() {}
 }

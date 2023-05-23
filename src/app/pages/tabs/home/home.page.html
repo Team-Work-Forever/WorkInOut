@@ -1,25 +1,25 @@
 <app-work-header
     [arrayList]="cards"
-    title="Bem-vindo"
+    title="Bem-vinda, Maria !"
     (result)="handleResult($event)"
 >
-    <ion-grid>
-        <ion-row>
-            <ion-col size-sm="5.9" size="5.9">
-                <ion-button class="custom-button-1"> Meus Planos </ion-button>
-            </ion-col>
-            <ion-col size-sm="5.9" size="5.9">
-                <ion-button class="custom-button-2">
-                    Planos de Treino
-                </ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <div class="queue">
+        <ion-toolbar>
+            <flat-button bgColor="#FF5400">Meus Planos</flat-button>
+        </ion-toolbar>
+        <ion-toolbar>
+            <flat-button bgColor="#004E89">Planos de Treino</flat-button>
+        </ion-toolbar>
+    </div>
 </app-work-header>
 
 <ion-content [fullscreen]="true">
     <swiper>
         <ion-content *swiperPage>
+            <ion-text>
+                <h1>Planos Favoritos</h1>
+            </ion-text>
+
             <ion-grid>
                 <ion-row class="card-row card-wrapper">
                     <ion-col
@@ -41,6 +41,10 @@
             </ion-grid>
         </ion-content>
         <ion-content *swiperPage>
+            <ion-text>
+                <h1>Planos Recomendados</h1>
+            </ion-text>
+
             <ion-grid>
                 <ion-row class="card-row card-wrapper">
                     <ion-col
@@ -62,6 +66,10 @@
             </ion-grid>
         </ion-content>
         <ion-content *swiperPage>
+            <ion-text>
+                <h1>Planos Mais Populares</h1>
+            </ion-text>
+
             <ion-grid>
                 <ion-row class="card-row card-wrapper">
                     <ion-col

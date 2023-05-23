@@ -8,3 +8,20 @@
     flex-wrap: wrap;
     margin: 0 -10px;
 }
+
+.queue {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+ion-text {
+    text-align: center;
+
+    .header-title {
+        color: #575757;
+        font-weight: bold;
+    }
+}

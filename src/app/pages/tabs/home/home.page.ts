@@ -7,6 +7,7 @@ import { CheckButtonModule } from 'src/app/components/check-button/components.mo
 import { CardComponent } from '../../../components/card/card.component';
 import { Card } from 'src/app/interfaces/card.inteface';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
+import { FlatButtonModule } from 'src/app/components/flat-button/flat-button.module';
 
 @Component({
     selector: 'app-home',
@@ -20,6 +21,7 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
         WorkHeaderModule,
         CheckButtonModule,
         CardComponent,
+        FlatButtonModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

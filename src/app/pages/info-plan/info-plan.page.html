@@ -37,7 +37,10 @@
             <ion-button color="">
                 <ion-icon slot="icon-only" name="add-outline"></ion-icon>
             </ion-button>
-            <ion-button color="">
+            <ion-button
+                color=""
+                (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : setOpen(true)"
+            >
                 <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -54,4 +57,10 @@
     </div>
 
     <ion-button class="create-btn" expand="block">Começar</ion-button>
+    <ion-action-sheet
+        [isOpen]="isActionSheetOpen"
+        header="Tem a certeza que deseja remover estes exercícios?"
+        [buttons]="actionSheetButtons"
+        (didDismiss)="setOpen(false)"
+    ></ion-action-sheet>
 </ion-content>

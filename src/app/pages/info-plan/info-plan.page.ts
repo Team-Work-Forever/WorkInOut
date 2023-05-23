@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { ExerciseModule } from 'src/app/components/exercise/exercise.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
 import { ModelItemComponent } from 'src/app/components/model-item/model-item.component';
@@ -30,7 +30,10 @@ export class InfoPlanPage implements OnInit {
     exercises: Exercise[];
     maxCardsPerRow: number;
 
-    constructor(private modalCtrl: ModalController) {
+    constructor(
+        public toastController: ToastController,
+        private modalCtrl: ModalController
+    ) {
         this.imageContainer = [
             {
                 title: 'Estimativa de calorias gastas',
@@ -114,5 +117,40 @@ export class InfoPlanPage implements OnInit {
             this.selectedItems.push(exercise); // Adiciona o exercício se ele ainda não estiver selecionado
         }
         console.log(this.selectedItems);
+    }
+
+    isEmpty() {
+        return this.selectedItems.length === 0;
+    }
+
+    async presentToast(position, title) {
+        const toast = await this.toastController.create({
+            message: title,
+            duration: 2000,
+            position: position,
+        });
+        toast.present();
+    }
+
+    isActionSheetOpen = false;
+    public actionSheetButtons = [
+        {
+            text: 'Remover',
+            role: 'destructive',
+            data: {
+                action: 'delete',
+            },
+        },
+        {
+            text: 'Cancelar',
+            role: 'cancel',
+            data: {
+                action: 'cancel',
+            },
+        },
+    ];
+
+    setOpen(isOpen: boolean) {
+        this.isActionSheetOpen = isOpen;
     }
 }

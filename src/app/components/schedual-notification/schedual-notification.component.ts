@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 @Component({
     selector: 'schedual-notification',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./schedual-notification.component.scss'],
 })
 export class SchedualNotificationComponent implements OnInit {
-    constructor() {}
+    constructor(public toastController: ToastController) {}
 
     public isSelected: boolean;
 
@@ -24,5 +25,14 @@ export class SchedualNotificationComponent implements OnInit {
             ? 'notifications'
             : 'notifications-outline';
         this.color = !this.isSelected ? 'lightblue' : 'black';
+    }
+
+    async presentToast(position, title) {
+        const toast = await this.toastController.create({
+            message: title,
+            duration: 2000,
+            position: position,
+        });
+        toast.present();
     }
 }

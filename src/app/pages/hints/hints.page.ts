@@ -5,6 +5,7 @@ import {
 } from '@capacitor/screen-orientation';
 import { ViewWillEnter } from '@ionic/angular';
 import { Hint } from 'src/app/interfaces/hint.interface';
+import { HintService } from 'src/app/services/hint.service.service';
 
 @Component({
     selector: 'app-hints',
@@ -14,23 +15,31 @@ import { Hint } from 'src/app/interfaces/hint.interface';
 export class HintsPage implements OnInit, ViewWillEnter {
     maxCardsPerRow: number;
     hints: Hint[] = [];
-    results: Hint[];
 
-    constructor() {}
+    constructor(private hintsService: HintService) {}
 
     ionViewWillEnter(): void {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
     }
 
-    ngOnInit() {
+    async ngOnInit() {
+        const hints = await this.hintsService.getAllHints();
+
+        this.hints = hints.map((hint) => {
+            return {
+                id: hint.id,
+                badge: hint.badge,
+                title: hint.title,
+                description: hint.description,
+                color: hint.color,
+            } as Hint;
+        });
+
         this.calculateMaxCardsPerRow();
-        this.results = this.hints;
     }
 
-    handleClick(hint: Hint) {
-        // this.nav.navigateForward('/detalhe', { state: card });
-    }
+    handleClick(hint: Hint) {}
 
     calculateMaxCardsPerRow(): void {
         const cardWidth = 164; // Largura fixa do card em pixels

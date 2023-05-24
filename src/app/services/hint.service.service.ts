@@ -11,7 +11,7 @@ type AddHint = {
 @Injectable({
     providedIn: 'root',
 })
-export class HintServiceService {
+export class HintService {
     constructor(private supabaseService: SupabaseService) {}
 
     public async getAllHints(): Promise<Hint[]> {

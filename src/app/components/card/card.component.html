@@ -1,6 +1,6 @@
-<ion-card (click)="handleClick()" class="card-container">
+<ion-card (press)="pressEvent($event)" class="card-container">
     <img [src]="image" />
-    <ion-card-content>
+    <ion-card-content (click)="handleClick()">
         <ion-card-subtitle color="primary">{{ time }}</ion-card-subtitle>
         <ion-card-title color="primary">{{ title }}</ion-card-title>
     </ion-card-content>

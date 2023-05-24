@@ -3,6 +3,7 @@ import { SupabaseService } from './supabase.service';
 import { User } from '../models/user.model';
 import { Plan } from '../models/plan.model';
 import { Exercise } from '../models/exercise.model';
+import { PostgrestError } from '@supabase/supabase-js';
 
 type CreatePlanProps = {
     plan_badge: string;
@@ -91,6 +92,16 @@ export class PlanService {
 
     public async getAllPopularPlan(): Promise<Plan[]> {
         return await this.getAllRecomendedPlan();
+    }
+
+    public async deletePlan(planId: string): Promise<PostgrestError> {
+        const { error } = await this.supabaseService
+            .getClient()
+            .from('public_plan')
+            .delete()
+            .eq('plan', planId);
+
+        return error;
     }
 
     public async changeFav(plan: Plan, user: User): Promise<void> {

@@ -150,8 +150,4 @@ export class HomePage implements OnInit, ViewWillEnter {
         const maxCards = Math.floor(availableWidth / (cardWidth + gap));
         this.maxCardsPerRow = Math.max(1, maxCards); // Define o mínimo de 1 card por linha
     }
-
-    private setResultList(cards: Card[]) {
-        this.results = this.cards;
-    }
 }

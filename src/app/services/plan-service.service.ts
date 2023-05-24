@@ -180,6 +180,8 @@ export class PlanService {
         plan: Plan,
         { categoryId, qty }
     ): Promise<PostgrestError> {
+        console.log('Ola=' + qty);
+
         const { error } = await this.supabaseService
             .getClient()
             .rpc('func_add_cat', {

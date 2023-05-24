@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
-import { IonicModule, NavController } from '@ionic/angular';
+import { IonicModule, NavController, ViewWillEnter } from '@ionic/angular';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { Card } from 'src/app/interfaces/card.inteface';
@@ -12,6 +12,10 @@ import { PlanService } from 'src/app/services/plan-service.service';
 import { User } from 'src/app/models/user.model';
 import { Plan } from 'src/app/models/plan.model';
 import { CardModule } from 'src/app/components/card/card.components.module';
+import {
+    OrientationLockOptions,
+    ScreenOrientation,
+} from '@capacitor/screen-orientation';
 
 @Component({
     selector: 'app-home',
@@ -29,7 +33,7 @@ import { CardModule } from 'src/app/components/card/card.components.module';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, ViewWillEnter {
     maxCardsPerRow: number;
     cards: Card[] = [];
     planFav: Card[] = [];
@@ -44,6 +48,11 @@ export class HomePage implements OnInit {
         private planService: PlanService,
         private router: Router
     ) {}
+
+    ionViewWillEnter(): void {
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+    }
 
     async ngOnInit() {
         const fav_plan = await this.planService.getAllPlanOfUserFavorite({

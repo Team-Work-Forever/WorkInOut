@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ItemReorderEventDetail, ToastController } from '@ionic/angular';
+import {
+    OrientationLockOptions,
+    ScreenOrientation,
+} from '@capacitor/screen-orientation';
+import {
+    ItemReorderEventDetail,
+    ToastController,
+    ViewWillEnter,
+} from '@ionic/angular';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
@@ -12,7 +20,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
     templateUrl: './add-plan.page.html',
     styleUrls: ['./add-plan.page.scss'],
 })
-export class AddPlanPage implements OnInit {
+export class AddPlanPage implements OnInit, ViewWillEnter {
     title: string;
 
     selectedItems: ExerciseItem[] = [];
@@ -27,6 +35,11 @@ export class AddPlanPage implements OnInit {
         private router: Router,
         private activeRoute: ActivatedRoute
     ) {}
+
+    ionViewWillEnter(): void {
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+    }
 
     async ngOnInit() {
         const plan = JSON.parse(

@@ -1,10 +1,15 @@
 <div class="item">
     <div *ngIf="isOpen" class="content">
         <swiper [isTopDown]="true">
-            <div *swiperPage></div>
             <div *swiperPage class="video-view">
-                <img src="./assets/workType/alongamentos.png" />
+                <!-- <video
+                    style="width: 100%; position: absolute"
+                    [autoplay]="true"
+                >
+                    <source [src]="videoUrl" type="video/mp4" />
+                </video> -->
             </div>
+            <div *swiperPage></div>
         </swiper>
     </div>
     <div (click)="handleClick()" class="header">

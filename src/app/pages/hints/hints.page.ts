@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {
+    OrientationLockOptions,
+    ScreenOrientation,
+} from '@capacitor/screen-orientation';
+import { ViewWillEnter } from '@ionic/angular';
 import { Hint } from 'src/app/interfaces/hint.interface';
 
 @Component({
@@ -6,12 +11,17 @@ import { Hint } from 'src/app/interfaces/hint.interface';
     templateUrl: './hints.page.html',
     styleUrls: ['./hints.page.scss'],
 })
-export class HintsPage implements OnInit {
+export class HintsPage implements OnInit, ViewWillEnter {
     maxCardsPerRow: number;
     hints: Hint[] = [];
     results: Hint[];
 
     constructor() {}
+
+    ionViewWillEnter(): void {
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+    }
 
     ngOnInit() {
         this.calculateMaxCardsPerRow();

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+    OrientationLockOptions,
+    ScreenOrientation,
+} from '@capacitor/screen-orientation';
+import { ViewWillEnter } from '@ionic/angular';
 import { NotificationItem } from 'src/app/interfaces/notification-item.interface';
-import { Notification } from 'src/app/models/notification.model';
 import { User } from 'src/app/models/user.model';
 import { NotificationService } from 'src/app/services/notification.service';
 import { convertToHoursMinutes } from 'src/utils/time-date.utils';
@@ -10,10 +14,15 @@ import { convertToHoursMinutes } from 'src/utils/time-date.utils';
     templateUrl: 'schedule.page.html',
     styleUrls: ['schedule.page.scss'],
 })
-export class SchedulePage implements OnInit {
+export class SchedulePage implements OnInit, ViewWillEnter {
     public notifications: NotificationItem[];
 
     constructor(private notificationService: NotificationService) {}
+
+    ionViewWillEnter(): void {
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+    }
 
     async ngOnInit() {
         const notifications =

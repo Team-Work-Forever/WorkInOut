@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule, NavController } from '@ionic/angular';
+import {
+    OrientationLockOptions,
+    ScreenOrientation,
+} from '@capacitor/screen-orientation';
+import { IonicModule, NavController, ViewWillEnter } from '@ionic/angular';
 import { CardModule } from 'src/app/components/card/card.components.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { HorizontalSliderModule } from 'src/app/components/horizontal-slider/horizontal-slider.module';
@@ -27,7 +31,7 @@ import { PlanService } from 'src/app/services/plan-service.service';
         CheckButtonModule,
     ],
 })
-export class MyPlanPage implements OnInit {
+export class MyPlanPage implements OnInit, ViewWillEnter {
     results: Card[];
     cards: Card[];
 
@@ -39,6 +43,11 @@ export class MyPlanPage implements OnInit {
         private planService: PlanService,
         private router: Router
     ) {}
+
+    ionViewWillEnter(): void {
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+    }
 
     async ngOnInit() {
         const categories = await this.categoryService.getAllCategories();

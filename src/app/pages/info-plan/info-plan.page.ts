@@ -1,7 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule, ModalController, ToastController } from '@ionic/angular';
+import {
+    OrientationLockOptions,
+    ScreenOrientation,
+} from '@capacitor/screen-orientation';
+import {
+    IonicModule,
+    ModalController,
+    ToastController,
+    ViewWillEnter,
+} from '@ionic/angular';
 import { ExerciseModule } from 'src/app/components/exercise/exercise.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
 import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
@@ -30,7 +39,7 @@ import { PlanService } from 'src/app/services/plan-service.service';
         ItemVisualizerModule,
     ],
 })
-export class InfoPlanPage implements OnInit {
+export class InfoPlanPage implements OnInit, ViewWillEnter {
     plan: Plan;
     exercises: Exercise[];
 
@@ -46,6 +55,11 @@ export class InfoPlanPage implements OnInit {
         private activeRoute: ActivatedRoute,
         private router: Router
     ) {}
+
+    ionViewWillEnter(): void {
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+    }
 
     async ngOnInit() {
         const planId = this.activeRoute.snapshot.paramMap.get('id');

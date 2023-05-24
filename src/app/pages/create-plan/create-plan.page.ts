@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+    OrientationLockOptions,
+    ScreenOrientation,
+} from '@capacitor/screen-orientation';
+import {
     ItemReorderEventDetail,
-    NavController,
     ToastController,
+    ViewWillEnter,
 } from '@ionic/angular';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
@@ -17,7 +21,7 @@ import { PlanService } from 'src/app/services/plan-service.service';
     templateUrl: './create-plan.page.html',
     styleUrls: ['./create-plan.page.scss'],
 })
-export class CreatePlanPage implements OnInit {
+export class CreatePlanPage implements OnInit, ViewWillEnter {
     planTitle: string = 'Novo Treino';
     choosenExercises: ExerciseItem[] = [];
 
@@ -27,6 +31,11 @@ export class CreatePlanPage implements OnInit {
         private activeRoute: ActivatedRoute,
         private router: Router
     ) {}
+
+    ionViewWillEnter(): void {
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+    }
 
     ngOnInit() {
         const info = this.activeRoute.snapshot.paramMap.get('plan');

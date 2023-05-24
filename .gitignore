@@ -4,6 +4,8 @@
 docs
 .vscode
 
+android/*
+
 *~
 *.sw[mnpcod]
 .tmp

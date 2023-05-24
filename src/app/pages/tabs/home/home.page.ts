@@ -6,7 +6,6 @@ import {
     ViewChild,
 } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
-import { loadTourismPoints } from '../../../services/api';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { CardComponent } from '../../../components/card/card.component';
@@ -17,6 +16,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 import { User } from 'src/app/models/user.model';
+import { Plan } from 'src/app/models/plan.model';
 
 @Component({
     selector: 'app-home',
@@ -51,23 +51,61 @@ export class HomePage implements OnInit {
     ) {}
 
     async ngOnInit() {
-        const plans = await this.planService.getAllPlanOfUserFavorite(
-            {} as User
-        );
+        const fav_plan = await this.planService.getAllPlanOfUserFavorite({
+            userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+        } as User);
 
-        this.results = plans.map((plan) => {
+        const rec_plan = await this.planService.getAllRecomendedPlan();
+        const pop_plan = await this.planService.getAllPopularPlan();
+
+        this.planFav = fav_plan.map((plan) => {
             return {
                 id: plan.id,
                 title: plan.title,
                 time: plan.duration.toString(),
                 isFavorite: plan.is_favourite,
+                image: plan.badge,
             } as Card;
         });
 
-        console.log(this.results);
+        this.planRec = rec_plan.map((plan) => {
+            return {
+                id: plan.id,
+                title: plan.title,
+                time: plan.duration.toString(),
+                isFavorite: plan.is_favourite,
+                image: plan.badge,
+            } as Card;
+        });
+
+        this.planPop = pop_plan.map((plan) => {
+            return {
+                id: plan.id,
+                title: plan.title,
+                time: plan.duration.toString(),
+                isFavorite: plan.is_favourite,
+                image: plan.badge,
+            } as Card;
+        });
+
+        console.log(this.planPop);
 
         this.handleChangeIndex(0);
         this.calculateMaxCardsPerRow();
+    }
+
+    handleChangeIndex(event: number) {
+        switch (event) {
+            case 0:
+                this.cards = this.planFav;
+                break;
+            case 1:
+                this.cards = this.planRec;
+                break;
+            case 2:
+                this.cards = this.planPop;
+                break;
+        }
         this.results = this.cards;
     }
 
@@ -83,22 +121,20 @@ export class HomePage implements OnInit {
         this.router.navigate(['/tabs/home/category']);
     }
 
-    handleClick(card: Card) {
-        // this.nav.navigateForward('/detalhe', { state: card });
+    handleClick(event: Card) {
+        this.router.navigate(['/tabs/home/info/' + event.id]);
     }
 
-    handleChangeIndex(event: number) {
-        switch (event) {
-            case 0:
-                this.cards = this.planFav;
-                break;
-            case 1:
-                this.cards = this.planRec;
-                break;
-            case 2:
-                this.cards = this.planPop;
-                break;
-        }
+    selectionChanged(event: Card) {
+        this.planService.changeFav(
+            {
+                id: event.id,
+                is_favourite: event.isFavorite,
+            } as Plan,
+            {
+                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+            } as User
+        );
     }
 
     calculateMaxCardsPerRow(): void {

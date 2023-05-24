@@ -1,12 +1,15 @@
-<app-work-header [isNested]="true" title="Plano 1" [search]="false">
+<app-work-header [isNested]="true" [title]="plan?.title" [search]="false">
     <flag-displayer></flag-displayer>
 </app-work-header>
 
 <ion-content [fullscreen]="true">
     <div class="list-wrapper">
         <ion-list>
-            <item-visualizer [isOpen]="true"> </item-visualizer>
-            <item-visualizer> </item-visualizer>
+            <item-visualizer
+                *ngFor="let exe of exercises ; let i = index"
+                [isOpen]="i === currentExercise"
+            >
+            </item-visualizer>
         </ion-list>
     </div>
 

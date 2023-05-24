@@ -75,11 +75,11 @@ export class MyPlanPage implements OnInit {
     }
 
     createPlan() {
-        this.router.navigate(['/tabs/home/mine/create']);
+        this.router.navigate(['/tabs/home/mine/create/nocontent']);
     }
 
     async selectionChanged({ id, image, isFavorite, time, title }: Card) {
-        await this.planService.updatePlan(
+        await this.planService.changeFav(
             {
                 id: id,
                 is_favourite: isFavorite,

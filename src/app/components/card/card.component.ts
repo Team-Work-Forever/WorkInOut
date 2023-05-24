@@ -35,6 +35,9 @@ export class CardComponent implements OnInit {
     @Output()
     isSelected: EventEmitter<Card> = new EventEmitter();
 
+    @Output()
+    eventClick: EventEmitter<any> = new EventEmitter();
+
     option: string;
 
     ngOnInit(): void {
@@ -43,8 +46,14 @@ export class CardComponent implements OnInit {
             : this.icon + '-outline';
     }
 
-    handleClick(card: Card) {
-        // this.nav.navigateForward('/detalhe', { state: card });
+    handleClick() {
+        this.eventClick.emit({
+            image: this.image,
+            isFavorite: this.isFavorite,
+            time: this.time,
+            title: this.time,
+            id: this.id,
+        } as Card);
     }
 
     toggleFavorite() {

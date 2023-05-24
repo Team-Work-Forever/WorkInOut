@@ -45,11 +45,28 @@ export class PlanService {
         return data as Plan[];
     }
 
+    public async getPlanOfUserById(planId: string, user: User): Promise<Plan> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .from('plan_user')
+            .select('*')
+            .eq('id', planId)
+            .eq('auth_user', user.userId)
+            .single();
+
+        if (error) {
+            return {} as Plan;
+        }
+
+        return data as Plan;
+    }
+
     public async getAllPlanOfUserFavorite(user: User): Promise<Plan[]> {
         const { data, error } = await this.supabaseService
             .getClient()
             .from('plan_user')
             .select('*')
+            .eq('auth_user', user.userId)
             .eq('is_favourite', true);
 
         if (error) {
@@ -59,7 +76,24 @@ export class PlanService {
         return data as Plan[];
     }
 
-    public async updatePlan(plan: Plan, user: User): Promise<void> {
+    public async getAllRecomendedPlan(): Promise<Plan[]> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .from('plan')
+            .select('*');
+
+        if (error) {
+            return [];
+        }
+
+        return data as Plan[];
+    }
+
+    public async getAllPopularPlan(): Promise<Plan[]> {
+        return await this.getAllRecomendedPlan();
+    }
+
+    public async changeFav(plan: Plan, user: User): Promise<void> {
         const { data, error } = await this.supabaseService
             .getClient()
             .rpc('func_change_fav', {
@@ -92,20 +126,39 @@ export class PlanService {
 
     public async addExercises(
         plan: Plan,
-        exercises: Exercise[]
+        exercises: { exerciseId: string; exerciseIndex: number }[]
     ): Promise<void> {
         await Promise.all(
             exercises.map((exercise) => this.addExercise(plan, exercise))
         );
     }
 
-    public async addExercise(plan: Plan, exercise: Exercise): Promise<void> {
+    public async addExercise(
+        plan: Plan,
+        { exerciseId, exerciseIndex }
+    ): Promise<void> {
         const { error } = await this.supabaseService
             .getClient()
             .rpc('func_add_exe', {
-                exercise_id: exercise.id,
-                exercise_index: exercise.index,
+                exercise_id: exerciseId,
+                exercise_index: exerciseIndex,
                 plan_id: plan.id,
             } as AddExerciseProps);
+
+        console.log(error);
+    }
+
+    public async getExercisesFromPlanById(planId: string): Promise<Exercise[]> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .from('exe_info')
+            .select('*')
+            .eq('plan', planId);
+
+        if (error) {
+            return [];
+        }
+
+        return data as Exercise[];
     }
 }

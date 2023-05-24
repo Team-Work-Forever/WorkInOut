@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -8,6 +8,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class SchedualNotificationComponent implements OnInit {
     constructor(public toastController: ToastController) {}
+
+    @Input()
+    public id: string;
 
     @Input()
     public isSelected: boolean;
@@ -21,12 +24,19 @@ export class SchedualNotificationComponent implements OnInit {
     @Input()
     public endDate: string;
 
+    @Output()
+    public eventClick: EventEmitter<{ id: string; isActive: boolean }> =
+        new EventEmitter();
+
     public icon: string;
 
     public color: string = 'black';
 
     ngOnInit(): void {
-        this.toggleButton();
+        this.icon = !this.isSelected
+            ? 'notifications'
+            : 'notifications-outline';
+        this.color = !this.isSelected ? 'lightblue' : 'black';
     }
 
     toggleButton() {
@@ -35,6 +45,10 @@ export class SchedualNotificationComponent implements OnInit {
             ? 'notifications'
             : 'notifications-outline';
         this.color = !this.isSelected ? 'lightblue' : 'black';
+        this.eventClick.emit({
+            id: this.id,
+            isActive: this.isSelected,
+        });
     }
 
     async presentToast(position, title) {

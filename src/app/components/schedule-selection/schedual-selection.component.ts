@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { NotificationService } from 'src/app/services/notification.service';
+import { Notification as Notify } from '../../models/notification.model';
 
 @Component({
     selector: 'schedual-selection',
@@ -11,7 +13,8 @@ export class SchedualSelectionComponent {
 
     constructor(
         private modalCtrl: ModalController,
-        public toastController: ToastController
+        public toastController: ToastController,
+        private notificationService: NotificationService
     ) {}
 
     cancel() {
@@ -24,6 +27,14 @@ export class SchedualSelectionComponent {
             console.log('Selecione uma data para agendar o plano');
             return;
         }
+
+        await this.notificationService.addNotification({
+            user_id: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+            title: 'Eueu',
+            type: 0,
+            is_active: false,
+            ended_at: this.getMinDate(),
+        } as Notify);
 
         await this.closeModal('confirm');
     }

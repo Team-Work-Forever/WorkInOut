@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { Notification } from '../models/notification.model';
-import { type } from 'os';
 import { User } from '../models/user.model';
 
 type AddNotificationProps = {
@@ -9,6 +8,12 @@ type AddNotificationProps = {
     title: string;
     type: number;
     is_active: boolean;
+    ended_at: string;
+};
+
+type SwitchNotificationProps = {
+    notification_id: string;
+    notification_is_active: boolean;
 };
 
 @Injectable({
@@ -25,7 +30,22 @@ export class NotificationService {
                 title: notification.title,
                 type: notification.type,
                 is_active: notification.is_active,
+                ended_at: notification.ended_at,
             } as AddNotificationProps);
+    }
+
+    public async switchNotification(
+        notification_id: string,
+        is_active: boolean
+    ): Promise<void> {
+        const { error } = await this.supabaseService
+            .getClient()
+            .rpc('func_switch_notification', {
+                notification_id: notification_id,
+                notification_is_active: is_active,
+            } as SwitchNotificationProps);
+
+        console.log(error);
     }
 
     public async getAllMyNotifications(user: User): Promise<Notification[]> {

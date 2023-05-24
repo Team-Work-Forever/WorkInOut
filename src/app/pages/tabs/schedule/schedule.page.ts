@@ -27,10 +27,14 @@ export class SchedulePage implements OnInit {
                 title: notification.title,
                 type: notification.type,
                 started_at: convertToHoursMinutes(notification.started_at),
-                ended_at: '', // Falta colocar ended_at
+                ended_at: convertToHoursMinutes(notification.ended_at),
                 is_active: notification.is_active,
             } as NotificationItem;
         });
+    }
+
+    handleNotification(event) {
+        this.notificationService.switchNotification(event.id, event.isActive);
     }
 
     getMinDate() {

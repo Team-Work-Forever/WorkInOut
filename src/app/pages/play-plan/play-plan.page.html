@@ -1,5 +1,5 @@
 <app-work-header [isNested]="true" [title]="plan?.title" [search]="false">
-    <flag-displayer></flag-displayer>
+    <flag-displayer [items]="categories | async"></flag-displayer>
 </app-work-header>
 
 <ion-content [fullscreen]="true">

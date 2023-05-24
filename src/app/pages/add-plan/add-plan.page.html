@@ -1,5 +1,5 @@
 <app-work-header [isNested]="true" [title]="title" [editable]="true">
-    <flag-displayer [categories]="selectedCategories"></flag-displayer>
+    <flag-displayer [items]="selectedCategories | async"></flag-displayer>
 </app-work-header>
 
 <ion-content [fullscreen]="true">

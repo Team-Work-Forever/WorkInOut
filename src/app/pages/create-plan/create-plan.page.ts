@@ -26,6 +26,8 @@ import { PlanService } from 'src/app/services/plan-service.service';
 export class CreatePlanPage implements OnInit, ViewWillEnter {
     planTitle: string = 'Novo Treino';
     choosenExercises: ExerciseItem[] = [];
+
+    sendCategories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
     categories: Category[] = [];
 
     constructor(
@@ -69,6 +71,7 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
                 });
             }
 
+            this.sendCategories.next(this.categories);
             this.planTitle = plan ? plan.title : 'Novo Plano';
         }
     }

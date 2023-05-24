@@ -9,6 +9,7 @@ import {
     ToastController,
     ViewWillEnter,
 } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
@@ -25,7 +26,7 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
     title: string = 'Novo Plano';
 
     selectedItems: ExerciseItem[] = [];
-    selectedCategories: Category[] = [];
+    selectedCategories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
 
     categories: HorizontalItem[];
     exercices: ExerciseItem[];
@@ -49,7 +50,7 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
             this.activeRoute.snapshot.paramMap.get('plan')
         ) as CreateRouteProps;
 
-        this.selectedCategories = plan.categories;
+        this.selectedCategories.next(plan.categories);
         this.selectedItems = plan.exercises;
 
         console.log(this.selectedItems);

@@ -11,6 +11,7 @@ import {
     ToastController,
     ViewWillEnter,
 } from '@ionic/angular';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ExerciseModule } from 'src/app/components/exercise/exercise.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
 import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
@@ -18,10 +19,12 @@ import { ModelItemComponent } from 'src/app/components/model-item/model-item.com
 import { SchedualSelectionComponent } from 'src/app/components/schedule-selection/schedual-selection.component';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { ImageContent } from 'src/app/interfaces/imageContent.interface';
+import { Category } from 'src/app/models/category.model';
 import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
 import { getMaterial } from 'src/app/services/api';
+import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
@@ -42,6 +45,7 @@ import { PlanService } from 'src/app/services/plan-service.service';
 export class InfoPlanPage implements OnInit, ViewWillEnter {
     plan: Plan;
     exercises: Exercise[];
+    categories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
 
     imageContainer: ImageContent[];
     results: ImageContent[];
@@ -67,6 +71,10 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         this.plan = await this.planService.getPlanOfUserById(planId, {
             userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
         } as User);
+
+        this.categories.next(
+            await this.planService.getCategoriesFromPlan(planId)
+        );
 
         this.exercises = await this.planService.getExercisesFromPlanById(
             planId

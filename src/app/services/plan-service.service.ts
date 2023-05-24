@@ -196,7 +196,7 @@ export class PlanService {
     public async getCategoriesFromPlan(planId: string): Promise<Category[]> {
         const { data, error } = await this.supabaseService
             .getClient()
-            .from('category_plan')
+            .from('cat_only')
             .select('*')
             .eq('plan', planId);
 

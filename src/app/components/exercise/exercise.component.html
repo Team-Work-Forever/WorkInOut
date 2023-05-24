@@ -1,11 +1,11 @@
 <div
     class="container"
-    [ngClass]="{ selected: selected }"
+    [ngClass]="!ignoreSelect ? { selected: selected } : ''"
     (click)="handleClick()"
 >
     <div class="wrapper">
         <span>{{ title }}</span>
     </div>
 
-    <span>{{ duration }}</span>
+    <span>{{ displayer }}</span>
 </div>

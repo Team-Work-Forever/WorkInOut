@@ -1,4 +1,4 @@
-<ion-card class="card-container">
+<ion-card (click)="handleClick()" class="card-container">
     <img [src]="image" />
     <ion-card-content>
         <ion-card-subtitle color="primary">{{ time }}</ion-card-subtitle>

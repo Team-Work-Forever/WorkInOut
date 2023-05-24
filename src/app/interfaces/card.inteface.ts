@@ -3,7 +3,7 @@ export interface Card {
     title: string;
     image: string;
     time: string;
-    list: Data[];
+
     isFavorite: boolean;
 }
 

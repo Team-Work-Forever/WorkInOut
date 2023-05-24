@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from 'src/app/interfaces/card.inteface';
 
 @Component({
@@ -7,6 +7,9 @@ import { Card } from 'src/app/interfaces/card.inteface';
     styleUrls: ['card.component.scss'],
 })
 export class CardComponent implements OnInit {
+    @Input()
+    id: string;
+
     @Input()
     hasFavorite: boolean = true;
 
@@ -25,6 +28,12 @@ export class CardComponent implements OnInit {
     @Input()
     icon: string;
 
+    @Output()
+    isSelected: EventEmitter<Card> = new EventEmitter();
+
+    @Output()
+    eventClick: EventEmitter<any> = new EventEmitter();
+
     option: string;
 
     ngOnInit(): void {
@@ -33,8 +42,14 @@ export class CardComponent implements OnInit {
             : this.icon + '-outline';
     }
 
-    handleClick(card: Card) {
-        // this.nav.navigateForward('/detalhe', { state: card });
+    handleClick() {
+        this.eventClick.emit({
+            image: this.image,
+            isFavorite: this.isFavorite,
+            time: this.time,
+            title: this.time,
+            id: this.id,
+        } as Card);
     }
 
     toggleFavorite() {
@@ -42,5 +57,12 @@ export class CardComponent implements OnInit {
         this.option = this.isFavorite
             ? this.icon + '-sharp'
             : this.icon + '-outline';
+        this.isSelected.emit({
+            id: this.id,
+            image: this.image,
+            isFavorite: this.isFavorite,
+            time: this.time,
+            title: this.title,
+        });
     }
 }

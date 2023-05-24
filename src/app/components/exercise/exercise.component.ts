@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { convertToMinutesSeconds } from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'exercise',
@@ -6,17 +7,24 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./exercise.component.scss'],
 })
 export class ExerciseComponent implements OnInit {
+    displayer: string;
+
     @Input()
     title: string;
 
     @Input()
-    duration: string;
+    duration: number;
+
+    @Input()
+    ignoreSelect: boolean = false;
 
     selected: boolean = false;
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.displayer = convertToMinutesSeconds(this.duration).concat(' min');
+    }
 
     handleClick() {
         this.selected = !this.selected;

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    ItemReorderEventDetail,
-    NavController,
-    ToastController,
-} from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ItemReorderEventDetail, ToastController } from '@ionic/angular';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
@@ -20,28 +17,30 @@ export class AddPlanPage implements OnInit {
 
     selectedItems: ExerciseItem[] = [];
     categories: HorizontalItem[];
-    exercises: ExerciseItem[];
+    exercices: ExerciseItem[];
     results: ExerciseItem[];
 
     constructor(
         public toastController: ToastController,
         private categoryService: CategoryService,
         private exerciseService: ExerciseService,
-        private nav: NavController
+        private router: Router,
+        private activeRoute: ActivatedRoute
     ) {}
 
     async ngOnInit() {
-        var data = history.state as CreateRouteProps;
+        const plan = JSON.parse(
+            this.activeRoute.snapshot.paramMap.get('plan')
+        ) as CreateRouteProps;
 
         const exercices = await this.exerciseService.getAllExercises();
         const categories = await this.categoryService.getAllCategories();
 
-        this.exercises = exercices.map((exe) => {
+        this.exercices = exercices.map((exe) => {
             return {
                 id: exe.id,
                 title: exe.title,
-                duration: exe.duration + ':00 min',
-                video_url: exe.video_url,
+                duration: exe.duration,
             } as ExerciseItem;
         });
 
@@ -52,9 +51,10 @@ export class AddPlanPage implements OnInit {
             } as HorizontalItem;
         });
 
-        this.title = data.title;
-        this.selectedItems = data.exercises ? data.exercises : [];
-        this.results = this.exercises;
+        this.title = plan.title;
+
+        this.selectedItems = plan.exercises;
+        this.results = this.exercices;
     }
 
     handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
@@ -78,7 +78,6 @@ export class AddPlanPage implements OnInit {
         } else {
             this.selectedItems.push(exercise); // Adiciona o exercício se ele ainda não estiver selecionado
         }
-        console.log(this.selectedItems);
     }
 
     isEmpty() {
@@ -96,11 +95,12 @@ export class AddPlanPage implements OnInit {
 
         if (this.selectedItems.length === 0) return;
 
-        this.nav.navigateForward('/tabs/home/mine/create', {
-            state: {
-                title: this.title,
-                exercises: this.selectedItems,
-            } as CreateRouteProps,
-        });
+        this.router.navigate([
+            '/tabs/home/mine/create/' +
+                JSON.stringify({
+                    title: this.title,
+                    exercises: this.selectedItems,
+                } as CreateRouteProps),
+        ]);
     }
 }

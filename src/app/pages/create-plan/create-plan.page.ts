@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     ItemReorderEventDetail,
     NavController,
@@ -23,17 +24,19 @@ export class CreatePlanPage implements OnInit {
     constructor(
         public toastController: ToastController,
         private planService: PlanService,
-        private nav: NavController
+        private activeRoute: ActivatedRoute,
+        private router: Router
     ) {}
 
     ngOnInit() {
-        var data = history.state as CreateRouteProps;
+        const info = this.activeRoute.snapshot.paramMap.get('plan');
 
-        if (data) {
-            console.log(data.exercises);
+        const plan =
+            info != 'nocontent' ? (JSON.parse(info) as CreateRouteProps) : '';
 
-            this.choosenExercises = data.exercises ? data.exercises : [];
-            this.planTitle = data.title ? data.title : 'Novo Plano';
+        if (plan) {
+            this.choosenExercises = plan.exercises ? plan.exercises : [];
+            this.planTitle = plan.title ? plan.title : 'Novo Plano';
         }
     }
 
@@ -53,12 +56,13 @@ export class CreatePlanPage implements OnInit {
     }
 
     addExercise() {
-        this.nav.navigateForward('/tabs/home/mine/add', {
-            state: {
-                title: this.planTitle,
-                exercises: this.choosenExercises,
-            } as CreateRouteProps,
-        });
+        this.router.navigate([
+            '/tabs/home/mine/add/' +
+                JSON.stringify({
+                    title: this.planTitle,
+                    exercises: this.choosenExercises,
+                } as CreateRouteProps),
+        ]);
     }
 
     async showToast(title: string) {
@@ -84,7 +88,7 @@ export class CreatePlanPage implements OnInit {
 
         const createdPlan = await this.planService.createPlan(
             {
-                badge: 'xdasdas',
+                badge: 'https://qbkliymokbvleuaxyiwn.supabase.co/storage/v1/object/public/SUPASUPA/ioga.png?t=2023-05-24T10%3A22%3A25.794Z',
                 color: '#000',
                 duration: 2,
                 is_favourite: false,
@@ -95,17 +99,28 @@ export class CreatePlanPage implements OnInit {
             } as User
         );
 
+        if (!createdPlan) {
+            this.showToast('Erro ao criar um plano!');
+            return;
+        }
+
         await this.planService.addExercises(
             createdPlan,
             this.choosenExercises.map((item) => {
                 return {
-                    id: item.id,
-                    title: item.title,
-                    video_url: item.video_url,
-                    duration: parseFloat(item.duration),
-                    index: 0,
-                } as Exercise;
+                    exerciseId: item.id,
+                    exerciseIndex: 0,
+                };
             })
         );
+
+        if (this.choosenExercises.length === 0) {
+            this.showToast('Não se esqueça de adicionar um exercício!');
+            return;
+        }
+
+        this.showToast('Plano criado');
+
+        this.router.navigate(['tabs/home/mine']);
     }
 }

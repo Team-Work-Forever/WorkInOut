@@ -1,14 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { ExerciseModule } from 'src/app/components/exercise/exercise.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
+import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
 import { ModelItemComponent } from 'src/app/components/model-item/model-item.component';
 import { SchedualSelectionComponent } from 'src/app/components/schedule-selection/schedual-selection.component';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
-import { Exercise } from 'src/app/interfaces/exercise.interface';
 import { ImageContent } from 'src/app/interfaces/imageContent.interface';
+import { Exercise } from 'src/app/models/exercise.model';
+import { Plan } from 'src/app/models/plan.model';
+import { User } from 'src/app/models/user.model';
 import { getMaterial } from 'src/app/services/api';
+import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
     selector: 'app-info-plan',
@@ -21,19 +26,38 @@ import { getMaterial } from 'src/app/services/api';
         WorkHeaderModule,
         ExerciseModule,
         FlagDisplayerModule,
+        ExerciseModule,
+        ItemVisualizerModule,
     ],
 })
 export class InfoPlanPage implements OnInit {
+    plan: Plan;
+    exercises: Exercise[];
+
     imageContainer: ImageContent[];
     results: ImageContent[];
     selectedItems: Exercise[] = [];
-    exercises: Exercise[];
     maxCardsPerRow: number;
 
     constructor(
+        private modalCtrl: ModalController,
         public toastController: ToastController,
-        private modalCtrl: ModalController
-    ) {
+        private planService: PlanService,
+        private activeRoute: ActivatedRoute,
+        private router: Router
+    ) {}
+
+    async ngOnInit() {
+        const planId = this.activeRoute.snapshot.paramMap.get('id');
+
+        this.plan = await this.planService.getPlanOfUserById(planId, {
+            userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+        } as User);
+
+        this.exercises = await this.planService.getExercisesFromPlanById(
+            planId
+        );
+
         this.imageContainer = [
             {
                 title: 'Estimativa de calorias gastas',
@@ -49,35 +73,6 @@ export class InfoPlanPage implements OnInit {
 
         this.results = this.imageContainer;
 
-        this.exercises = [
-            {
-                id: 1,
-                title: 'Break',
-                duration: '2:00min',
-                videoUrl: '',
-            },
-            {
-                id: 2,
-                title: 'Break',
-                duration: '3:00min',
-                videoUrl: '',
-            },
-            {
-                id: 3,
-                title: 'Break',
-                duration: '4:00min',
-                videoUrl: '',
-            },
-            {
-                id: 4,
-                title: 'Break',
-                duration: '5:00min',
-                videoUrl: '',
-            },
-        ];
-    }
-
-    ngOnInit() {
         this.calculateMaxCardsPerRow();
     }
 
@@ -89,6 +84,10 @@ export class InfoPlanPage implements OnInit {
             },
         });
         modal.present();
+    }
+
+    startPlan() {
+        this.router.navigate(['/tabs/home/play/' + this.plan.id]);
     }
 
     calculateMaxCardsPerRow(): void {

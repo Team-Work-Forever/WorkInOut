@@ -8,6 +8,8 @@ import { HorizontalSliderModule } from 'src/app/components/horizontal-slider/hor
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { Card } from 'src/app/interfaces/card.inteface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
+import { Plan } from 'src/app/models/plan.model';
+import { User } from 'src/app/models/user.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
@@ -46,8 +48,6 @@ export class MyPlanPage implements OnInit {
             email: '',
         });
 
-        console.log(plans);
-
         this.cards = plans.map((plan) => {
             return {
                 id: plan.id,
@@ -73,10 +73,23 @@ export class MyPlanPage implements OnInit {
     }
 
     createPlan() {
-        this.router.navigate(['/tabs/home/mine/create']);
+        this.router.navigate(['/tabs/home/mine/create/nocontent']);
+    }
+
+    async selectionChanged({ id, image, isFavorite, time, title }: Card) {
+        await this.planService.changeFav(
+            {
+                id: id,
+                is_favourite: isFavorite,
+                badge: image,
+                title: title,
+                duration: parseFloat(time),
+            } as Plan,
+            { userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f' } as User
+        );
     }
 
     handleClick(card: Card) {
-        // this.nav.navigateForward('/detalhe', { state: card });
+        this.router.navigate(['/tabs/home/info/' + card.id]);
     }
 }

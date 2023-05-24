@@ -4,7 +4,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
     {
-        path: 'tabs',
+        path: '',
         component: TabsPage,
         children: [
             {
@@ -28,14 +28,14 @@ const routes: Routes = [
                                     ).then((m) => m.MyPlanPageModule),
                             },
                             {
-                                path: 'create',
+                                path: 'create/:plan',
                                 loadChildren: () =>
                                     import(
                                         '../pages/create-plan/create-plan.module'
                                     ).then((m) => m.CreatePlanPageModule),
                             },
                             {
-                                path: 'add',
+                                path: 'add/:plan',
                                 loadChildren: () =>
                                     import(
                                         '../pages/add-plan/add-plan.module'
@@ -49,6 +49,20 @@ const routes: Routes = [
                             import(
                                 '../pages/category-plan/category-plan.module'
                             ).then((m) => m.CategoryPlanPageModule),
+                    },
+                    {
+                        path: 'info/:id',
+                        loadChildren: () =>
+                            import('../pages/info-plan/info-plan.module').then(
+                                (m) => m.InfoPlanPageModule
+                            ),
+                    },
+                    {
+                        path: 'play/:id',
+                        loadChildren: () =>
+                            import('../pages/play-plan/play-plan.module').then(
+                                (m) => m.PlayPlanPageModule
+                            ),
                     },
                 ],
             },

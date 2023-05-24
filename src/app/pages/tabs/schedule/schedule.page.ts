@@ -1,12 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NotificationItem } from 'src/app/interfaces/notification-item.interface';
+import { Notification } from 'src/app/models/notification.model';
+import { User } from 'src/app/models/user.model';
+import { NotificationService } from 'src/app/services/notification.service';
+import { convertToHoursMinutes } from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'app-schedule',
     templateUrl: 'schedule.page.html',
     styleUrls: ['schedule.page.scss'],
 })
-export class SchedulePage {
-    constructor() {}
+export class SchedulePage implements OnInit {
+    public notifications: NotificationItem[];
+
+    constructor(private notificationService: NotificationService) {}
+
+    async ngOnInit() {
+        const notifications =
+            await this.notificationService.getAllMyNotifications({
+                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+            } as User);
+
+        this.notifications = notifications.map((notification) => {
+            return {
+                id: notification.id,
+                title: notification.title,
+                type: notification.type,
+                started_at: convertToHoursMinutes(notification.started_at),
+                ended_at: convertToHoursMinutes(notification.ended_at),
+                is_active: notification.is_active,
+            } as NotificationItem;
+        });
+    }
+
+    handleNotification(event) {
+        this.notificationService.switchNotification(event.id, event.isActive);
+    }
+
     getMinDate() {
         const currentDate = new Date();
         const year = currentDate.getFullYear();

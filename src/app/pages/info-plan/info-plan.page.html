@@ -1,4 +1,4 @@
-<app-work-header [isNested]="true" [search]="false" title="Plano 1">
+<app-work-header [search]="false" title="Plano 1">
     <flag-displayer [hasAgenda]="true" (open)="openModal()"></flag-displayer>
 </app-work-header>
 
@@ -47,20 +47,13 @@
         <div class="separator"></div>
     </div>
     <div class="list-wrapper">
-        <ion-list *ngFor="let exercise of exercises">
-            <exercise
-                [title]="exercise.title"
-                [duration]="exercise.duration"
-                (click)="addToSelected(exercise)"
-            ></exercise>
+        <ion-list>
+            <item-visualizer> </item-visualizer>
+            <item-visualizer> </item-visualizer>
+            <item-visualizer> </item-visualizer>
+            <item-visualizer> </item-visualizer>
         </ion-list>
     </div>
 
     <ion-button class="create-btn" expand="block">Começar</ion-button>
-    <ion-action-sheet
-        [isOpen]="isActionSheetOpen"
-        header="Tem a certeza que deseja remover estes exercícios?"
-        [buttons]="actionSheetButtons"
-        (didDismiss)="setOpen(false)"
-    ></ion-action-sheet>
 </ion-content>

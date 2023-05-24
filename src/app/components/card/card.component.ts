@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from 'src/app/interfaces/card.inteface';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastOptions } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,6 +11,9 @@ import { CommonModule } from '@angular/common';
     styleUrls: ['card.component.scss'],
 })
 export class CardComponent implements OnInit {
+    @Input()
+    id: string;
+
     @Input()
     hasFavorite: boolean = true;
 
@@ -29,6 +32,9 @@ export class CardComponent implements OnInit {
     @Input()
     icon: string;
 
+    @Output()
+    isSelected: EventEmitter<Card> = new EventEmitter();
+
     option: string;
 
     ngOnInit(): void {
@@ -46,5 +52,12 @@ export class CardComponent implements OnInit {
         this.option = this.isFavorite
             ? this.icon + '-sharp'
             : this.icon + '-outline';
+        this.isSelected.emit({
+            id: this.id,
+            image: this.image,
+            isFavorite: this.isFavorite,
+            time: this.time,
+            title: this.title,
+        });
     }
 }

@@ -28,6 +28,8 @@
             >
                 <app-card
                     (click)="handleClick(card)"
+                    (isSelected)="selectionChanged($event)"
+                    [id]="card.id"
                     [image]="card.image"
                     [title]="card.title"
                     [time]="card.time"

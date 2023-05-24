@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -9,7 +9,17 @@ import { ToastController } from '@ionic/angular';
 export class SchedualNotificationComponent implements OnInit {
     constructor(public toastController: ToastController) {}
 
+    @Input()
     public isSelected: boolean;
+
+    @Input()
+    public title: string = 'Plano 1';
+
+    @Input()
+    public startDate: string;
+
+    @Input()
+    public endDate: string;
 
     public icon: string;
 

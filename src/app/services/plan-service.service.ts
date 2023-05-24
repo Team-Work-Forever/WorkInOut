@@ -19,6 +19,12 @@ type AddExerciseProps = {
     plan_id: string;
 };
 
+type ChangeFavProps = {
+    plan_id: string;
+    user_id: string;
+    is_fav: boolean;
+};
+
 @Injectable({
     providedIn: 'root',
 })
@@ -30,7 +36,6 @@ export class PlanService {
             .getClient()
             .from('plan_user')
             .select('*')
-            .eq('is_favourite', true)
             .eq('auth_user', user.userId);
 
         if (error) {
@@ -52,6 +57,18 @@ export class PlanService {
         }
 
         return data as Plan[];
+    }
+
+    public async updatePlan(plan: Plan, user: User): Promise<void> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .rpc('func_change_fav', {
+                user_id: user.userId,
+                plan_id: plan.id,
+                is_fav: plan.is_favourite,
+            } as ChangeFavProps);
+
+        console.log(error);
     }
 
     public async createPlan(plan: Plan, user: User): Promise<Plan> {
@@ -90,7 +107,5 @@ export class PlanService {
                 exercise_index: exercise.index,
                 plan_id: plan.id,
             } as AddExerciseProps);
-
-        console.log(error);
     }
 }

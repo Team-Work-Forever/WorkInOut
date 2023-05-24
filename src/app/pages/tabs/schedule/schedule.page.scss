@@ -6,6 +6,9 @@
 
 ion-text {
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .date-picker-container {
@@ -14,7 +17,7 @@ ion-text {
     align-items: center;
     justify-content: center;
     padding: 22px;
-  }
+}
 
 .date-picker {
     max-width: 300px;

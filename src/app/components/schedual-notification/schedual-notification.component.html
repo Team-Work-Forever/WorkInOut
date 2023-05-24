@@ -1,6 +1,13 @@
 <div
     (click)="toggleButton()"
-    (click)="presentToast('top', 'O plano de treino foi desmarcado!')"
+    (click)="
+        presentToast(
+            'top',
+            !isSelected
+                ? 'O plano de treino foi desmarcado!'
+                : 'O plano de treino foi marcado!'
+        )
+    "
     class="notify"
 >
     <div class="content">

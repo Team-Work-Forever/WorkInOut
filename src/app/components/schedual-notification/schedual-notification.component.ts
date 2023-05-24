@@ -33,18 +33,14 @@ export class SchedualNotificationComponent implements OnInit {
     public color: string = 'black';
 
     ngOnInit(): void {
-        this.icon = !this.isSelected
-            ? 'notifications'
-            : 'notifications-outline';
-        this.color = !this.isSelected ? 'lightblue' : 'black';
+        this.icon = this.isSelected ? 'notifications' : 'notifications-outline';
+        this.color = this.isSelected ? 'lightblue' : 'black';
     }
 
     toggleButton() {
         this.isSelected = !this.isSelected;
-        this.icon = !this.isSelected
-            ? 'notifications'
-            : 'notifications-outline';
-        this.color = !this.isSelected ? 'lightblue' : 'black';
+        this.icon = this.isSelected ? 'notifications' : 'notifications-outline';
+        this.color = this.isSelected ? 'lightblue' : 'black';
         this.eventClick.emit({
             id: this.id,
             isActive: this.isSelected,

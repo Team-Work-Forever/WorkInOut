@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'tabs',
         loadChildren: () =>
             import('./tabs/tabs.module').then((m) => m.TabsPageModule),
     },
@@ -13,56 +13,9 @@ const routes: Routes = [
             import('./pages/login/login.module').then((m) => m.LoginPageModule),
     },
     {
-        path: 'settings',
-        loadChildren: () =>
-            import('./pages/tabs/settings/settings.module').then(
-                (m) => m.SettingsPageModule
-            ),
-    },
-    {
-        path: 'account',
-        loadChildren: () =>
-            import('./pages/tabs/account/account.module').then(
-                (m) => m.AccountPageModule
-            ),
-    },
-    {
-        path: 'login',
-        loadChildren: () =>
-            import('./pages/login/login.module').then((m) => m.LoginPageModule),
-    },
-    {
-        path: 'category-plan',
-        loadChildren: () =>
-            import('./pages/category-plan/category-plan.module').then(
-                (m) => m.CategoryPlanPageModule
-            ),
-    },
-    {
-        path: 'my-plan',
-        loadChildren: () =>
-            import('./pages/my-plan/my-plan.module').then(
-                (m) => m.MyPlanPageModule
-            ),
-    },
-  {
-    path: 'create-plan',
-    loadChildren: () => import('./pages/create-plan/create-plan.module').then( m => m.CreatePlanPageModule)
-  },
-  {
-    path: 'add-plan',
-    loadChildren: () => import('./pages/add-plan/add-plan.module').then( m => m.AddPlanPageModule)
-  },
-  {
-    path: 'play-plan',
-    loadChildren: () => import('./pages/play-plan/play-plan.module').then( m => m.PlayPlanPageModule)
-  },
-   {
-        path: 'info-plan',
-        loadChildren: () =>
-            import('./pages/info-plan/info-plan.module').then(
-                (m) => m.InfoPlanPageModule
-            ),
+        path: '',
+        redirectTo: '/login',
+        pathMatch: 'full',
     },
 ];
 
@@ -73,5 +26,3 @@ const routes: Routes = [
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
-

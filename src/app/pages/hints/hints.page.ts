@@ -3,7 +3,8 @@ import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
-import { ViewWillEnter } from '@ionic/angular';
+import { ModalController, ViewWillEnter } from '@ionic/angular';
+import { HintModalComponent } from 'src/app/components/hint-modal/hint-modal.component';
 import { Hint } from 'src/app/interfaces/hint.interface';
 import { HintService } from 'src/app/services/hint.service.service';
 
@@ -16,7 +17,10 @@ export class HintsPage implements OnInit, ViewWillEnter {
     maxCardsPerRow: number;
     hints: Hint[] = [];
 
-    constructor(private hintsService: HintService) {}
+    constructor(
+        private hintsService: HintService,
+        private modalCtrl: ModalController
+    ) {}
 
     ionViewWillEnter(): void {
         const options: OrientationLockOptions = { orientation: 'portrait' };
@@ -39,7 +43,22 @@ export class HintsPage implements OnInit, ViewWillEnter {
         this.calculateMaxCardsPerRow();
     }
 
-    handleClick(hint: Hint) {}
+    async handleClick(description) {
+        const modal = await this.modalCtrl.create({
+            component: HintModalComponent,
+            componentProps: {
+                description: description,
+            },
+        });
+        modal.present();
+    }
+
+    async openModal() {
+        const modal = await this.modalCtrl.create({
+            component: HintModalComponent,
+        });
+        modal.present();
+    }
 
     calculateMaxCardsPerRow(): void {
         const cardWidth = 164; // Largura fixa do card em pixels

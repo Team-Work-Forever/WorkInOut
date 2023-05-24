@@ -9,6 +9,7 @@ import { HintsPageRoutingModule } from './hints-routing.module';
 import { HintsPage } from './hints.page';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { CardHintModule } from 'src/app/components/card-hint/card-hint.components.module';
+import { HintModalModule } from 'src/app/components/hint-modal/hint-modal.module';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { CardHintModule } from 'src/app/components/card-hint/card-hint.component
         HintsPageRoutingModule,
         WorkHeaderModule,
         CardHintModule,
+        HintModalModule,
     ],
     declarations: [HintsPage],
 })

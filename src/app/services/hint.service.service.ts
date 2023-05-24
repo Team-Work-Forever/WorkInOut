@@ -5,7 +5,7 @@ import { User } from '../models/user.model';
 
 type AddHint = {
     user_id: string;
-    hint_id: number;
+    hint_id: string;
 };
 
 @Injectable({

@@ -10,11 +10,12 @@
                 size-lg="3"
                 *ngFor="let hint of hints"
             >
-                <app-card
+                <app-card-hint
+                    (isSelected)="selectionChanged($event)"
                     (click)="handleClick(hint)"
                     [title]="hint.title"
                     icon="flag"
-                ></app-card>
+                ></app-card-hint>
             </ion-col>
         </ion-row>
     </ion-grid>

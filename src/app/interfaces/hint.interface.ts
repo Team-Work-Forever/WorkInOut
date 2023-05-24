@@ -1,6 +1,6 @@
 export interface Hint {
-    id: number;
-    badge: string;
+    id: string;
+    image: string;
     title: string;
     description: string;
     color: string;

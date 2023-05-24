@@ -1,0 +1,18 @@
+<ion-card (press)="pressEvent($event)" class="card-container">
+    <img [src]="image" />
+    <ion-card-content (click)="handleClick()">
+        <ion-card-title color="primary">{{ title }}</ion-card-title>
+    </ion-card-content>
+    <div *ngIf="hasFavorite" class="button-container">
+        <div class="geometric-figure"></div>
+        <ion-buttons>
+            <ion-button (click)="toggleFavorite()">
+                <ion-icon
+                    class="favorite-button"
+                    slot="icon-only"
+                    [name]="option"
+                ></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </div>
+</ion-card>

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Card } from 'src/app/interfaces/card.inteface';
+import { Hint } from 'src/app/interfaces/hint.interface';
 
 @Component({
-    selector: 'app-card',
-    templateUrl: 'card.component.html',
-    styleUrls: ['card.component.scss'],
+    selector: 'app-card-hint',
+    templateUrl: 'card-hint.component.html',
+    styleUrls: ['card-hint.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardHintComponent implements OnInit {
     @Input()
     id: string;
 
@@ -23,13 +23,16 @@ export class CardComponent implements OnInit {
     title: string = 'Treino';
 
     @Input()
-    time: string = '';
+    description?: string;
+
+    @Input()
+    color?: string;
 
     @Input()
     icon: string;
 
     @Output()
-    isSelected: EventEmitter<Card> = new EventEmitter();
+    isSelected: EventEmitter<Hint> = new EventEmitter();
 
     @Output()
     eventClick: EventEmitter<any> = new EventEmitter();
@@ -45,11 +48,11 @@ export class CardComponent implements OnInit {
     handleClick() {
         this.eventClick.emit({
             image: this.image,
-            isFavorite: this.isFavorite,
-            time: this.time,
+            description: this.description,
             title: this.title,
             id: this.id,
-        } as Card);
+            color: this.color,
+        } as Hint);
     }
 
     pressEvent(event) {
@@ -62,11 +65,11 @@ export class CardComponent implements OnInit {
             ? this.icon + '-sharp'
             : this.icon + '-outline';
         this.isSelected.emit({
-            id: this.id,
             image: this.image,
-            isFavorite: this.isFavorite,
-            time: this.time,
+            description: this.description,
             title: this.title,
+            id: this.id,
+            color: this.color,
         });
     }
 }

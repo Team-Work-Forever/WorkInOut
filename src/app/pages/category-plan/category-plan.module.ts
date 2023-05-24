@@ -8,7 +8,7 @@ import { CategoryPlanPageRoutingModule } from './category-plan-routing.module';
 
 import { CategoryPlanPage } from './category-plan.page';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
-import { CardComponent } from 'src/app/components/card/card.component';
+import { CardModule } from 'src/app/components/card/card.components.module';
 
 @NgModule({
     imports: [
@@ -17,7 +17,7 @@ import { CardComponent } from 'src/app/components/card/card.component';
         IonicModule,
         CategoryPlanPageRoutingModule,
         WorkHeaderModule,
-        CardComponent,
+        CardModule,
     ],
     declarations: [CategoryPlanPage],
 })

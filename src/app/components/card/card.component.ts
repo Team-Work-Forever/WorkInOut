@@ -1,11 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Card } from 'src/app/interfaces/card.inteface';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
 
 @Component({
-    standalone: true,
-    imports: [CommonModule, IonicModule],
     selector: 'app-card',
     templateUrl: 'card.component.html',
     styleUrls: ['card.component.scss'],
@@ -15,10 +11,10 @@ export class CardComponent implements OnInit {
     hasFavorite: boolean = true;
 
     @Input()
-    isFavorite: boolean;
+    isFavorite?: boolean;
 
     @Input()
-    image: string = '';
+    image?: string = '';
 
     @Input()
     title: string = 'Treino';

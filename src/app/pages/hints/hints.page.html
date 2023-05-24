@@ -1,13 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>hints</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-work-header [isNested]="true" [search]="false" title="Dicas">
+</app-work-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">hints</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-grid>
+        <ion-row class="card-row card-wrapper">
+            <ion-col
+                size="6"
+                size-md="3"
+                size-lg="3"
+                *ngFor="let hint of results"
+            >
+                <app-card
+                    (click)="handleClick(hint)"
+                    [title]="hint.title"
+                    icon="flag"
+                ></app-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

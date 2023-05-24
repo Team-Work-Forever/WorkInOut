@@ -3,7 +3,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
-import { CardComponent } from '../../../components/card/card.component';
 import { Card } from 'src/app/interfaces/card.inteface';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
 import { FlatButtonModule } from 'src/app/components/flat-button/flat-button.module';
@@ -11,6 +10,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 import { User } from 'src/app/models/user.model';
+import { CardModule } from 'src/app/components/card/card.components.module';
 
 @Component({
     selector: 'app-home',
@@ -23,7 +23,7 @@ import { User } from 'src/app/models/user.model';
         SwiperModule,
         WorkHeaderModule,
         CheckButtonModule,
-        CardComponent,
+        CardModule,
         FlatButtonModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

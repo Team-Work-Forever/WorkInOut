@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule, NavController } from '@ionic/angular';
-import { CardComponent } from 'src/app/components/card/card.component';
+import { CardModule } from 'src/app/components/card/card.components.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { HorizontalSliderModule } from 'src/app/components/horizontal-slider/horizontal-slider.module';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
@@ -20,7 +20,7 @@ import { PlanService } from 'src/app/services/plan-service.service';
         IonicModule,
         CommonModule,
         WorkHeaderModule,
-        CardComponent,
+        CardModule,
         HorizontalSliderModule,
         CheckButtonModule,
     ],

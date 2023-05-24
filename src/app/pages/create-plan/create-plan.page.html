@@ -4,7 +4,7 @@
     [editable]="true"
     (editValue)="planTitleChanged($event)"
 >
-    <flag-displayer></flag-displayer>
+    <flag-displayer [categories]="categories"></flag-displayer>
 </app-work-header>
 
 <ion-content [fullscreen]="true">

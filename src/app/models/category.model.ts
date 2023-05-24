@@ -4,4 +4,5 @@ export interface Category {
     title: string;
     color: string;
     isFavourite: boolean;
+    qty: number;
 }

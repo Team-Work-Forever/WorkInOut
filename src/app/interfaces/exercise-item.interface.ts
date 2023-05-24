@@ -4,4 +4,5 @@ export interface ExerciseItem {
     duration: number;
     video_url: string;
     index: number;
+    category: string;
 }

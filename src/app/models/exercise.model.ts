@@ -4,4 +4,5 @@ export interface Exercise {
     title: string;
     duration: number;
     index?: number;
+    category: string;
 }

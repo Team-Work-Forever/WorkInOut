@@ -22,6 +22,19 @@ export class CategoryService {
         return data as Category[];
     }
 
+    public async getCategoryById(categoryId: string): Promise<Category> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .from('category')
+            .select('*')
+            .eq('id', categoryId)
+            .single();
+
+        if (error) return {} as Category;
+
+        return data as Category;
+    }
+
     public async getCategoryByTitle(title: string): Promise<Category> {
         const { data, error } = await this.supabaseService
             .getClient()

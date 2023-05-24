@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { Plan } from '../models/plan.model';
 import { Exercise } from '../models/exercise.model';
 import { PostgrestError } from '@supabase/supabase-js';
+import { Category } from '../models/category.model';
 
 type CreatePlanProps = {
     plan_badge: string;
@@ -18,6 +19,12 @@ type AddExerciseProps = {
     exercise_id: string;
     exercise_index: number;
     plan_id: string;
+};
+
+type AddCategoryProps = {
+    plan_id: string;
+    category_id: string;
+    category_qty: number;
 };
 
 type ChangeFavProps = {
@@ -153,6 +160,49 @@ export class PlanService {
                 exercise_index: exerciseIndex,
                 plan_id: plan.id,
             } as AddExerciseProps);
+    }
+
+    public async addCategories(
+        plan: Plan,
+        categories: { categoryId: string; qty: number }[]
+    ): Promise<void> {
+        await Promise.all(
+            categories.map((category) =>
+                this.addCategory(plan, {
+                    categoryId: category.categoryId,
+                    qty: category.qty,
+                })
+            )
+        );
+    }
+
+    public async addCategory(
+        plan: Plan,
+        { categoryId, qty }
+    ): Promise<PostgrestError> {
+        const { error } = await this.supabaseService
+            .getClient()
+            .rpc('func_add_cat', {
+                plan_id: plan.id,
+                category_id: categoryId,
+                category_qty: qty,
+            } as AddCategoryProps);
+
+        console.log(error);
+
+        return error;
+    }
+
+    public async getCategoriesFromPlan(planId: string): Promise<Category[]> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .from('category_plan')
+            .select('*')
+            .eq('plan', planId);
+
+        if (error) return [];
+
+        return data as Category[];
     }
 
     public async getExercisesFromPlanById(planId: string): Promise<Exercise[]> {

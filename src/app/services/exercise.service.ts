@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { Exercise } from '../models/exercise.model';
+import { Category } from '../models/category.model';
 
 @Injectable({
     providedIn: 'root',

@@ -12,6 +12,7 @@ import {
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
+import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ExerciseService } from 'src/app/services/exercise.service';
 
@@ -21,9 +22,11 @@ import { ExerciseService } from 'src/app/services/exercise.service';
     styleUrls: ['./add-plan.page.scss'],
 })
 export class AddPlanPage implements OnInit, ViewWillEnter {
-    title: string;
+    title: string = 'Novo Plano';
 
     selectedItems: ExerciseItem[] = [];
+    selectedCategories: Category[] = [];
+
     categories: HorizontalItem[];
     exercices: ExerciseItem[];
     results: ExerciseItem[];
@@ -46,6 +49,8 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
             this.activeRoute.snapshot.paramMap.get('plan')
         ) as CreateRouteProps;
 
+        this.selectedCategories = plan.categories;
+
         const exercices = await this.exerciseService.getAllExercises();
         const categories = await this.categoryService.getAllCategories();
 
@@ -54,6 +59,7 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
                 id: exe.id,
                 title: exe.title,
                 duration: exe.duration,
+                category: exe.category,
             } as ExerciseItem;
         });
 
@@ -67,6 +73,9 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
         this.title = plan.title;
 
         this.selectedItems = plan.exercises;
+
+        console.log(this.selectedCategories.length);
+
         this.results = this.exercices;
     }
 

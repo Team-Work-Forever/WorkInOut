@@ -59,7 +59,8 @@ export class CardHintComponent implements OnInit {
         console.log(event);
     }
 
-    toggleFavorite() {
+    toggleFavorite(event) {
+        event.stopPropagation();
         this.isFavorite = !this.isFavorite;
         this.option = this.isFavorite
             ? this.icon + '-sharp'

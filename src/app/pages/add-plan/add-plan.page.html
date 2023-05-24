@@ -12,6 +12,7 @@
             <exercise
                 [title]="exercise.title"
                 [duration]="exercise.duration"
+                [selected]="exercise.isSelected"
                 (click)="addToSelected(exercise)"
             ></exercise>
         </ion-list>

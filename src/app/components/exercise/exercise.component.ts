@@ -18,6 +18,7 @@ export class ExerciseComponent implements OnInit {
     @Input()
     ignoreSelect: boolean = false;
 
+    @Input()
     selected: boolean = false;
 
     constructor() {}

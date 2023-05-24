@@ -5,4 +5,5 @@ export interface ExerciseItem {
     video_url: string;
     index: number;
     category: string;
+    isSelected?: boolean;
 }

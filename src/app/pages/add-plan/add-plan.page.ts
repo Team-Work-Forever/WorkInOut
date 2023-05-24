@@ -50,6 +50,9 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
         ) as CreateRouteProps;
 
         this.selectedCategories = plan.categories;
+        this.selectedItems = plan.exercises;
+
+        console.log(this.selectedItems);
 
         const exercices = await this.exerciseService.getAllExercises();
         const categories = await this.categoryService.getAllCategories();
@@ -70,12 +73,13 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
             } as HorizontalItem;
         });
 
+        this.exercices.forEach((exe) => {
+            if (this.selectedItems.find((item) => item.id === exe.id)) {
+                exe.isSelected = true;
+            }
+        });
+
         this.title = plan.title;
-
-        this.selectedItems = plan.exercises;
-
-        console.log(this.selectedCategories.length);
-
         this.results = this.exercices;
     }
 

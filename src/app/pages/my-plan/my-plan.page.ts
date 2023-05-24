@@ -48,8 +48,6 @@ export class MyPlanPage implements OnInit {
             email: '',
         });
 
-        console.log(plans);
-
         this.cards = plans.map((plan) => {
             return {
                 id: plan.id,
@@ -92,6 +90,6 @@ export class MyPlanPage implements OnInit {
     }
 
     handleClick(card: Card) {
-        // this.nav.navigateForward('/detalhe', { state: card });
+        this.router.navigate(['/tabs/home/info/' + card.id]);
     }
 }

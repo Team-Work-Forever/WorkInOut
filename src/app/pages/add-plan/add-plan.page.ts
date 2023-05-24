@@ -52,7 +52,8 @@ export class AddPlanPage implements OnInit {
         });
 
         this.title = plan.title;
-        this.selectedItems = plan.exercises ? plan.exercises : [];
+
+        this.selectedItems = plan.exercises;
         this.results = this.exercices;
     }
 
@@ -77,7 +78,6 @@ export class AddPlanPage implements OnInit {
         } else {
             this.selectedItems.push(exercise); // Adiciona o exercício se ele ainda não estiver selecionado
         }
-        console.log(this.selectedItems);
     }
 
     isEmpty() {

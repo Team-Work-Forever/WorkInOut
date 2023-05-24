@@ -30,14 +30,11 @@ export class CreatePlanPage implements OnInit {
 
     ngOnInit() {
         const info = this.activeRoute.snapshot.paramMap.get('plan');
-        console.log(info);
 
         const plan =
             info != 'nocontent' ? (JSON.parse(info) as CreateRouteProps) : '';
 
         if (plan) {
-            console.log(plan.exercises);
-
             this.choosenExercises = plan.exercises ? plan.exercises : [];
             this.planTitle = plan.title ? plan.title : 'Novo Plano';
         }

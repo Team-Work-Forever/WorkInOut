@@ -28,7 +28,7 @@
                 <reorder-item
                     *ngFor="let item of choosenExercises"
                     [title]="item.title"
-                    [time]="item.duration.toString()"
+                    [time]="item.duration"
                 ></reorder-item>
             </ion-reorder-group>
         </ion-list>

@@ -101,8 +101,6 @@ export class PlanService {
                 plan_id: plan.id,
                 is_fav: plan.is_favourite,
             } as ChangeFavProps);
-
-        console.log(error);
     }
 
     public async createPlan(plan: Plan, user: User): Promise<Plan> {
@@ -144,8 +142,6 @@ export class PlanService {
                 exercise_index: exerciseIndex,
                 plan_id: plan.id,
             } as AddExerciseProps);
-
-        console.log(error);
     }
 
     public async getExercisesFromPlanById(planId: string): Promise<Exercise[]> {

@@ -88,8 +88,6 @@ export class HomePage implements OnInit {
             } as Card;
         });
 
-        console.log(this.planPop);
-
         this.handleChangeIndex(0);
         this.calculateMaxCardsPerRow();
     }

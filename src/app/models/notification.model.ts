@@ -4,6 +4,6 @@ export interface Notification {
     type: number;
     is_active: boolean;
     user_id?: string;
-    started_at?: Date;
-    ended_at?: Date;
+    started_at?: string;
+    ended_at?: string;
 }

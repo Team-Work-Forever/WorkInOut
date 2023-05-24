@@ -3,6 +3,7 @@ import { NotificationItem } from 'src/app/interfaces/notification-item.interface
 import { Notification } from 'src/app/models/notification.model';
 import { User } from 'src/app/models/user.model';
 import { NotificationService } from 'src/app/services/notification.service';
+import { convertToHoursMinutes } from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'app-schedule',
@@ -25,8 +26,8 @@ export class SchedulePage implements OnInit {
                 id: notification.id,
                 title: notification.title,
                 type: notification.type,
-                started_at: notification.started_at.toString(),
-                ended_at: notification.ended_at.toString(),
+                started_at: convertToHoursMinutes(notification.started_at),
+                ended_at: '', // Falta colocar ended_at
                 is_active: notification.is_active,
             } as NotificationItem;
         });

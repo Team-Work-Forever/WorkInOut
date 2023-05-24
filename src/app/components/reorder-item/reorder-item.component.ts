@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { convertToMinutesSeconds } from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'reorder-item',
@@ -6,13 +7,17 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./reorder-item.component.scss'],
 })
 export class ReorderItemComponent implements OnInit {
+    duration: string;
+
     @Input()
     public title: string;
 
     @Input()
-    public time: string;
+    public time: number;
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.duration = convertToMinutesSeconds(this.time).concat(' min');
+    }
 }

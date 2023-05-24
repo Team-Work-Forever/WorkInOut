@@ -27,6 +27,7 @@
                 *ngFor="let card of results"
             >
                 <app-card
+                    (eventClick)="handleClick($event)"
                     (click)="handleClick(card)"
                     (isSelected)="selectionChanged($event)"
                     [id]="card.id"

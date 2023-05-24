@@ -31,7 +31,7 @@ import { PlanService } from 'src/app/services/plan-service.service';
         CheckButtonModule,
     ],
 })
-export class MyPlanPage implements OnInit, ViewWillEnter {
+export class MyPlanPage implements ViewWillEnter {
     results: Card[];
     cards: Card[];
 
@@ -44,12 +44,10 @@ export class MyPlanPage implements OnInit, ViewWillEnter {
         private router: Router
     ) {}
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-    }
 
-    async ngOnInit() {
         const categories = await this.categoryService.getAllCategories();
 
         const plans = await this.planService.getAllPlanOfUser({

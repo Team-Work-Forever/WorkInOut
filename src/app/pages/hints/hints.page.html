@@ -11,7 +11,7 @@
                 *ngFor="let hint of hints"
             >
                 <app-card-hint
-                    (click)="handleClick(hint)"
+                    (click)="handleClick(hint.description)"
                     [id]="hint.id"
                     [title]="hint.title"
                     [description]="hint.description"

@@ -8,6 +8,7 @@ import { AccountPageRoutingModule } from './account-routing.module';
 
 import { AccountPage } from './account.page';
 import { WorkHeaderModule } from 'src/app/components/work-header/work-header.module';
+import { FlatButtonModule } from 'src/app/components/flat-button/flat-button.module';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
         IonicModule,
         AccountPageRoutingModule,
         WorkHeaderModule,
+        FlatButtonModule,
     ],
     declarations: [AccountPage],
 })

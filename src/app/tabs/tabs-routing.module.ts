@@ -75,10 +75,27 @@ const routes: Routes = [
             },
             {
                 path: 'account',
-                loadChildren: () =>
-                    import('../pages/tabs/account/account.module').then(
-                        (m) => m.AccountPageModule
-                    ),
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('../pages/tabs/account/account.module').then(
+                                (m) => m.AccountPageModule
+                            ),
+                    },
+                    {
+                        path: 'hints',
+                        children: [
+                            {
+                                path: '',
+                                loadChildren: () =>
+                                    import('../pages/hints/hints.module').then(
+                                        (m) => m.HintsPageModule
+                                    ),
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 path: '',

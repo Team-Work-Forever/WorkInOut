@@ -63,7 +63,11 @@ const routes: Routes = [
             import('./pages/info-plan/info-plan.module').then(
                 (m) => m.InfoPlanPageModule
             ),
-    },
+    },  {
+    path: 'hints',
+    loadChildren: () => import('./pages/hints/hints.module').then( m => m.HintsPageModule)
+  },
+
 ];
 
 @NgModule({

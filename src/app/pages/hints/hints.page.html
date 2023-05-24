@@ -11,9 +11,11 @@
                 *ngFor="let hint of hints"
             >
                 <app-card-hint
-                    (isSelected)="selectionChanged($event)"
                     (click)="handleClick(hint)"
+                    [id]="hint.id"
                     [title]="hint.title"
+                    [description]="hint.description"
+                    [image]="hint.image"
                     icon="flag"
                 ></app-card-hint>
             </ion-col>

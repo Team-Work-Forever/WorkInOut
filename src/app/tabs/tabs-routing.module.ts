@@ -44,6 +44,18 @@ const routes: Routes = [
                         ],
                     },
                     {
+                        path: 'hints',
+                        children: [
+                            {
+                                path: '',
+                                loadChildren: () =>
+                                    import('../pages/hints/hints.module').then(
+                                        (m) => m.HintsPageModule
+                                    ),
+                            },
+                        ],
+                    },
+                    {
                         path: 'category',
                         loadChildren: () =>
                             import(
@@ -89,27 +101,10 @@ const routes: Routes = [
             },
             {
                 path: 'account',
-                children: [
-                    {
-                        path: '',
-                        loadChildren: () =>
-                            import('../pages/tabs/account/account.module').then(
-                                (m) => m.AccountPageModule
-                            ),
-                    },
-                    {
-                        path: 'hints',
-                        children: [
-                            {
-                                path: '',
-                                loadChildren: () =>
-                                    import('../pages/hints/hints.module').then(
-                                        (m) => m.HintsPageModule
-                                    ),
-                            },
-                        ],
-                    },
-                ],
+                loadChildren: () =>
+                    import('../pages/tabs/account/account.module').then(
+                        (m) => m.AccountPageModule
+                    ),
             },
             {
                 path: '',

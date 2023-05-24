@@ -4,4 +4,5 @@ export interface Hint {
     title: string;
     description: string;
     color: string;
+    isFavorite?: boolean;
 }

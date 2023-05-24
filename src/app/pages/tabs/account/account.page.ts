@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 import {
     OrientationLockOptions,
     ScreenOrientation,
@@ -12,7 +12,7 @@ import { ViewWillEnter } from '@ionic/angular';
     styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit, ViewWillEnter {
-    constructor(private router: Router) {}
+    constructor() {}
 
     ionViewWillEnter(): void {
         const options: OrientationLockOptions = { orientation: 'portrait' };
@@ -20,8 +20,4 @@ export class AccountPage implements OnInit, ViewWillEnter {
     }
 
     ngOnInit() {}
-
-    goToHints() {
-        this.router.navigate(['tabs/account/hints']);
-    }
 }

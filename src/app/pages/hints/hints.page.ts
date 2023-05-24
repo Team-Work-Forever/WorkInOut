@@ -5,7 +5,6 @@ import {
 } from '@capacitor/screen-orientation';
 import { ViewWillEnter } from '@ionic/angular';
 import { Hint } from 'src/app/interfaces/hint.interface';
-import { User } from 'src/app/models/user.model';
 import { HintService } from 'src/app/services/hint.service.service';
 
 @Component({
@@ -38,17 +37,6 @@ export class HintsPage implements OnInit, ViewWillEnter {
         });
 
         this.calculateMaxCardsPerRow();
-    }
-
-    selectionChanged(event: Hint) {
-        this.hintsService.addMyHint(
-            {
-                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-            } as User,
-            {
-                id: event.id,
-            } as Hint
-        );
     }
 
     handleClick(hint: Hint) {}

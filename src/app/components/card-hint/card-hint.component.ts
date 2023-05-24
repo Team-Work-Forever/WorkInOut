@@ -20,7 +20,7 @@ export class CardHintComponent implements OnInit {
     image?: string = '';
 
     @Input()
-    title: string = 'Treino';
+    title: string = 'Dica';
 
     @Input()
     description?: string;
@@ -70,6 +70,7 @@ export class CardHintComponent implements OnInit {
             title: this.title,
             id: this.id,
             color: this.color,
+            isFavorite: this.isFavorite,
         });
     }
 }

@@ -1,12 +1,6 @@
 import { CommonModule } from '@angular/common';
-import {
-    CUSTOM_ELEMENTS_SCHEMA,
-    Component,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { IonicModule, NavController } from '@ionic/angular';
-import { loadTourismPoints } from '../../../services/api';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { CardComponent } from '../../../components/card/card.component';

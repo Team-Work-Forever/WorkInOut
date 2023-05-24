@@ -7,7 +7,7 @@
     <div *ngIf="hasFavorite" class="button-container">
         <div class="geometric-figure"></div>
         <ion-buttons>
-            <ion-button (click)="toggleFavorite()">
+            <ion-button (click)="toggleFavorite($event)">
                 <ion-icon
                     class="favorite-button"
                     slot="icon-only"

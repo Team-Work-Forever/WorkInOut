@@ -34,6 +34,7 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
         public toastController: ToastController,
         private planService: PlanService,
         private activeRoute: ActivatedRoute,
+        private categoryService: CategoryService,
         private router: Router
     ) {}
 
@@ -66,6 +67,7 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
                     } else {
                         this.categories.push({
                             id: exe.category,
+                            qty: 0,
                         } as Category);
                     }
                 });
@@ -118,9 +120,19 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
             return;
         }
 
+        let bestCategory: Category | null = null;
+
+        this.categories.forEach((cat) => {
+            if (!bestCategory || cat.qty > bestCategory.qty) {
+                bestCategory = cat;
+            }
+        });
+
+        const cat = await this.categoryService.getCategoryById(bestCategory.id);
+
         const createdPlan = await this.planService.createPlan(
             {
-                badge: 'https://qbkliymokbvleuaxyiwn.supabase.co/storage/v1/object/public/SUPASUPA/ioga.png?t=2023-05-24T10%3A22%3A25.794Z',
+                badge: cat.badge,
                 color: '#000',
                 duration: this.choosenExercises.reduce(
                     (sum, item) => sum + item.duration,

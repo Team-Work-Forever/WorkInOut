@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Notification as Notify } from '../../models/notification.model';
+import { getMinDate as currentDate } from 'src/utils/time-date.utils';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'schedual-selection',
@@ -9,12 +11,14 @@ import { Notification as Notify } from '../../models/notification.model';
     styleUrls: ['./schedual-selection.component.scss'],
 })
 export class SchedualSelectionComponent {
-    selectedDate: boolean;
+    isSelectedDate: boolean;
+    selectedDate: string;
 
     constructor(
         private modalCtrl: ModalController,
         public toastController: ToastController,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private router: Router
     ) {}
 
     cancel() {
@@ -22,7 +26,7 @@ export class SchedualSelectionComponent {
     }
 
     async confirm() {
-        if (!this.selectedDate) {
+        if (!this.isSelectedDate) {
             // Se nenhuma data foi selecionada, exiba uma mensagem de erro ou realize a ação adequada.
             console.log('Selecione uma data para agendar o plano');
             return;
@@ -33,46 +37,28 @@ export class SchedualSelectionComponent {
             title: 'Eueu',
             type: 0,
             is_active: false,
-            ended_at: this.getMinDate(),
+            ended_at: this.selectedDate,
         } as Notify);
 
         await this.closeModal('confirm');
+
+        this.router.navigate([
+            '/tabs/schedule/' + JSON.stringify(this.selectedDate),
+        ]);
+    }
+
+    getMinDate() {
+        return currentDate();
     }
 
     async closeModal(result?: string) {
         await this.modalCtrl.dismiss(result);
     }
 
-    getMinDate() {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const minDate = `${year}-${month}-${day}T00:00:00`;
-        return minDate;
-    }
-
     getSelectedDate(event) {
         const selectedDateTime = event.detail.value;
-        const dateTimeParts = selectedDateTime.split('T');
-        const dateParts = dateTimeParts[0].split('-');
-        const timeParts = dateTimeParts[1].split(':');
-
-        const year = dateParts[0];
-        const month = dateParts[1];
-        const day = dateParts[2];
-        const hour = timeParts[0];
-        const minute = timeParts[1];
-
-        this.selectedDate = true;
-
-        // Agora você tem todas as partes da data e da hora separadas.
-        // Você pode usá-las para realizar as ações necessárias.
-        console.log('Ano:', year);
-        console.log('Mês:', month);
-        console.log('Dia:', day);
-        console.log('Hora:', hour);
-        console.log('Minutos:', minute);
+        this.isSelectedDate = true;
+        this.selectedDate = selectedDateTime;
     }
 
     async presentToast(position, title) {

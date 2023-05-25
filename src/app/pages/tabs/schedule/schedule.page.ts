@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
     OrientationLockOptions,
     ScreenOrientation,
@@ -7,7 +8,10 @@ import { ViewWillEnter } from '@ionic/angular';
 import { NotificationItem } from 'src/app/interfaces/notification-item.interface';
 import { User } from 'src/app/models/user.model';
 import { NotificationService } from 'src/app/services/notification.service';
-import { convertToHoursMinutes } from 'src/utils/time-date.utils';
+import {
+    convertToHoursMinutes,
+    getMinDate as currentDate,
+} from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'app-schedule',
@@ -16,19 +20,48 @@ import { convertToHoursMinutes } from 'src/utils/time-date.utils';
 })
 export class SchedulePage implements OnInit, ViewWillEnter {
     public notifications: NotificationItem[];
+    public tabDate: string;
 
-    constructor(private notificationService: NotificationService) {}
+    constructor(
+        private notificationService: NotificationService,
+        private activeRoute: ActivatedRoute
+    ) {}
 
     ionViewWillEnter(): void {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
+
+        const info = this.activeRoute.snapshot.paramMap.get('date');
+
+        const date = info ? (JSON.parse(info) as string) : '';
+        console.log(date);
     }
 
-    async ngOnInit() {
+    async ngOnInit() {}
+
+    handleNotification(event) {
+        this.notificationService.switchNotification(event.id, event.isActive);
+    }
+
+    getMinDate() {
+        return currentDate();
+    }
+
+    getDateFromTab(): string {
+        return this.tabDate || this.getMinDate();
+    }
+
+    async getSelectedDate(event) {
+        const selectedDateTime = event.detail.value;
+        const selectedDate = selectedDateTime.split('T')[0]; // Extrair a parte da data
+
         const notifications =
-            await this.notificationService.getAllMyNotifications({
-                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-            } as User);
+            await this.notificationService.getAllMyNotifications(
+                {
+                    userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+                } as User,
+                selectedDate
+            );
 
         this.notifications = notifications.map((notification) => {
             return {
@@ -40,32 +73,5 @@ export class SchedulePage implements OnInit, ViewWillEnter {
                 is_active: notification.is_active,
             } as NotificationItem;
         });
-    }
-
-    handleNotification(event) {
-        this.notificationService.switchNotification(event.id, event.isActive);
-    }
-
-    getMinDate() {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const minDate = `${year}-${month}-${day}T00:00:00`;
-        return minDate;
-    }
-
-    getSelectedDate(event) {
-        const selectedDate = event.detail.value;
-        const dateParts = selectedDate.split('T')[0].split('-');
-        const year = dateParts[0];
-        const month = dateParts[1];
-        const day = dateParts[2];
-
-        // Agora você pode usar as variáveis 'year', 'month' e 'day' para obter os planos de treino correspondentes a essa data.
-        // Você pode chamar outra função aqui para exibir os planos de treino ou manipulá-los de acordo com a sua necessidade.
-        console.log('Ano:', year);
-        console.log('Mês:', month);
-        console.log('Dia:', day);
     }
 }

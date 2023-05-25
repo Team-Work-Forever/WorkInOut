@@ -48,12 +48,20 @@ export class NotificationService {
         console.log(error);
     }
 
-    public async getAllMyNotifications(user: User): Promise<Notification[]> {
+    public async getAllMyNotifications(
+        user: User,
+        date: string
+    ): Promise<Notification[]> {
+        const startDateTime = `${date}T00:00:00`;
+        const endDateTime = `${date}T23:59:59`;
+
         const { data, error } = await this.supabaseService
             .getClient()
             .from('notification')
             .select('*')
-            .eq('auth', user.userId);
+            .eq('auth', user.userId)
+            .gte('ended_at', startDateTime)
+            .lt('ended_at', endDateTime);
 
         if (error) return [];
 

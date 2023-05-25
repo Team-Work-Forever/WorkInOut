@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { convertToMinutesSeconds } from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'flag-displayer',
@@ -12,7 +13,9 @@ export class FlagDisplayerComponent implements OnInit {
     public displayCategory: string;
     public displayQty: number = 0;
     public flagColor: string;
+    public displayDuration: string;
 
+    public categories: Category[];
     private _items = new BehaviorSubject<Category[]>([]);
 
     constructor(private categoryService: CategoryService) {}
@@ -20,7 +23,8 @@ export class FlagDisplayerComponent implements OnInit {
     @Input()
     hasAgenda: boolean = false;
 
-    public categories: Category[];
+    @Input()
+    duration: number;
 
     @Input() set items(value: Category[]) {
         this._items.next(value);
@@ -36,6 +40,7 @@ export class FlagDisplayerComponent implements OnInit {
     async ngOnInit() {
         this._items.subscribe(async (x) => {
             this.categories = x;
+            this.displayDuration = convertToMinutesSeconds(this.duration);
 
             console.log(x);
 

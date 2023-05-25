@@ -3,6 +3,7 @@
         [items]="categories | async"
         [hasAgenda]="true"
         (open)="openModal()"
+        [duration]="plan?.duration"
     ></flag-displayer>
 </app-work-header>
 

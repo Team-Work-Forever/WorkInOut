@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
     OrientationLockOptions,
@@ -18,7 +18,7 @@ import {
     templateUrl: 'schedule.page.html',
     styleUrls: ['schedule.page.scss'],
 })
-export class SchedulePage implements OnInit, ViewWillEnter {
+export class SchedulePage implements ViewWillEnter {
     public notifications: NotificationItem[];
     public tabDate: string;
 
@@ -27,7 +27,7 @@ export class SchedulePage implements OnInit, ViewWillEnter {
         private activeRoute: ActivatedRoute
     ) {}
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
@@ -36,8 +36,6 @@ export class SchedulePage implements OnInit, ViewWillEnter {
         const date = info ? (JSON.parse(info) as string) : '';
         console.log(date);
     }
-
-    async ngOnInit() {}
 
     handleNotification(event) {
         this.notificationService.switchNotification(event.id, event.isActive);

@@ -49,12 +49,9 @@ export class HomePage implements OnInit, ViewWillEnter {
         private router: Router
     ) {}
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-    }
-
-    async ngOnInit() {
         const fav_plan = await this.planService.getAllPlanOfUserFavorite({
             userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
         } as User);
@@ -93,6 +90,9 @@ export class HomePage implements OnInit, ViewWillEnter {
         });
 
         this.handleChangeIndex(0);
+    }
+
+    async ngOnInit() {
         this.calculateMaxCardsPerRow();
     }
 

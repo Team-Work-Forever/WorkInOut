@@ -1,5 +1,8 @@
 <app-work-header [isNested]="true" [title]="plan?.title" [search]="false">
-    <flag-displayer [items]="categories | async"></flag-displayer>
+    <flag-displayer
+        [duration]="plan?.duration"
+        [items]="categories | async"
+    ></flag-displayer>
 </app-work-header>
 
 <ion-content [fullscreen]="true">
@@ -8,14 +11,19 @@
             <item-visualizer
                 *ngFor="let exe of exercises ; let i = index"
                 [isOpen]="i === currentExercise"
+                [title]="exe.title"
+                [duration]="exe.duration"
+                [rangeValue]="i === currentExercise ? currentValue : 0"
             >
             </item-visualizer>
         </ion-list>
     </div>
 
-    <ion-fab class="create-btn">
+    <ion-fab (click)="togglePlayback()" class="create-btn">
         <ion-fab-button olor="primary">
-            <ion-icon name="pause-outline"></ion-icon>
+            <ion-icon
+                [name]="this.isPlaying ? 'pause-outline' : 'play-outline'"
+            ></ion-icon>
         </ion-fab-button>
     </ion-fab>
 </ion-content>

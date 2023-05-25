@@ -12,11 +12,16 @@
 
     .header {
         display: flex;
+        flex-direction: column;
         padding: 0 40px;
-        flex-direction: row;
         font-size: large;
         font-weight: bold;
-        justify-content: space-between;
+
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
     }
 
     span:nth-child(2) {

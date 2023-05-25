@@ -60,7 +60,7 @@ export class MyPlanPage implements ViewWillEnter {
                 id: plan.id,
                 title: plan.title,
                 image: plan.badge,
-                time: plan.duration.toString(),
+                time: plan.duration,
                 isFavorite: plan.is_favourite,
             } as Card;
         });
@@ -90,7 +90,7 @@ export class MyPlanPage implements ViewWillEnter {
                 is_favourite: isFavorite,
                 badge: image,
                 title: title,
-                duration: parseFloat(time),
+                duration: time,
             } as Plan,
             { userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f' } as User
         );

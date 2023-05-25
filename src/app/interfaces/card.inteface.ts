@@ -2,7 +2,7 @@ export interface Card {
     id?: string;
     title: string;
     image: string;
-    time: string;
+    time: number;
 
     isFavorite: boolean;
 }

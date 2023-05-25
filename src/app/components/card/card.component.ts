@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from 'src/app/interfaces/card.inteface';
+import { convertToMinutesSeconds } from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'app-card',
@@ -7,6 +8,8 @@ import { Card } from 'src/app/interfaces/card.inteface';
     styleUrls: ['card.component.scss'],
 })
 export class CardComponent implements OnInit {
+    public displayDuration: string;
+
     @Input()
     id: string;
 
@@ -23,7 +26,7 @@ export class CardComponent implements OnInit {
     title: string = 'Treino';
 
     @Input()
-    time: string = '';
+    time: number;
 
     @Input()
     icon: string;
@@ -37,6 +40,7 @@ export class CardComponent implements OnInit {
     option: string;
 
     ngOnInit(): void {
+        this.displayDuration = convertToMinutesSeconds(this.time);
         this.option = this.isFavorite
             ? this.icon + '-sharp'
             : this.icon + '-outline';

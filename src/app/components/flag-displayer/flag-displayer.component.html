@@ -5,7 +5,7 @@
         </span>
         <span *ngIf="displayQty > 0" class="item-over">+{{ displayQty }}</span>
     </div>
-    <span> 2 min </span>
+    <span> {{ displayDuration }} min </span>
 
     <div class="container" *ngIf="hasAgenda">
         <ion-icon

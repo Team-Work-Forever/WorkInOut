@@ -14,17 +14,15 @@ import { convertToHoursMinutes } from 'src/utils/time-date.utils';
     templateUrl: 'schedule.page.html',
     styleUrls: ['schedule.page.scss'],
 })
-export class SchedulePage implements OnInit, ViewWillEnter {
+export class SchedulePage implements ViewWillEnter {
     public notifications: NotificationItem[];
 
     constructor(private notificationService: NotificationService) {}
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-    }
 
-    async ngOnInit() {
         const notifications =
             await this.notificationService.getAllMyNotifications({
                 userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',

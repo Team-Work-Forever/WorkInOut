@@ -101,6 +101,38 @@ export class PlanService {
         return await this.getAllRecomendedPlan();
     }
 
+    public async getCaloriesFromPlan(planId: string): Promise<number> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .from('exercise_plan')
+            .select('exercises(calories)')
+            .eq('plan', planId);
+
+        if (error) {
+            // Handle the error
+            return 0;
+        }
+
+        // let totalCalories = 0;
+
+        // if (data && data.length > 0) {
+        //     for (const exercisePlan of data) {
+        //         if (
+        //             exercisePlan.exercises &&
+        //             exercisePlan.exercises.length > 0
+        //         ) {
+        //             for (const exercise of exercisePlan.exercises) {
+        //                 if (exercise.calories) {
+        //                     totalCalories += exercise.calories;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
+        return 0;
+    }
+
     public async deletePlan(planId: string): Promise<PostgrestError> {
         const { error } = await this.supabaseService
             .getClient()

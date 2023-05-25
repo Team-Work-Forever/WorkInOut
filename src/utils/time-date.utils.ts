@@ -7,9 +7,8 @@ export function convertToMinutesSeconds(floatValue: number) {
 
 export function convertToHoursMinutes(timestamp) {
     const date = new Date(timestamp);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
     return `${hours}h${minutes}m`;
 }
 

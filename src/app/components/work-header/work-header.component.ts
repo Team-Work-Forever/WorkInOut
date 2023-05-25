@@ -26,6 +26,9 @@ export class WorkHeaderComponent implements OnInit {
     @Input()
     search: boolean = true;
 
+    @Input()
+    backUrl: string = '#';
+
     @Output()
     result: EventEmitter<Card[]> = new EventEmitter<Card[]>();
 

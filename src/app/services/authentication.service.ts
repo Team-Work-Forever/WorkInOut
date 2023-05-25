@@ -43,7 +43,6 @@ export class AuthenticationService {
 
     public async isAuthenticated(): Promise<boolean> {
         this.authUser = await this.storage.getValue<User>('auth_info');
-        console.log(this.authUser);
 
         return this.authUser != null;
     }

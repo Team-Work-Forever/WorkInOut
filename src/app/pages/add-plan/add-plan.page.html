@@ -1,4 +1,9 @@
-<app-work-header [isNested]="true" [title]="title" [editable]="true">
+<app-work-header
+    [isNested]="true"
+    [title]="title"
+    (editValue)="planTitleChanged($event)"
+    [editable]="true"
+>
     <flag-displayer
         [duration]="duration"
         [items]="selectedCategories | async"

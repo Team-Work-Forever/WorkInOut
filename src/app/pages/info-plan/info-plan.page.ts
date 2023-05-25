@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
     OrientationLockOptions,
@@ -58,7 +58,7 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         public toastController: ToastController,
         private planService: PlanService,
         private activeRoute: ActivatedRoute,
-        private authenticationService: AuthenticationService,
+        private cdr: ChangeDetectorRef,
         private router: Router
     ) {}
 
@@ -153,6 +153,14 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
                 };
             })
         );
+        for (const e of this.exercises) {
+            const index = this.selectedItems.findIndex(
+                (exercise) => exercise.id === e.id
+            );
+            if (index !== -1) {
+                this.exercises.splice(index, 1);
+            }
+        }
     }
 
     isEmpty() {

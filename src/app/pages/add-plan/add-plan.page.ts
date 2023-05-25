@@ -22,7 +22,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
     templateUrl: './add-plan.page.html',
     styleUrls: ['./add-plan.page.scss'],
 })
-export class AddPlanPage implements OnInit, ViewWillEnter {
+export class AddPlanPage implements ViewWillEnter {
     title: string = 'Novo Plano';
 
     selectedItems: ExerciseItem[] = [];
@@ -32,6 +32,8 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
     exercices: ExerciseItem[];
     results: ExerciseItem[];
 
+    duration: number = 0;
+
     constructor(
         public toastController: ToastController,
         private categoryService: CategoryService,
@@ -40,18 +42,17 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
         private activeRoute: ActivatedRoute
     ) {}
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-    }
 
-    async ngOnInit() {
         const plan = JSON.parse(
             this.activeRoute.snapshot.paramMap.get('plan')
         ) as CreateRouteProps;
 
         this.selectedCategories.next(plan.categories);
         this.selectedItems = plan.exercises;
+        this.checkDuration();
 
         console.log(this.selectedItems);
 
@@ -84,15 +85,11 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
         this.results = this.exercices;
     }
 
-    handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
-        // The `from` and `to` properties contain the index of the item
-        // when the drag started and ended, respectively
-        console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
-
-        // Finish the reorder and position the item in the DOM based on
-        // where the gesture ended. This method can also be called directly
-        // by the reorder group
-        ev.detail.complete();
+    checkDuration() {
+        this.duration = this.selectedItems.reduce(
+            (sum, item) => sum + item.duration,
+            0
+        );
     }
 
     addToSelected(exercise: ExerciseItem) {
@@ -105,6 +102,8 @@ export class AddPlanPage implements OnInit, ViewWillEnter {
         } else {
             this.selectedItems.push(exercise); // Adiciona o exercício se ele ainda não estiver selecionado
         }
+
+        this.checkDuration();
     }
 
     isEmpty() {

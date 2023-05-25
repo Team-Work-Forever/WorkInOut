@@ -24,12 +24,13 @@ import { PlanService } from 'src/app/services/plan-service.service';
     templateUrl: './create-plan.page.html',
     styleUrls: ['./create-plan.page.scss'],
 })
-export class CreatePlanPage implements OnInit, ViewWillEnter {
+export class CreatePlanPage implements ViewWillEnter {
     planTitle: string = 'Novo Treino';
     choosenExercises: ExerciseItem[] = [];
 
     sendCategories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
     categories: Category[] = [];
+    duration: number = 0;
 
     constructor(
         public toastController: ToastController,
@@ -40,12 +41,10 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
         private router: Router
     ) {}
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-    }
 
-    async ngOnInit() {
         const info = this.activeRoute.snapshot.paramMap.get('plan');
 
         const plan =
@@ -75,6 +74,10 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
                 });
             }
 
+            this.duration = this.choosenExercises.reduce(
+                (sum, item) => sum + item.duration,
+                0
+            );
             this.sendCategories.next(this.categories);
             this.planTitle = plan ? plan.title : 'Novo Plano';
         }

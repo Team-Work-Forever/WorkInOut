@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Plan } from 'src/app/models/plan.model';
@@ -10,16 +18,24 @@ import { convertToMinutesSeconds } from 'src/utils/time-date.utils';
     templateUrl: './flag-displayer.component.html',
     styleUrls: ['./flag-displayer.component.scss'],
 })
-export class FlagDisplayerComponent implements OnInit {
+export class FlagDisplayerComponent implements OnInit, OnChanges {
     public displayCategory: string;
     public displayQty: number = 0;
     public flagColor: string;
-    public displayDuration: string;
+    public displayDuration: string = '0 min';
 
     public categories: Category[];
     private _items = new BehaviorSubject<Category[]>([]);
 
     constructor(private categoryService: CategoryService) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['duration']) {
+            this.displayDuration = convertToMinutesSeconds(
+                changes['duration'].currentValue
+            );
+        }
+    }
 
     @Input()
     hasAgenda: boolean = false;
@@ -41,6 +57,7 @@ export class FlagDisplayerComponent implements OnInit {
     async ngOnInit() {
         this._items.subscribe(async (x) => {
             this.categories = x;
+
             this.displayDuration = convertToMinutesSeconds(this.duration);
 
             console.log(x);

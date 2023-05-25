@@ -4,7 +4,10 @@
     [editable]="true"
     (editValue)="planTitleChanged($event)"
 >
-    <flag-displayer [items]="sendCategories | async"></flag-displayer>
+    <flag-displayer
+        [duration]="duration"
+        [items]="sendCategories | async"
+    ></flag-displayer>
 </app-work-header>
 
 <ion-content [fullscreen]="true">

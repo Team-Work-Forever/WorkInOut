@@ -12,6 +12,7 @@
                 *ngFor="let exe of exercises ; let i = index"
                 [isOpen]="i === currentExercise"
                 [title]="exe.title"
+                [video_url]="exe.video_url"
                 [duration]="exe.duration"
                 [rangeValue]="i === currentExercise ? currentValue : 0"
             >
@@ -20,7 +21,7 @@
     </div>
 
     <ion-fab (click)="togglePlayback()" class="create-btn">
-        <ion-fab-button olor="primary">
+        <ion-fab-button color="primary">
             <ion-icon
                 [name]="this.isPlaying ? 'pause-outline' : 'play-outline'"
             ></ion-icon>

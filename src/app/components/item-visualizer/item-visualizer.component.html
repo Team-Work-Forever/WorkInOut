@@ -1,7 +1,13 @@
 <div class="item">
     <div *ngIf="isOpen" class="content">
         <swiper [isTopDown]="true">
-            <div *swiperPage class="video-view"></div>
+            <div *swiperPage class="video-view">
+                <img
+                    *ngIf="video_url"
+                    [src]="video_url"
+                    alt="Imagem do vídeo"
+                />
+            </div>
             <div *swiperPage></div>
         </swiper>
     </div>

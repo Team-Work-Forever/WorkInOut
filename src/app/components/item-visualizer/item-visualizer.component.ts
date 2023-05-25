@@ -21,6 +21,9 @@ export class ItemVisualizerComponent implements OnInit {
     public title: string;
 
     @Input()
+    public video_url?: string;
+
+    @Input()
     public duration: number;
 
     @Output()

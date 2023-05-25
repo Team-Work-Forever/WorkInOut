@@ -185,8 +185,4 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
             },
         },
     ];
-
-    // setOpen(isOpen: boolean) {
-    //     this.isActionSheetOpen = isOpen;
-    // }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
     OrientationLockOptions,
     ScreenOrientation,
@@ -9,7 +10,7 @@ import { User } from 'src/app/models/user.model';
 import { NotificationService } from 'src/app/services/notification.service';
 import {
     convertToHoursMinutes,
-    convertToYearMonthDay,
+    getMinDate as currentDate,
 } from 'src/utils/time-date.utils';
 
 @Component({
@@ -19,12 +20,21 @@ import {
 })
 export class SchedulePage implements OnInit, ViewWillEnter {
     public notifications: NotificationItem[];
+    public tabDate: string;
 
-    constructor(private notificationService: NotificationService) {}
+    constructor(
+        private notificationService: NotificationService,
+        private activeRoute: ActivatedRoute
+    ) {}
 
     ionViewWillEnter(): void {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
+
+        const info = this.activeRoute.snapshot.paramMap.get('date');
+
+        const date = info ? (JSON.parse(info) as string) : '';
+        console.log(date);
     }
 
     async ngOnInit() {}
@@ -34,12 +44,11 @@ export class SchedulePage implements OnInit, ViewWillEnter {
     }
 
     getMinDate() {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const minDate = `${year}-${month}-${day}T00:00:00`;
-        return minDate;
+        return currentDate();
+    }
+
+    getDateFromTab(): string {
+        return this.tabDate || this.getMinDate();
     }
 
     async getSelectedDate(event) {
@@ -55,7 +64,6 @@ export class SchedulePage implements OnInit, ViewWillEnter {
             );
 
         this.notifications = notifications.map((notification) => {
-            console.log(this.notifications);
             return {
                 id: notification.id,
                 title: notification.title,

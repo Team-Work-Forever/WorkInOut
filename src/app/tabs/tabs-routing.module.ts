@@ -86,7 +86,7 @@ const routes: Routes = [
                     ),
             },
             {
-                path: 'schedule',
+                path: 'schedule/:date',
                 loadChildren: () =>
                     import('../pages/tabs/schedule/schedule.module').then(
                         (m) => m.SchedulePageModule

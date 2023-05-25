@@ -23,3 +23,12 @@ export function convertToYearMonthDay(timestamp) {
         .toString()
         .padStart(2, '0')}T00:00:00`;
 }
+
+export function getMinDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const minDate = `${year}-${month}-${day}T00:00:00`;
+    return minDate;
+}

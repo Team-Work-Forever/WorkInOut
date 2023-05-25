@@ -14,6 +14,8 @@ import { HintService } from 'src/app/services/hint.service.service';
     styleUrls: ['./hints.page.scss'],
 })
 export class HintsPage implements OnInit, ViewWillEnter {
+    public isLoading: boolean = false;
+
     maxCardsPerRow: number;
     hints: Hint[] = [];
 
@@ -22,12 +24,12 @@ export class HintsPage implements OnInit, ViewWillEnter {
         private modalCtrl: ModalController
     ) {}
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-    }
 
-    async ngOnInit() {
+        this.isLoading = true;
+
         const hints = await this.hintsService.getAllHints();
 
         this.hints = hints.map((hint) => {
@@ -40,6 +42,10 @@ export class HintsPage implements OnInit, ViewWillEnter {
             } as Hint;
         });
 
+        this.isLoading = false;
+    }
+
+    async ngOnInit() {
         this.calculateMaxCardsPerRow();
     }
 

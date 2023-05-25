@@ -1,7 +1,9 @@
 <app-work-header [isNested]="true" [search]="false" title="Dicas">
 </app-work-header>
 
-<ion-content [fullscreen]="true">
+<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+
+<ion-content *ngIf="!isLoading" [fullscreen]="true">
     <ion-grid>
         <ion-row class="card-row card-wrapper">
             <ion-col

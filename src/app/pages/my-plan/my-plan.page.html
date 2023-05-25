@@ -9,7 +9,9 @@
     </div>
 </app-work-header>
 
-<ion-content [fullscreen]="true">
+<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+
+<ion-content *ngIf="!isLoading" [fullscreen]="true">
     <div class="separator-bar">
         <ion-buttons slot="end" class="ion-buttons-end">
             <ion-button color="">

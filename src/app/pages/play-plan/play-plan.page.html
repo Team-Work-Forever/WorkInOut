@@ -5,7 +5,9 @@
     ></flag-displayer>
 </app-work-header>
 
-<ion-content [fullscreen]="true">
+<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+
+<ion-content *ngIf="!isLoading" [fullscreen]="true">
     <div class="list-wrapper">
         <ion-list>
             <item-visualizer

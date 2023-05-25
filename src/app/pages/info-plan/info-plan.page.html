@@ -7,7 +7,9 @@
     ></flag-displayer>
 </app-work-header>
 
-<ion-content [fullscreen]="true">
+<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+
+<ion-content *ngIf="!isLoading" [fullscreen]="true">
     <ion-grid>
         <ion-row class="center">
             <ion-col

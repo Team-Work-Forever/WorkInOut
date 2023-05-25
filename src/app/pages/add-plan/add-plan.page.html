@@ -10,7 +10,9 @@
     ></flag-displayer>
 </app-work-header>
 
-<ion-content [fullscreen]="true">
+<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+
+<ion-content *ngIf="!isLoading" [fullscreen]="true">
     <ion-searchbar placeholder="Pesquisar" [debounce]="1000"></ion-searchbar>
 
     <horizontal-slider [arrayList]="categories"> </horizontal-slider>

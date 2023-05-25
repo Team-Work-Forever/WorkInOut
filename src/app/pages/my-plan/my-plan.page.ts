@@ -33,6 +33,8 @@ import { PlanService } from 'src/app/services/plan-service.service';
     ],
 })
 export class MyPlanPage implements ViewWillEnter {
+    public isLoading: boolean = true;
+
     results: Card[];
     cards: Card[];
 
@@ -46,6 +48,8 @@ export class MyPlanPage implements ViewWillEnter {
     ) {}
 
     async ionViewWillEnter() {
+        this.isLoading = true;
+
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
@@ -74,6 +78,7 @@ export class MyPlanPage implements ViewWillEnter {
         });
 
         this.results = this.cards;
+        this.isLoading = false;
     }
 
     handleResult(filteredResults: Card[]) {

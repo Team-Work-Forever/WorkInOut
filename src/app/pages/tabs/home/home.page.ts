@@ -34,6 +34,8 @@ import {
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit, ViewWillEnter {
+    isLoading: boolean = false;
+
     maxCardsPerRow: number;
     cards: Card[] = [];
     planFav: Card[] = [];

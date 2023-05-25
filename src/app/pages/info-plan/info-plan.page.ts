@@ -43,6 +43,8 @@ import { PlanService } from 'src/app/services/plan-service.service';
     ],
 })
 export class InfoPlanPage implements OnInit, ViewWillEnter {
+    public isLoading: boolean = false;
+
     plan: Plan;
     exercises: Exercise[];
     categories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
@@ -61,13 +63,16 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         private cdr: ChangeDetectorRef,
         private router: Router
     ) {}
-
-    ionViewWillEnter(): void {
-        const options: OrientationLockOptions = { orientation: 'portrait' };
-        ScreenOrientation.lock(options);
+    ngOnInit(): void {
+        this.calculateMaxCardsPerRow();
     }
 
-    async ngOnInit() {
+    async ionViewWillEnter() {
+        this.isLoading = true;
+
+        const options: OrientationLockOptions = { orientation: 'portrait' };
+        ScreenOrientation.lock(options);
+
         const planId = this.activeRoute.snapshot.paramMap.get('id');
 
         this.plan = await this.planService.getPlanById(planId);
@@ -96,7 +101,7 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         this.results = this.exercises;
         this.resultsImageCont = this.imageContainer;
 
-        this.calculateMaxCardsPerRow();
+        this.isLoading = false;
     }
 
     async handleClick(material) {

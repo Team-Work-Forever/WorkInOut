@@ -1,4 +1,5 @@
 <app-work-header
+    *ngIf="!isLoading"
     [arrayList]="cards"
     title="Bem-vindo!"
     (result)="handleResult($event)"
@@ -17,7 +18,9 @@
     </div>
 </app-work-header>
 
-<ion-content [fullscreen]="true">
+<ion-spinner class="spinner" *ngIf="isLoading" name="crescent"></ion-spinner>
+
+<ion-content *ngIf="!isLoading" [fullscreen]="true">
     <swiper (realIndex)="handleChangeIndex($event)">
         <ion-content *swiperPage>
             <ion-text>

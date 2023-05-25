@@ -19,6 +19,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
     styleUrls: ['./add-plan.page.scss'],
 })
 export class AddPlanPage implements ViewWillEnter {
+    public isLoading: boolean = false;
     title: string = 'Novo Treino';
 
     selectedItems: ExerciseItem[] = [];
@@ -41,6 +42,8 @@ export class AddPlanPage implements ViewWillEnter {
     async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
+
+        this.isLoading = true;
 
         const plan = JSON.parse(
             this.activeRoute.snapshot.paramMap.get('plan')
@@ -79,6 +82,8 @@ export class AddPlanPage implements ViewWillEnter {
 
         this.title = plan.title;
         this.results = this.exercices;
+
+        this.isLoading = false;
     }
 
     checkDuration() {

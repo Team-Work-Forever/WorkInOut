@@ -18,6 +18,8 @@ import { PlanService } from 'src/app/services/plan-service.service';
     styleUrls: ['./play-plan.page.scss'],
 })
 export class PlayPlanPage implements ViewWillEnter {
+    public isLoading: boolean = false;
+
     plan: Plan;
     exercises: Exercise[];
     categories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
@@ -42,6 +44,8 @@ export class PlayPlanPage implements ViewWillEnter {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        this.isLoading = true;
+
         const planId = this.activeRoute.snapshot.paramMap.get('id');
 
         this.plan = await this.planService.getPlanOfUserById(
@@ -56,6 +60,8 @@ export class PlayPlanPage implements ViewWillEnter {
         this.exercises = await this.planService.getExercisesFromPlanById(
             planId
         );
+
+        this.isLoading = false;
     }
 
     togglePlayback() {

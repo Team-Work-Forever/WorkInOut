@@ -279,7 +279,8 @@ export class PlanService {
             .getClient()
             .from('exe_info')
             .select('*')
-            .eq('plan', planId);
+            .eq('plan', planId)
+            .order('index', { ascending: true });
 
         if (error) {
             return [];

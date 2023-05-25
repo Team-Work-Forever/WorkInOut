@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { User } from '../models/user.model';
 import { AuthError } from '@supabase/supabase-js';
+import { AppStorageService } from './app-storage.service';
 
 @Injectable({
     providedIn: 'root',
@@ -10,7 +11,10 @@ export class AuthenticationService {
     private authUser: User;
     private access_token: string;
 
-    constructor(private supabaseService: SupabaseService) {}
+    constructor(
+        private supabaseService: SupabaseService,
+        private storage: AppStorageService
+    ) {}
 
     public async authenticate(
         email: string,
@@ -31,12 +35,16 @@ export class AuthenticationService {
         } as User;
 
         this.access_token = data.session.access_token;
-        console.log(this.access_token);
+
+        await this.storage.setValue('auth_info', JSON.stringify(this.authUser));
 
         return null;
     }
 
-    public isAuthenticated(): boolean {
+    public async isAuthenticated(): Promise<boolean> {
+        this.authUser = await this.storage.getValue<User>('auth_info');
+        console.log(this.authUser);
+
         return this.authUser != null;
     }
 

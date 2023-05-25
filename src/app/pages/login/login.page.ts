@@ -14,6 +14,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements ViewWillEnter {
+    public isLoading: boolean = false;
+
     authForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
@@ -41,11 +43,13 @@ export class LoginPage implements ViewWillEnter {
             );
             return;
         }
+        this.isLoading = true;
 
         const result = await this.authenticationService.authenticate(
             this.authForm.value.email,
             this.authForm.value.password
         );
+        this.isLoading = false;
 
         if (result) {
             this.showToast(

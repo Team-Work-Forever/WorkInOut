@@ -49,7 +49,10 @@
                 </p>
             </div>
 
-            <ion-button type="submit">Entrar</ion-button>
+            <ion-button type="submit">
+                <span *ngIf="!isLoading">Entrar</span>
+                <ion-spinner *ngIf="isLoading" name="dots"></ion-spinner>
+            </ion-button>
             <ion-text color="gray">
                 <p>Esqueceu-se da palavra-passe?</p>
             </ion-text>

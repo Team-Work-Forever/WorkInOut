@@ -116,12 +116,16 @@ export class CreatePlanPage implements ViewWillEnter {
 
     async createPlan() {
         if (this.planTitle.length === 0) {
-            this.showToast('Não se esqueça de adicionar um titulo ao plano!');
+            this.showToast(
+                'Erro ao salvar o plano: é necessário adicionar um título.'
+            );
             return;
         }
 
         if (this.choosenExercises.length === 0) {
-            this.showToast('Não se esqueça de adicionar um exercício!');
+            this.showToast(
+                'Atenção: É necessário adicionar um exercício antes de prosseguir.'
+            );
             return;
         }
 
@@ -150,12 +154,16 @@ export class CreatePlanPage implements ViewWillEnter {
         );
 
         if (!createdPlan) {
-            this.showToast('Erro ao criar um plano!');
+            this.showToast(
+                'Desculpe, ocorreu um erro ao criar o plano. Por favor, tente novamente mais tarde.'
+            );
             return;
         }
 
         if (this.choosenExercises.length === 0) {
-            this.showToast('Não se esqueça de adicionar um exercício!');
+            this.showToast(
+                'Erro ao criar o plano: É necessário adicionar pelo menos um exercício.'
+            );
             return;
         }
 
@@ -179,7 +187,7 @@ export class CreatePlanPage implements ViewWillEnter {
             })
         );
 
-        this.showToast('Plano criado');
+        this.showToast('Plano criado com sucesso!');
 
         this.router.navigate(['tabs/home/mine']);
     }

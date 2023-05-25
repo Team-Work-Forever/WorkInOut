@@ -19,7 +19,7 @@ import { ExerciseService } from 'src/app/services/exercise.service';
     styleUrls: ['./add-plan.page.scss'],
 })
 export class AddPlanPage implements ViewWillEnter {
-    title: string = 'Novo Plano';
+    title: string = 'Novo Treino';
 
     selectedItems: ExerciseItem[] = [];
     selectedCategories: BehaviorSubject<Category[]> = new BehaviorSubject([]);

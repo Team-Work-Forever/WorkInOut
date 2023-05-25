@@ -7,34 +7,57 @@
                 <h1>WorkInOut</h1>
             </ion-text>
 
-            <ion-input
-                formControlName="email"
-                label="e-mail"
-                label-placement="floating"
-                fill="outline"
-                placeholder="Enter text"
-                error-text="authForm.controls['email'].errors?.['required']"
-            ></ion-input>
+            <div class="input-container">
+                <ion-input
+                    formControlName="email"
+                    label="e-mail"
+                    label-placement="floating"
+                    fill="outline"
+                    placeholder="Enter text"
+                ></ion-input>
+                <p
+                    *ngIf="authForm.get('email').touched && authForm.get('email').errors?.['required']"
+                >
+                    Este campo é obrigatório. Por favor, preencha-o.
+                </p>
+                <p
+                    *ngIf="authForm.get('email').touched && authForm.get('email').errors?.['email']"
+                >
+                    Por favor, insira um e-mail válido.
+                </p>
+            </div>
 
-            <ion-input
-                formControlName="password"
-                type="password"
-                label="palavra-passe"
-                label-placement="floating"
-                fill="outline"
-                placeholder="Enter text"
-                error-text="authForm.controls['password'].errors?.['required']"
-            ></ion-input>
+            <div class="input-container">
+                <ion-input
+                    formControlName="password"
+                    type="password"
+                    label="palavra-passe"
+                    label-placement="floating"
+                    fill="outline"
+                    placeholder="Enter text"
+                ></ion-input>
+
+                <p
+                    *ngIf="authForm.get('password').touched && authForm.get('password').errors?.['required']"
+                >
+                    Este campo é obrigatório. Por favor, preencha-o.
+                </p>
+                <p
+                    *ngIf="authForm.get('password').touched && authForm.get('password').errors && !authForm.get('password').errors?.['required']"
+                >
+                    A palavra-passe deve ter de 6 a 16 caracteres.
+                </p>
+            </div>
 
             <ion-button type="submit">Entrar</ion-button>
             <ion-text color="gray">
                 <p>Esqueceu-se da palavra-passe?</p>
             </ion-text>
         </form>
-        <div>
-            <ion-button (click)="handleGoogle()">o</ion-button>
-            <ion-button>o</ion-button>
-            <ion-button>o</ion-button>
+        <div class="buttons-container">
+            <button><ion-icon name="logo-google"></ion-icon></button>
+            <button><ion-icon name="logo-facebook"></ion-icon></button>
+            <button><ion-icon name="logo-microsoft"></ion-icon></button>
         </div>
     </div>
 </ion-content>

@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit, ViewWillEnter {
+export class LoginPage implements ViewWillEnter {
     authForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
@@ -34,10 +34,11 @@ export class LoginPage implements OnInit, ViewWillEnter {
         ScreenOrientation.lock(options);
     }
 
-    ngOnInit() {}
-
     async handleClick() {
         if (!this.authForm.valid) {
+            this.showToast(
+                'Por favor, faça login fornecendo suas credenciais de acesso'
+            );
             return;
         }
 
@@ -47,7 +48,9 @@ export class LoginPage implements OnInit, ViewWillEnter {
         );
 
         if (result) {
-            this.showToast('Email ou palavra-passe estão incorretos!');
+            this.showToast(
+                'Email ou palavra-passe incorretos. Por favor, verifique suas credenciais e tente novamente.'
+            );
             return;
         }
 

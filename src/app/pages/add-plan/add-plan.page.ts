@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
-import {
-    ItemReorderEventDetail,
-    ToastController,
-    ViewWillEnter,
-} from '@ionic/angular';
+import { ToastController, ViewWillEnter } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
@@ -108,6 +104,10 @@ export class AddPlanPage implements ViewWillEnter {
 
     isEmpty() {
         return this.selectedItems.length === 0;
+    }
+
+    planTitleChanged(event: string) {
+        this.title = event;
     }
 
     async presentToast(position, title) {

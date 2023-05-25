@@ -91,12 +91,11 @@ export class HomePage implements OnInit, ViewWillEnter {
                 image: plan.badge,
             } as Card;
         });
-
+        this.handleChangeIndex(0);
         this.isLoading = false;
     }
 
     ngOnInit() {
-        this.handleChangeIndex(0);
         this.calculateMaxCardsPerRow();
     }
 

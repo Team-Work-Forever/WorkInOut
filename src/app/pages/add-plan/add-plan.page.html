@@ -10,28 +10,37 @@
     ></flag-displayer>
 </app-work-header>
 
-<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+<ion-content [fullscreen]="true">
+    <ion-spinner
+        *ngIf="isLoading"
+        class="spinner"
+        name="crescent"
+    ></ion-spinner>
 
-<ion-content *ngIf="!isLoading" [fullscreen]="true">
-    <ion-searchbar placeholder="Pesquisar" [debounce]="1000"></ion-searchbar>
+    <div *ngIf="!isLoading">
+        <ion-searchbar
+            placeholder="Pesquisar"
+            [debounce]="1000"
+        ></ion-searchbar>
 
-    <horizontal-slider [arrayList]="categories"> </horizontal-slider>
+        <horizontal-slider [arrayList]="categories"> </horizontal-slider>
 
-    <div class="list-wrapper">
-        <ion-list *ngFor="let exercise of results">
-            <exercise
-                [title]="exercise.title"
-                [duration]="exercise.duration"
-                [selected]="exercise.isSelected"
-                (click)="addToSelected(exercise)"
-            ></exercise>
-        </ion-list>
+        <div class="list-wrapper">
+            <ion-list *ngFor="let exercise of results">
+                <exercise
+                    [title]="exercise.title"
+                    [duration]="exercise.duration"
+                    [selected]="exercise.isSelected"
+                    (click)="addToSelected(exercise)"
+                ></exercise>
+            </ion-list>
+        </div>
+
+        <ion-button
+            (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : presentToast('top', 'Os exercícios foram adicionados ao Plano!')"
+            class="create-btn"
+            expand="block"
+            >Adicionar</ion-button
+        >
     </div>
-
-    <ion-button
-        (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : presentToast('top', 'Os exercícios foram adicionados ao Plano!')"
-        class="create-btn"
-        expand="block"
-        >Adicionar</ion-button
-    >
 </ion-content>

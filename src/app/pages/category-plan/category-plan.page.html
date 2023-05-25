@@ -5,8 +5,14 @@
     title="Plano de Treino"
 ></app-work-header>
 
-<ion-content padding>
-    <ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true">
+    <ion-spinner
+        *ngIf="isLoading"
+        class="spinner"
+        name="crescent"
+    ></ion-spinner>
+
+    <div *ngIf="!isLoading">
         <ion-grid>
             <ion-row class="card-row card-wrapper">
                 <ion-col
@@ -27,5 +33,5 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-    </ion-content>
+    </div>
 </ion-content>

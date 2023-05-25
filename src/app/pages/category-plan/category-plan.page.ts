@@ -12,7 +12,8 @@ import { CategoryService } from 'src/app/services/category.service';
     templateUrl: './category-plan.page.html',
     styleUrls: ['./category-plan.page.scss'],
 })
-export class CategoryPlanPage implements OnInit, ViewWillEnter {
+export class CategoryPlanPage implements ViewWillEnter {
+    public isLoading: boolean = false;
     cards: Card[];
 
     constructor(private categoryService: CategoryService) {}
@@ -21,12 +22,12 @@ export class CategoryPlanPage implements OnInit, ViewWillEnter {
         // this.nav.navigateForward('/detalhe', { state: card });
     }
 
-    ionViewWillEnter(): void {
+    async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-    }
 
-    async ngOnInit() {
+        this.isLoading = true;
+
         const categories = await this.categoryService.getAllCategories();
 
         this.cards = categories.map((cat) => {
@@ -37,5 +38,7 @@ export class CategoryPlanPage implements OnInit, ViewWillEnter {
                 isFavorite: cat.isFavourite,
             } as Card;
         });
+
+        this.isLoading = false;
     }
 }

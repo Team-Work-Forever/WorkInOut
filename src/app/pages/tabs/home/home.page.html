@@ -1,5 +1,4 @@
 <app-work-header
-    *ngIf="!isLoading"
     [arrayList]="cards"
     title="Bem-vindo!"
     (result)="handleResult($event)"
@@ -18,89 +17,95 @@
     </div>
 </app-work-header>
 
-<ion-spinner class="spinner" *ngIf="isLoading" name="crescent"></ion-spinner>
+<ion-content [fullscreen]="true">
+    <ion-spinner
+        class="spinner"
+        *ngIf="isLoading"
+        name="crescent"
+    ></ion-spinner>
 
-<ion-content *ngIf="!isLoading" [fullscreen]="true">
-    <swiper (realIndex)="handleChangeIndex($event)">
-        <ion-content *swiperPage>
-            <ion-text>
-                <h1>Planos Favoritos</h1>
-            </ion-text>
+    <div style="height: 100%; width: 100%" *ngIf="!isLoading">
+        <swiper (realIndex)="handleChangeIndex($event)">
+            <ion-content *swiperPage>
+                <ion-text>
+                    <h1>Planos Favoritos</h1>
+                </ion-text>
 
-            <ion-grid>
-                <ion-row class="card-row card-wrapper">
-                    <ion-col
-                        size="6"
-                        size-md="3"
-                        size-lg="3"
-                        *ngFor="let card of results"
-                    >
-                        <app-card
-                            (isSelected)="selectionChanged($event)"
-                            [id]="card.id"
-                            [hasFavorite]="false"
-                            (click)="handleClick(card)"
-                            [image]="card.image"
-                            [title]="card.title"
-                            [time]="card.time"
-                            [isFavorite]="card.isFavorite"
-                            icon="star"
-                        ></app-card>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-content>
-        <ion-content *swiperPage>
-            <ion-text>
-                <h1>Planos Recomendados</h1>
-            </ion-text>
+                <ion-grid>
+                    <ion-row class="card-row card-wrapper">
+                        <ion-col
+                            size="6"
+                            size-md="3"
+                            size-lg="3"
+                            *ngFor="let card of results"
+                        >
+                            <app-card
+                                (isSelected)="selectionChanged($event)"
+                                [id]="card.id"
+                                [hasFavorite]="false"
+                                (click)="handleClick(card)"
+                                [image]="card.image"
+                                [title]="card.title"
+                                [time]="card.time"
+                                [isFavorite]="card.isFavorite"
+                                icon="star"
+                            ></app-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-content>
+            <ion-content *swiperPage>
+                <ion-text>
+                    <h1>Planos Recomendados</h1>
+                </ion-text>
 
-            <ion-grid>
-                <ion-row class="card-row card-wrapper">
-                    <ion-col
-                        size="6"
-                        size-md="3"
-                        size-lg="3"
-                        *ngFor="let card of planRec"
-                    >
-                        <app-card
-                            [hasFavorite]="false"
-                            (click)="handleClick(card)"
-                            [image]="card.image"
-                            [title]="card.title"
-                            [time]="card.time"
-                            [isFavorite]="card.isFavorite"
-                            icon="star"
-                        ></app-card>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-content>
-        <ion-content *swiperPage>
-            <ion-text>
-                <h1>Planos Mais Populares</h1>
-            </ion-text>
+                <ion-grid>
+                    <ion-row class="card-row card-wrapper">
+                        <ion-col
+                            size="6"
+                            size-md="3"
+                            size-lg="3"
+                            *ngFor="let card of planRec"
+                        >
+                            <app-card
+                                [hasFavorite]="false"
+                                (click)="handleClick(card)"
+                                [image]="card.image"
+                                [title]="card.title"
+                                [time]="card.time"
+                                [isFavorite]="card.isFavorite"
+                                icon="star"
+                            ></app-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-content>
+            <ion-content *swiperPage>
+                <ion-text>
+                    <h1>Planos Mais Populares</h1>
+                </ion-text>
 
-            <ion-grid>
-                <ion-row class="card-row card-wrapper">
-                    <ion-col
-                        size="6"
-                        size-md="3"
-                        size-lg="3"
-                        *ngFor="let card of planPop"
-                    >
-                        <app-card
-                            [hasFavorite]="false"
-                            (click)="handleClick(card)"
-                            [image]="card.image"
-                            [title]="card.title"
-                            [time]="card.time"
-                            [isFavorite]="card.isFavorite"
-                            icon="star"
-                        ></app-card>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-content>
-    </swiper>
+                <ion-grid>
+                    <ion-row class="card-row card-wrapper">
+                        <ion-col
+                            size="6"
+                            size-md="3"
+                            size-lg="3"
+                            *ngFor="let card of planPop"
+                        >
+                            <app-card
+                                [hasFavorite]="false"
+                                (click)="handleClick(card)"
+                                [image]="card.image"
+                                [title]="card.title"
+                                [time]="card.time"
+                                [isFavorite]="card.isFavorite"
+                                icon="star"
+                            ></app-card>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-content>
+        </swiper>
+    </div>
 </ion-content>

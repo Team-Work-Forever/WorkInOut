@@ -37,12 +37,3 @@ ion-grid {
 ion-content {
     --border-color: transparent;
 }
-
-.spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    height: 50px;
-    width: 50px;
-}

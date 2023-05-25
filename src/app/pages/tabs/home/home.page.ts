@@ -9,7 +9,6 @@ import { FlatButtonModule } from 'src/app/components/flat-button/flat-button.mod
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanService } from 'src/app/services/plan-service.service';
-import { User } from 'src/app/models/user.model';
 import { Plan } from 'src/app/models/plan.model';
 import { CardModule } from 'src/app/components/card/card.components.module';
 import {
@@ -53,6 +52,9 @@ export class HomePage implements OnInit, ViewWillEnter {
     async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
+
+        this.isLoading = true;
+
         const fav_plan = await this.planService.getAllPlanOfUserFavorite(
             this.authService.getAuthUser()
         );
@@ -90,10 +92,11 @@ export class HomePage implements OnInit, ViewWillEnter {
             } as Card;
         });
 
-        this.handleChangeIndex(0);
+        this.isLoading = false;
     }
 
-    async ngOnInit() {
+    ngOnInit() {
+        this.handleChangeIndex(0);
         this.calculateMaxCardsPerRow();
     }
 

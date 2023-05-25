@@ -5,28 +5,34 @@
     ></flag-displayer>
 </app-work-header>
 
-<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+<ion-content [fullscreen]="true">
+    <ion-spinner
+        *ngIf="isLoading"
+        class="spinner"
+        name="crescent"
+    ></ion-spinner>
 
-<ion-content *ngIf="!isLoading" [fullscreen]="true">
-    <div class="list-wrapper">
-        <ion-list>
-            <item-visualizer
-                *ngFor="let exe of exercises ; let i = index"
-                [isOpen]="i === currentExercise"
-                [title]="exe.title"
-                [video_url]="exe.video_url"
-                [duration]="exe.duration"
-                [rangeValue]="i === currentExercise ? currentValue : 0"
-            >
-            </item-visualizer>
-        </ion-list>
+    <div *ngIf="!isLoading">
+        <div class="list-wrapper">
+            <ion-list>
+                <item-visualizer
+                    *ngFor="let exe of exercises ; let i = index"
+                    [isOpen]="i === currentExercise"
+                    [title]="exe.title"
+                    [video_url]="exe.video_url"
+                    [duration]="exe.duration"
+                    [rangeValue]="i === currentExercise ? currentValue : 0"
+                >
+                </item-visualizer>
+            </ion-list>
+        </div>
+
+        <ion-fab (click)="togglePlayback()" class="create-btn">
+            <ion-fab-button color="primary">
+                <ion-icon
+                    [name]="this.isPlaying ? 'pause-outline' : 'play-outline'"
+                ></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
     </div>
-
-    <ion-fab (click)="togglePlayback()" class="create-btn">
-        <ion-fab-button color="primary">
-            <ion-icon
-                [name]="this.isPlaying ? 'pause-outline' : 'play-outline'"
-            ></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
 </ion-content>

@@ -7,59 +7,70 @@
     ></flag-displayer>
 </app-work-header>
 
-<ion-spinner *ngIf="isLoading" class="spinner" name="crescent"></ion-spinner>
+<ion-content [fullscreen]="true">
+    <ion-spinner
+        *ngIf="isLoading"
+        class="spinner"
+        name="crescent"
+    ></ion-spinner>
 
-<ion-content *ngIf="!isLoading" [fullscreen]="true">
-    <ion-grid>
-        <ion-row class="center">
-            <ion-col
-                *ngFor="let imageContainer of resultsImageCont; let i = index"
-                class="card-container"
-            >
-                <div class="container">
-                    <ng-container *ngIf="i === 0">
-                        <img class="radius" [src]="imageContainer.image" />
-                        <div class="image-text">{{ imageContainer.title }}</div>
-                        <div class="image-subtext">
-                            {{ imageContainer.qt }} Calorias
-                        </div>
-                    </ng-container>
-                    <ng-container *ngIf="i === 1">
-                        <div
-                            class="clickable container"
-                            (click)="handleClick(imageContainer.material)"
-                        >
+    <div *ngIf="!isLoading">
+        <ion-grid>
+            <ion-row class="center">
+                <ion-col
+                    *ngFor="let imageContainer of resultsImageCont; let i = index"
+                    class="card-container"
+                >
+                    <div class="container">
+                        <ng-container *ngIf="i === 0">
                             <img class="radius" [src]="imageContainer.image" />
-                            <div class="image-text-button">
+                            <div class="image-text">
                                 {{ imageContainer.title }}
                             </div>
-                        </div>
-                    </ng-container>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    <div class="separator-bar">
-        <ion-buttons slot="end" class="ion-buttons-end">
-            <ion-button color="">
-                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-        <div class="separator"></div>
-    </div>
-    <div class="list-wrapper">
-        <ion-list>
-            <exercise
-                *ngFor="let exe of exercises"
-                [title]="exe.title"
-                [duration]="exe.duration"
-                [ignoreSelect]="true"
-            >
-            </exercise>
-        </ion-list>
-    </div>
+                            <div class="image-subtext">
+                                {{ imageContainer.qt }} Calorias
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="i === 1">
+                            <div
+                                class="clickable container"
+                                (click)="handleClick(imageContainer.material)"
+                            >
+                                <img
+                                    class="radius"
+                                    [src]="imageContainer.image"
+                                />
+                                <div class="image-text-button">
+                                    {{ imageContainer.title }}
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div class="separator-bar">
+            <ion-buttons slot="end" class="ion-buttons-end">
+                <ion-button color="">
+                    <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <div class="separator"></div>
+        </div>
+        <div class="list-wrapper">
+            <ion-list>
+                <exercise
+                    *ngFor="let exe of exercises"
+                    [title]="exe.title"
+                    [duration]="exe.duration"
+                    [ignoreSelect]="true"
+                >
+                </exercise>
+            </ion-list>
+        </div>
 
-    <ion-button (click)="startPlan()" class="create-btn" expand="block"
-        >Começar</ion-button
-    >
+        <ion-button (click)="startPlan()" class="create-btn" expand="block"
+            >Começar</ion-button
+        >
+    </div>
 </ion-content>

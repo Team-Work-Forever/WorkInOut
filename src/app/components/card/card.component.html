@@ -1,7 +1,7 @@
 <ion-card (press)="pressEvent($event)" class="card-container">
     <img [src]="image" />
     <ion-card-content (click)="handleClick()">
-        <ion-card-subtitle color="primary"
+        <ion-card-subtitle *ngIf="time" color="primary"
             >{{ displayDuration }} min
         </ion-card-subtitle>
         <ion-card-title color="primary">{{ title }}</ion-card-title>

@@ -24,7 +24,6 @@ import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
 import { getMaterial } from 'src/app/services/api';
-import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
@@ -123,6 +122,9 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
     async openModal() {
         const modal = await this.modalCtrl.create({
             component: SchedualSelectionComponent,
+            componentProps: {
+                plan: this.plan,
+            },
         });
         modal.present();
     }

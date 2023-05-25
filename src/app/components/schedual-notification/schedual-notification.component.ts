@@ -21,9 +21,6 @@ export class SchedualNotificationComponent implements OnInit {
     @Input()
     public startDate: string;
 
-    @Input()
-    public endDate: string;
-
     @Output()
     public eventClick: EventEmitter<{ id: string; isActive: boolean }> =
         new EventEmitter();

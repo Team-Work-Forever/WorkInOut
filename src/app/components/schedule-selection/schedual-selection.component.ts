@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Notification as Notify } from '../../models/notification.model';
 import { getMinDate as currentDate } from 'src/utils/time-date.utils';
 import { Router } from '@angular/router';
+import { Plan } from 'src/app/models/plan.model';
 
 @Component({
     selector: 'schedual-selection',
@@ -11,6 +12,9 @@ import { Router } from '@angular/router';
     styleUrls: ['./schedual-selection.component.scss'],
 })
 export class SchedualSelectionComponent {
+    @Input()
+    plan: Plan;
+
     isSelectedDate: boolean;
     selectedDate: string;
 
@@ -34,7 +38,7 @@ export class SchedualSelectionComponent {
 
         await this.notificationService.addNotification({
             user_id: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-            title: 'Eueu',
+            title: this.plan.title,
             type: 0,
             is_active: false,
             ended_at: this.selectedDate,

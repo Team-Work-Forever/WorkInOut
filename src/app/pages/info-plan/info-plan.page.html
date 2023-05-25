@@ -42,13 +42,6 @@
             <ion-button color="">
                 <ion-icon slot="icon-only" name="add-outline"></ion-icon>
             </ion-button>
-            <ion-button
-                color=""
-                (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : presentToast('top', 'Exercícios removidos!')"
-                (click)="removeExercicesFromPlan()"
-            >
-                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-            </ion-button>
         </ion-buttons>
         <div class="separator"></div>
     </div>
@@ -58,7 +51,7 @@
                 *ngFor="let exe of exercises"
                 [title]="exe.title"
                 [duration]="exe.duration"
-                (click)="addToSelected(exe)"
+                [ignoreSelect]="true"
             >
             </exercise>
         </ion-list>

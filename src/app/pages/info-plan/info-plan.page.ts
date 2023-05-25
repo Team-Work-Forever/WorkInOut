@@ -131,38 +131,6 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         modal.present();
     }
 
-    addToSelected(exercise: Exercise) {
-        const index = this.selectedItems.findIndex(
-            (item) => item.id === exercise.id
-        );
-
-        if (index !== -1) {
-            this.selectedItems.splice(index, 1); // Remove o exercício se ele já estiver selecionado
-        } else {
-            this.selectedItems.push(exercise); // Adiciona o exercício se ele ainda não estiver selecionado
-        }
-        console.log(this.selectedItems);
-    }
-
-    async removeExercicesFromPlan() {
-        await this.planService.removeExercises(
-            this.plan,
-            this.selectedItems.map((item) => {
-                return {
-                    exerciseId: item.id,
-                };
-            })
-        );
-        for (const e of this.exercises) {
-            const index = this.selectedItems.findIndex(
-                (exercise) => exercise.id === e.id
-            );
-            if (index !== -1) {
-                this.exercises.splice(index, 1);
-            }
-        }
-    }
-
     isEmpty() {
         return this.selectedItems.length === 0;
     }

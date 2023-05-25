@@ -48,9 +48,10 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
     categories: BehaviorSubject<Category[]> = new BehaviorSubject([]);
 
     imageContainer: ImageContent[];
-    results: ImageContent[];
+    resultsImageCont: ImageContent[];
     selectedItems: Exercise[] = [];
     maxCardsPerRow: number;
+    results: Exercise[];
 
     constructor(
         private modalCtrl: ModalController,
@@ -95,7 +96,8 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
             },
         ];
 
-        this.results = this.imageContainer;
+        this.results = this.exercises;
+        this.resultsImageCont = this.imageContainer;
 
         this.calculateMaxCardsPerRow();
     }
@@ -145,6 +147,17 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         console.log(this.selectedItems);
     }
 
+    async removeExercicesFromPlan() {
+        await this.planService.removeExercises(
+            this.plan,
+            this.selectedItems.map((item) => {
+                return {
+                    exerciseId: item.id,
+                };
+            })
+        );
+    }
+
     isEmpty() {
         return this.selectedItems.length === 0;
     }
@@ -175,8 +188,4 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
             },
         },
     ];
-
-    setOpen(isOpen: boolean) {
-        this.isActionSheetOpen = isOpen;
-    }
 }

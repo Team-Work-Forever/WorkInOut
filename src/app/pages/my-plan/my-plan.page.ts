@@ -61,7 +61,7 @@ export class MyPlanPage implements ViewWillEnter {
                 id: plan.id,
                 title: plan.title,
                 image: plan.badge,
-                time: plan.duration.toString(),
+                time: plan.duration,
                 isFavorite: plan.is_favourite,
             } as Card;
         });
@@ -91,7 +91,7 @@ export class MyPlanPage implements ViewWillEnter {
                 is_favourite: isFavorite,
                 badge: image,
                 title: title,
-                duration: parseFloat(time),
+                duration: time,
             } as Plan,
             this.authenticationService.getAuthUser()
         );

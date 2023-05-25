@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { waitForAsync } from '@angular/core/testing';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
-import { ToastController, ViewWillEnter } from '@ionic/angular';
+import { ViewWillEnter } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
-import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
@@ -37,7 +35,6 @@ export class PlayPlanPage implements ViewWillEnter {
     constructor(
         private activeRoute: ActivatedRoute,
         private planService: PlanService,
-        private toastController: ToastController,
         private authenticationService: AuthenticationService
     ) {}
 
@@ -59,25 +56,6 @@ export class PlayPlanPage implements ViewWillEnter {
         this.exercises = await this.planService.getExercisesFromPlanById(
             planId
         );
-    }
-
-    playPlan() {
-        this.isPlaying = !this.isPlaying;
-        this.presentToast(
-            'top',
-            this.isPlaying
-                ? 'Execução do plano, colocado em pausa'
-                : 'O plano está a decorrer'
-        );
-    }
-
-    async presentToast(position, title) {
-        const toast = await this.toastController.create({
-            message: title,
-            duration: 2000,
-            position: position,
-        });
-        toast.present();
     }
 
     togglePlayback() {

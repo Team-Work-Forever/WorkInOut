@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
-import { Plan } from 'src/app/models/plan.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { convertToMinutesSeconds } from 'src/utils/time-date.utils';
 

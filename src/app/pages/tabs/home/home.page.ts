@@ -62,7 +62,7 @@ export class HomePage implements OnInit, ViewWillEnter {
             return {
                 id: plan.id,
                 title: plan.title,
-                time: plan.duration.toString(),
+                time: plan.duration,
                 isFavorite: plan.is_favourite,
                 image: plan.badge,
             } as Card;
@@ -72,7 +72,7 @@ export class HomePage implements OnInit, ViewWillEnter {
             return {
                 id: plan.id,
                 title: plan.title,
-                time: plan.duration.toString(),
+                time: plan.duration,
                 isFavorite: plan.is_favourite,
                 image: plan.badge,
             } as Card;
@@ -82,7 +82,7 @@ export class HomePage implements OnInit, ViewWillEnter {
             return {
                 id: plan.id,
                 title: plan.title,
-                time: plan.duration.toString(),
+                time: plan.duration,
                 isFavorite: plan.is_favourite,
                 image: plan.badge,
             } as Card;

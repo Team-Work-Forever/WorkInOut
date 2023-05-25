@@ -70,10 +70,7 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
     async ngOnInit() {
         const planId = this.activeRoute.snapshot.paramMap.get('id');
 
-        this.plan = await this.planService.getPlanOfUserById(
-            planId,
-            this.authenticationService.getAuthUser()
-        );
+        this.plan = await this.planService.getPlanById(planId);
 
         this.categories.next(
             await this.planService.getCategoriesFromPlan(planId)

@@ -69,6 +69,21 @@ export class PlanService {
         return data as Plan;
     }
 
+    public async getPlanById(planId: string): Promise<Plan> {
+        const { data, error } = await this.supabaseService
+            .getClient()
+            .from('plan')
+            .select('*')
+            .eq('id', planId)
+            .single();
+
+        if (error) {
+            return {} as Plan;
+        }
+
+        return data as Plan;
+    }
+
     public async getAllPlanOfUserFavorite(user: User): Promise<Plan[]> {
         const { data, error } = await this.supabaseService
             .getClient()

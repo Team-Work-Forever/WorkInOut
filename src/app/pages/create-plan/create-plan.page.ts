@@ -15,6 +15,7 @@ import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { Category } from 'src/app/models/category.model';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
@@ -35,6 +36,7 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
         private planService: PlanService,
         private activeRoute: ActivatedRoute,
         private categoryService: CategoryService,
+        private authenticationService: AuthenticationService,
         private router: Router
     ) {}
 
@@ -141,9 +143,7 @@ export class CreatePlanPage implements OnInit, ViewWillEnter {
                 is_favourite: false,
                 title: this.planTitle,
             } as Plan,
-            {
-                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-            } as User
+            this.authenticationService.getAuthUser()
         );
 
         if (!createdPlan) {

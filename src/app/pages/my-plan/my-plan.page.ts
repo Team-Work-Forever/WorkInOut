@@ -14,6 +14,7 @@ import { Card } from 'src/app/interfaces/card.inteface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
@@ -38,8 +39,8 @@ export class MyPlanPage implements ViewWillEnter {
     categories: HorizontalItem[] = [];
 
     constructor(
-        private nav: NavController,
         private categoryService: CategoryService,
+        private authenticationService: AuthenticationService,
         private planService: PlanService,
         private router: Router
     ) {}
@@ -51,7 +52,7 @@ export class MyPlanPage implements ViewWillEnter {
         const categories = await this.categoryService.getAllCategories();
 
         const plans = await this.planService.getAllPlanOfUser({
-            userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+            userId: this.authenticationService.getAuthUser().userId,
             email: '',
         });
 
@@ -92,7 +93,7 @@ export class MyPlanPage implements ViewWillEnter {
                 title: title,
                 duration: parseFloat(time),
             } as Plan,
-            { userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f' } as User
+            this.authenticationService.getAuthUser()
         );
     }
 

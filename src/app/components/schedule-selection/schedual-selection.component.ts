@@ -5,6 +5,7 @@ import { Notification as Notify } from '../../models/notification.model';
 import { getMinDate as currentDate } from 'src/utils/time-date.utils';
 import { Router } from '@angular/router';
 import { Plan } from 'src/app/models/plan.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
     selector: 'schedual-selection',
@@ -22,6 +23,7 @@ export class SchedualSelectionComponent {
         private modalCtrl: ModalController,
         public toastController: ToastController,
         private notificationService: NotificationService,
+        private authenticationService: AuthenticationService,
         private router: Router
     ) {}
 
@@ -37,7 +39,7 @@ export class SchedualSelectionComponent {
         }
 
         await this.notificationService.addNotification({
-            user_id: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+            user_id: this.authenticationService.getAuthUser().userId,
             title: this.plan.title,
             type: 0,
             is_active: false,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { User } from '../models/user.model';
+import { AuthError } from '@supabase/supabase-js';
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +15,7 @@ export class AuthenticationService {
     public async authenticate(
         email: string,
         password: string
-    ): Promise<string> {
+    ): Promise<AuthError> {
         const { data, error } = await this.supabaseService
             .getClient()
             .auth.signInWithPassword({
@@ -22,7 +23,7 @@ export class AuthenticationService {
                 password,
             });
 
-        if (error) return error.message;
+        if (error) return error;
 
         this.authUser = {
             userId: data.user.id,
@@ -30,8 +31,9 @@ export class AuthenticationService {
         } as User;
 
         this.access_token = data.session.access_token;
+        console.log(this.access_token);
 
-        return '';
+        return null;
     }
 
     public isAuthenticated(): boolean {

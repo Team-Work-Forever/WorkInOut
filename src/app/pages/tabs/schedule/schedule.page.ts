@@ -6,7 +6,7 @@ import {
 } from '@capacitor/screen-orientation';
 import { ViewWillEnter } from '@ionic/angular';
 import { NotificationItem } from 'src/app/interfaces/notification-item.interface';
-import { User } from 'src/app/models/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import {
     convertToHoursMinutes,
@@ -24,6 +24,7 @@ export class SchedulePage implements ViewWillEnter {
 
     constructor(
         private notificationService: NotificationService,
+        private authenticationService: AuthenticationService,
         private activeRoute: ActivatedRoute
     ) {}
 
@@ -55,9 +56,7 @@ export class SchedulePage implements ViewWillEnter {
 
         const notifications =
             await this.notificationService.getAllMyNotifications(
-                {
-                    userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-                } as User,
+                this.authenticationService.getAuthUser(),
                 selectedDate
             );
 

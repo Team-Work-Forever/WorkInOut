@@ -11,6 +11,7 @@ import { Category } from 'src/app/models/category.model';
 import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
@@ -36,7 +37,8 @@ export class PlayPlanPage implements ViewWillEnter {
     constructor(
         private activeRoute: ActivatedRoute,
         private planService: PlanService,
-        private toastController: ToastController
+        private toastController: ToastController,
+        private authenticationService: AuthenticationService
     ) {}
 
     async ionViewWillEnter() {
@@ -45,9 +47,10 @@ export class PlayPlanPage implements ViewWillEnter {
 
         const planId = this.activeRoute.snapshot.paramMap.get('id');
 
-        this.plan = await this.planService.getPlanOfUserById(planId, {
-            userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-        } as User);
+        this.plan = await this.planService.getPlanOfUserById(
+            planId,
+            this.authenticationService.getAuthUser()
+        );
 
         this.categories.next(
             await this.planService.getCategoriesFromPlan(planId)

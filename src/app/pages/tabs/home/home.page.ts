@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
-import { IonicModule, NavController, ViewWillEnter } from '@ionic/angular';
+import { IonicModule, ViewWillEnter } from '@ionic/angular';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { Card } from 'src/app/interfaces/card.inteface';
@@ -43,7 +43,6 @@ export class HomePage implements OnInit, ViewWillEnter {
     results: Card[];
 
     constructor(
-        private nav: NavController,
         private authService: AuthenticationService,
         private planService: PlanService,
         private router: Router
@@ -52,9 +51,9 @@ export class HomePage implements OnInit, ViewWillEnter {
     async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-        const fav_plan = await this.planService.getAllPlanOfUserFavorite({
-            userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-        } as User);
+        const fav_plan = await this.planService.getAllPlanOfUserFavorite(
+            this.authService.getAuthUser()
+        );
 
         const rec_plan = await this.planService.getAllRecomendedPlan();
         const pop_plan = await this.planService.getAllPopularPlan();
@@ -133,9 +132,7 @@ export class HomePage implements OnInit, ViewWillEnter {
                 id: event.id,
                 is_favourite: event.isFavorite,
             } as Plan,
-            {
-                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-            } as User
+            this.authService.getAuthUser()
         );
     }
 

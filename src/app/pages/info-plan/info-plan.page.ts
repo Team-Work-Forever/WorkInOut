@@ -11,7 +11,7 @@ import {
     ToastController,
     ViewWillEnter,
 } from '@ionic/angular';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ExerciseModule } from 'src/app/components/exercise/exercise.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
 import { ItemVisualizerModule } from 'src/app/components/item-visualizer/item-visualizer.module';
@@ -24,6 +24,7 @@ import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
 import { User } from 'src/app/models/user.model';
 import { getMaterial } from 'src/app/services/api';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
@@ -56,6 +57,7 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         public toastController: ToastController,
         private planService: PlanService,
         private activeRoute: ActivatedRoute,
+        private authenticationService: AuthenticationService,
         private router: Router
     ) {}
 
@@ -67,9 +69,10 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
     async ngOnInit() {
         const planId = this.activeRoute.snapshot.paramMap.get('id');
 
-        this.plan = await this.planService.getPlanOfUserById(planId, {
-            userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-        } as User);
+        this.plan = await this.planService.getPlanOfUserById(
+            planId,
+            this.authenticationService.getAuthUser()
+        );
 
         this.categories.next(
             await this.planService.getCategoriesFromPlan(planId)

@@ -17,6 +17,10 @@
     gap: 5px;
 }
 
+h1 {
+    color: #575757;
+}
+
 ion-text {
     text-align: center;
 
@@ -28,4 +32,8 @@ ion-text {
 
 ion-grid {
     margin-bottom: 20px;
+}
+
+ion-content {
+    --border-color: transparent;
 }

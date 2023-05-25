@@ -10,7 +10,6 @@
     font-weight: bold;
     color: #5f5f5f;
     font-size: 18px;
-    gap: 12px;
 
     div {
         display: flex;
@@ -24,9 +23,21 @@
     }
 }
 
+ion-item {
+    padding: 0;
+    --background: transparent;
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-start: 0px;
+    --padding-end: 0px;
+    --border-color: transparent;
+}
+
+span {
+    min-width: 4px;
+}
+
 .wrapper {
-    height: 100%;
-    font-size: large;
-    font-weight: bold;
-    word-wrap: unset;
+    display: flex;
+    gap: 10px;
 }

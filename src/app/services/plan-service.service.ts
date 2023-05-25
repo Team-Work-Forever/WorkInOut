@@ -194,6 +194,26 @@ export class PlanService {
             } as AddExerciseProps);
     }
 
+    public async removeExercises(
+        plan: Plan,
+        exercises: { exerciseId: string }[]
+    ): Promise<void> {
+        await Promise.all(
+            exercises.map((exercise) => this.removeExercise(plan, exercise))
+        );
+    }
+
+    public async removeExercise(plan: Plan, { exerciseId }): Promise<void> {
+        const { error } = await this.supabaseService
+            .getClient()
+            .from('exercise_plan')
+            .delete()
+            .eq('plan', plan.id)
+            .eq('exercise', exerciseId);
+
+        console.log(error);
+    }
+
     public async addCategories(
         plan: Plan,
         categories: { categoryId: string; qty: number }[]

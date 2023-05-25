@@ -11,7 +11,7 @@
     <ion-grid>
         <ion-row class="center">
             <ion-col
-                *ngFor="let imageContainer of results; let i = index"
+                *ngFor="let imageContainer of resultsImageCont; let i = index"
                 class="card-container"
             >
                 <div class="container">
@@ -44,7 +44,8 @@
             </ion-button>
             <ion-button
                 color=""
-                (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : setOpen(true)"
+                (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : presentToast('top', 'Exercícios removidos!')"
+                (click)="removeExercicesFromPlan()"
             >
                 <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
             </ion-button>
@@ -55,9 +56,9 @@
         <ion-list>
             <exercise
                 *ngFor="let exe of exercises"
-                [ignoreSelect]="true"
                 [title]="exe.title"
                 [duration]="exe.duration"
+                (click)="addToSelected(exe)"
             >
             </exercise>
         </ion-list>

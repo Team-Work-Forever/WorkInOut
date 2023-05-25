@@ -12,3 +12,14 @@ export function convertToHoursMinutes(timestamp) {
 
     return `${hours}h${minutes}m`;
 }
+
+export function convertToYearMonthDay(timestamp) {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDay();
+
+    return `${year}-${month.toString().padStart(2, '0')}-${day
+        .toString()
+        .padStart(2, '0')}T00:00:00`;
+}

@@ -7,7 +7,10 @@ import { ViewWillEnter } from '@ionic/angular';
 import { NotificationItem } from 'src/app/interfaces/notification-item.interface';
 import { User } from 'src/app/models/user.model';
 import { NotificationService } from 'src/app/services/notification.service';
-import { convertToHoursMinutes } from 'src/utils/time-date.utils';
+import {
+    convertToHoursMinutes,
+    convertToYearMonthDay,
+} from 'src/utils/time-date.utils';
 
 @Component({
     selector: 'app-schedule',
@@ -24,23 +27,7 @@ export class SchedulePage implements OnInit, ViewWillEnter {
         ScreenOrientation.lock(options);
     }
 
-    async ngOnInit() {
-        const notifications =
-            await this.notificationService.getAllMyNotifications({
-                userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
-            } as User);
-
-        this.notifications = notifications.map((notification) => {
-            return {
-                id: notification.id,
-                title: notification.title,
-                type: notification.type,
-                started_at: convertToHoursMinutes(notification.started_at),
-                ended_at: convertToHoursMinutes(notification.ended_at),
-                is_active: notification.is_active,
-            } as NotificationItem;
-        });
-    }
+    async ngOnInit() {}
 
     handleNotification(event) {
         this.notificationService.switchNotification(event.id, event.isActive);
@@ -55,17 +42,28 @@ export class SchedulePage implements OnInit, ViewWillEnter {
         return minDate;
     }
 
-    getSelectedDate(event) {
-        const selectedDate = event.detail.value;
-        const dateParts = selectedDate.split('T')[0].split('-');
-        const year = dateParts[0];
-        const month = dateParts[1];
-        const day = dateParts[2];
+    async getSelectedDate(event) {
+        const selectedDateTime = event.detail.value;
+        const selectedDate = selectedDateTime.split('T')[0]; // Extrair a parte da data
 
-        // Agora você pode usar as variáveis 'year', 'month' e 'day' para obter os planos de treino correspondentes a essa data.
-        // Você pode chamar outra função aqui para exibir os planos de treino ou manipulá-los de acordo com a sua necessidade.
-        console.log('Ano:', year);
-        console.log('Mês:', month);
-        console.log('Dia:', day);
+        const notifications =
+            await this.notificationService.getAllMyNotifications(
+                {
+                    userId: '4a0ae186-7dee-41ba-9f0e-a26d4ecaff7f',
+                } as User,
+                selectedDate
+            );
+
+        this.notifications = notifications.map((notification) => {
+            console.log(this.notifications);
+            return {
+                id: notification.id,
+                title: notification.title,
+                type: notification.type,
+                started_at: convertToHoursMinutes(notification.started_at),
+                ended_at: convertToHoursMinutes(notification.ended_at),
+                is_active: notification.is_active,
+            } as NotificationItem;
+        });
     }
 }

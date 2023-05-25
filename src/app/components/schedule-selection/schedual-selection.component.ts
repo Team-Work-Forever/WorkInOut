@@ -37,7 +37,6 @@ export class SchedualSelectionComponent {
             console.log('Selecione uma data para agendar o plano');
             return;
         }
-
         await this.notificationService.addNotification({
             user_id: this.authenticationService.getAuthUser().userId,
             title: this.plan.title,

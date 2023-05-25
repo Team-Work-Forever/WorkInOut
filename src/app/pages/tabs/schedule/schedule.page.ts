@@ -35,7 +35,6 @@ export class SchedulePage implements ViewWillEnter {
         const info = this.activeRoute.snapshot.paramMap.get('date');
 
         const date = info ? (JSON.parse(info) as string) : '';
-        console.log(date);
     }
 
     handleNotification(event) {

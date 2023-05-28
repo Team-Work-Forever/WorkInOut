@@ -1,0 +1,13 @@
+{
+    "materials" : [
+        {
+            "name" : "Tapete"
+        },
+        {
+            "name": "Pesos"
+        },
+        {
+            "name": "Banco"
+        }
+    ]
+}

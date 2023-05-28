@@ -22,9 +22,6 @@ import { ImageContent } from 'src/app/interfaces/imageContent.interface';
 import { Category } from 'src/app/models/category.model';
 import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
-import { User } from 'src/app/models/user.model';
-import { getMaterial } from 'src/app/services/api';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 
 @Component({
@@ -60,7 +57,6 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         public toastController: ToastController,
         private planService: PlanService,
         private activeRoute: ActivatedRoute,
-        private cdr: ChangeDetectorRef,
         private router: Router
     ) {}
     ngOnInit(): void {
@@ -85,6 +81,8 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
             planId
         );
 
+        const getMaterials = await fetch('./assets/data/materials.json');
+
         this.imageContainer = [
             {
                 title: 'Estimativa de calorias gastas',
@@ -94,7 +92,7 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
             {
                 title: 'Materiais Necessários',
                 image: '/assets/materiais.png',
-                material: getMaterial(),
+                material: (await getMaterials.json()).materials,
             },
         ];
 

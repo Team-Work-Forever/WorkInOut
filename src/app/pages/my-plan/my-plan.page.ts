@@ -72,6 +72,7 @@ export class MyPlanPage implements ViewWillEnter {
 
         this.categories = categories.map((cat) => {
             return {
+                id: cat.id,
                 title: cat.title,
                 color: cat.color,
             } as HorizontalItem;
@@ -83,6 +84,29 @@ export class MyPlanPage implements ViewWillEnter {
 
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
+    }
+
+    async selectedCategoriesChanged(selectedCategories: string[]) {
+        const filteredPlans =
+            await this.planService.getAllPlanOfUserFilterWithCategories(
+                this.authenticationService.getAuthUser(),
+                selectedCategories
+            );
+
+        if (filteredPlans.length === 0) {
+            this.results = this.cards;
+            return;
+        }
+
+        this.results = filteredPlans.map((plan) => {
+            return {
+                id: plan.id,
+                title: plan.title,
+                image: plan.badge,
+                time: plan.duration,
+                isFavorite: plan.is_favourite,
+            } as Card;
+        });
     }
 
     createPlan() {

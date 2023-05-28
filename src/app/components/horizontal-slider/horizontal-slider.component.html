@@ -1,7 +1,9 @@
 <div class="wrapper">
     <check-button
-        *ngFor="let btn of arrayList"
+        *ngFor="let btn of arrayList; let i = index"
         [content]="btn.title"
         [mainColor]="btn.color"
+        [isChecked]="btn.isChecked"
+        (checkedChanged)="eventChecked($event, i)"
     ></check-button>
 </div>

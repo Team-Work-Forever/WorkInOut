@@ -53,6 +53,24 @@ export class PlanService {
         return data as Plan[];
     }
 
+    public async getAllPlanOfUserFilterWithCategories(
+        { userId: user_id }: User,
+        categoryindices: string[]
+    ): Promise<Plan[]> {
+        const { data: plans, error } = await this.supabaseService
+            .getClient()
+            .rpc('getfilteredplans', {
+                categoryindices,
+                user_id,
+            });
+
+        if (error) {
+            return [];
+        }
+
+        return plans;
+    }
+
     public async getPlanOfUserById(planId: string, user: User): Promise<Plan> {
         const { data, error } = await this.supabaseService
             .getClient()

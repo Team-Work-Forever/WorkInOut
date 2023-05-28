@@ -5,7 +5,11 @@
     (result)="handleResult($event)"
 >
     <div class="container">
-        <horizontal-slider [arrayList]="categories"> </horizontal-slider>
+        <horizontal-slider
+            (selectionChanged)="selectedCategoriesChanged($event)"
+            [arrayList]="categories"
+        >
+        </horizontal-slider>
     </div>
 </app-work-header>
 

@@ -5,6 +5,7 @@ import {
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
 import {
+    IonBackButton,
     ItemReorderEventDetail,
     ToastController,
     ViewWillEnter,
@@ -14,7 +15,6 @@ import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
 import { Category } from 'src/app/models/category.model';
 import { Plan } from 'src/app/models/plan.model';
-import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
@@ -94,14 +94,20 @@ export class CreatePlanPage implements ViewWillEnter {
     }
 
     addExercise() {
-        this.router.navigate([
-            '/tabs/home/mine/add/' +
-                JSON.stringify({
-                    title: this.planTitle,
-                    exercises: this.choosenExercises,
-                    categories: this.categories,
-                } as CreateRouteProps),
-        ]);
+        this.router.navigate(
+            [
+                '/tabs/home/mine/add/' +
+                    JSON.stringify({
+                        title: this.planTitle,
+                        exercises: this.choosenExercises,
+                        categories: this.categories,
+                    } as CreateRouteProps),
+            ],
+            {
+                skipLocationChange: true,
+                replaceUrl: true,
+            }
+        );
     }
 
     async showToast(title: string) {
@@ -189,6 +195,9 @@ export class CreatePlanPage implements ViewWillEnter {
 
         this.showToast('Plano criado com sucesso!');
 
-        this.router.navigate(['tabs/home/mine']);
+        this.router.navigate(['tabs/home/mine'], {
+            skipLocationChange: true,
+            replaceUrl: true,
+        });
     }
 }

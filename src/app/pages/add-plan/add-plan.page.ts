@@ -126,12 +126,18 @@ export class AddPlanPage implements ViewWillEnter {
 
         if (this.selectedItems.length === 0) return;
 
-        this.router.navigate([
-            '/tabs/home/mine/create/' +
-                JSON.stringify({
-                    title: this.title,
-                    exercises: this.selectedItems,
-                } as CreateRouteProps),
-        ]);
+        this.router.navigate(
+            [
+                '/tabs/home/mine/create/' +
+                    JSON.stringify({
+                        title: this.title,
+                        exercises: this.selectedItems,
+                    } as CreateRouteProps),
+            ],
+            {
+                skipLocationChange: true,
+                replaceUrl: true,
+            }
+        );
     }
 }

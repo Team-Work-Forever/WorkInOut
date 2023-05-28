@@ -60,7 +60,10 @@ export class LoginPage implements ViewWillEnter {
             return;
         }
 
-        this.router.navigate(['/tabs/home']);
+        this.router.navigate(['/tabs/home'], {
+            skipLocationChange: true,
+            replaceUrl: true,
+        });
     }
 
     async handleGoogle() {

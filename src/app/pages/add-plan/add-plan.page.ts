@@ -114,7 +114,9 @@ export class AddPlanPage implements ViewWillEnter {
                 duration: exe.duration,
                 index: exe.index,
                 title: exe.title,
-                video_url: exe.video_url,
+                isSelected: !!this.selectedItems.find(
+                    (item) => item.id === exe.id
+                ),
             } as ExerciseItem;
         });
     }
@@ -149,6 +151,8 @@ export class AddPlanPage implements ViewWillEnter {
         });
 
         toast.present();
+
+        console.log(this.selectedItems);
 
         if (this.selectedItems.length === 0) return;
 

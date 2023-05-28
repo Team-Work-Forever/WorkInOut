@@ -48,10 +48,9 @@ export class HorizontalSliderComponent implements OnChanges {
                 this.arrayList.forEach((elem) => (elem.isChecked = false));
             }
         } else {
+            this.arrayList[index].isChecked = event;
             if (!event && this.arrayList[0].isChecked) {
                 this.arrayList[0].isChecked = false;
-            } else {
-                this.arrayList[index].isChecked = event;
             }
         }
 

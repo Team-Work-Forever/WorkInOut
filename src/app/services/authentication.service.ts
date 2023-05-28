@@ -8,6 +8,7 @@ import { AppStorageService } from './app-storage.service';
     providedIn: 'root',
 })
 export class AuthenticationService {
+    private readonly AUTH_API_KEY: string = 'auth_info';
     private authUser: User;
     private access_token: string;
 
@@ -19,7 +20,9 @@ export class AuthenticationService {
     }
 
     async init() {
-        this.authUser = JSON.parse(await this.storage.getValue('auth_info'));
+        this.authUser = JSON.parse(
+            await this.storage.getValue(this.AUTH_API_KEY)
+        );
     }
 
     public async authenticate(
@@ -41,17 +44,25 @@ export class AuthenticationService {
         } as User;
 
         this.access_token = data.session.access_token;
-        await this.storage.setValue('auth_info', JSON.stringify(this.authUser));
+        await this.storage.setValue(
+            this.AUTH_API_KEY,
+            JSON.stringify(this.authUser)
+        );
 
         return null;
     }
 
     public async isAuthenticated(): Promise<boolean> {
-        return !!(await this.storage.getValue<User>('auth_info'));
+        return !!(await this.storage.getValue<User>(this.AUTH_API_KEY));
     }
 
     public getAuthUser(): User {
         return this.authUser;
+    }
+
+    public async logOut() {
+        this.authUser = null;
+        await this.storage.removeValue(this.AUTH_API_KEY);
     }
 
     public async authenticateWithGoogle() {

@@ -1,6 +1,11 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, PlatformLocation } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
-import { IonicModule, ViewWillEnter } from '@ionic/angular';
+import {
+    IonBackButton,
+    IonicModule,
+    NavController,
+    ViewWillEnter,
+} from '@ionic/angular';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { Card } from 'src/app/interfaces/card.inteface';
@@ -46,10 +51,13 @@ export class HomePage implements OnInit, ViewWillEnter {
     constructor(
         private authService: AuthenticationService,
         private planService: PlanService,
-        private router: Router
+        private router: Router,
+        private navController: NavController
     ) {}
 
     async ionViewWillEnter() {
+        IonBackButton['defaultHref'] = '';
+
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 

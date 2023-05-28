@@ -34,6 +34,8 @@ export class LoginPage implements ViewWillEnter {
     ionViewWillEnter(): void {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
+
+        this.authForm.reset();
     }
 
     async handleClick() {

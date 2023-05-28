@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
-import { getTheme } from 'src/utils/theme.utils';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AppStorageService {
-    constructor(private storage: Storage) {
-        this.init();
-    }
+    constructor(private storage: Storage) {}
 
-    async init() {
-        // await this.storage.defineDriver(CordovaSQLiteDriver);
-        // const storage = await this.storage.create();
-        // const theme = (await storage.get('theme')) as boolean;
-        // document.body.setAttribute('color-theme', getTheme(theme));
+    public async initializeStorage(): Promise<Storage> {
+        await this.storage.defineDriver(CordovaSQLiteDriver);
+        return await this.storage.create();
     }
 
     public async setValue(key: string, value: string) {
         await this.storage.set(key, value);
+    }
+
+    public async removeValue(key: string) {
+        await this.storage.remove(key);
     }
 
     public async getValue<T>(key: string): Promise<T> {

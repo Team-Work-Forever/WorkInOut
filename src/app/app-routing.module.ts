@@ -8,6 +8,7 @@ const routes: Routes = [
         loadChildren: () =>
             import('./tabs/tabs.module').then((m) => m.TabsPageModule),
         canActivate: [AuthGuard],
+        runGuardsAndResolvers: 'always',
     },
     {
         path: 'login',
@@ -16,7 +17,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/tabs/home',
         pathMatch: 'full',
     },
 ];

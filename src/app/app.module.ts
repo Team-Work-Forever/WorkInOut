@@ -1,6 +1,6 @@
-import { NgModule, importProvidersFrom } from '@angular/core';
+import { NgModule, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { RouteReuseStrategy, Router, provideRouter } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -9,14 +9,14 @@ import { AppComponent } from './app.component';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt-PT';
 
-import { Storage } from '@ionic/storage-angular';
-
 import { register } from 'swiper/element/bundle';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { AuthGuard } from './core/guard/auth.guard';
 import { getTheme } from 'src/utils/theme.utils';
+import { AuthenticationService } from './services/authentication.service';
+import { AppStorageService } from './services/app-storage.service';
 
 registerLocaleData(localePt);
 register();
@@ -42,13 +42,12 @@ register();
     bootstrap: [AppComponent],
 })
 export class AppModule {
-    constructor(private _storage: Storage) {
-        this.initialConfiguration();
+    constructor(private _storage: AppStorageService, private router: Router) {
+        this.init().then();
     }
 
-    async initialConfiguration() {
-        await this._storage.defineDriver(CordovaSQLiteDriver);
-        const storage = await this._storage.create();
+    async init() {
+        const storage = await this._storage.initializeStorage();
 
         const theme = (await storage.get('theme')) as boolean;
         document.body.setAttribute('color-theme', getTheme(theme));

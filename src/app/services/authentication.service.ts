@@ -14,7 +14,13 @@ export class AuthenticationService {
     constructor(
         private supabaseService: SupabaseService,
         private storage: AppStorageService
-    ) {}
+    ) {
+        this.init();
+    }
+
+    async init() {
+        this.authUser = JSON.parse(await this.storage.getValue('auth_info'));
+    }
 
     public async authenticate(
         email: string,
@@ -35,16 +41,13 @@ export class AuthenticationService {
         } as User;
 
         this.access_token = data.session.access_token;
-
         await this.storage.setValue('auth_info', JSON.stringify(this.authUser));
 
         return null;
     }
 
     public async isAuthenticated(): Promise<boolean> {
-        this.authUser = await this.storage.getValue<User>('auth_info');
-
-        return this.authUser != null;
+        return !!(await this.storage.getValue<User>('auth_info'));
     }
 
     public getAuthUser(): User {

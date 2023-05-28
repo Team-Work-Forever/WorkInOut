@@ -51,8 +51,7 @@ export class HomePage implements OnInit, ViewWillEnter {
     constructor(
         private authService: AuthenticationService,
         private planService: PlanService,
-        private router: Router,
-        private navController: NavController
+        private router: Router
     ) {}
 
     async ionViewWillEnter() {
@@ -119,11 +118,13 @@ export class HomePage implements OnInit, ViewWillEnter {
                 this.cards = this.planPop;
                 break;
         }
+
         this.results = this.cards;
     }
 
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
+        console.log(this.results);
     }
 
     goToMyPlans() {

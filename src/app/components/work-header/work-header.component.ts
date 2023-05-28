@@ -49,31 +49,13 @@ export class WorkHeaderComponent implements OnInit {
         this.editValue.emit(event.target.value);
     }
 
-    // handleChange(event: any) {
-    //     const searchTerm = event.target.value;
-    //     if (searchTerm && searchTerm.trim() !== '') {
-    //         const filteredResults = this.arrayList.filter((card) => {
-    //             return (
-    //                 card.title
-    //                     .toLowerCase()
-    //                     .indexOf(searchTerm.toLowerCase()) !== -1
-    //             );
-    //         });
-    //         this.result.emit(filteredResults);
-    //     } else {
-    //         this.result.emit(this.arrayList);
-    //     }
-    // }
     handleChange(event: any) {
         const searchTerm = event.target.value;
         if (searchTerm && searchTerm.trim() !== '') {
-            const filteredResults = this.arrayList.filter((card) => {
-                return (
-                    card.title
-                        .toLowerCase()
-                        .indexOf(searchTerm.toLowerCase()) !== -1
-                );
-            });
+            const filteredResults = this.arrayList.filter((option) =>
+                option.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
             this.result.emit(filteredResults);
 
             // Verificar a string de pesquisa e redirecionar se necessário

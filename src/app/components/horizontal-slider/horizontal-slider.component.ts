@@ -40,14 +40,6 @@ export class HorizontalSliderComponent implements OnChanges {
         }
     }
 
-    public appendHorizontalItemToFront(horizontalItem: HorizontalItem) {
-        if (!this.arrayList) {
-            this.arrayList = [horizontalItem];
-        } else {
-            this.arrayList.unshift(horizontalItem);
-        }
-    }
-
     public eventChecked(event: boolean, index: number) {
         if (index === 0) {
             if (event) {

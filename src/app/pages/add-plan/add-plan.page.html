@@ -23,7 +23,11 @@
             [debounce]="1000"
         ></ion-searchbar>
 
-        <horizontal-slider [arrayList]="categories"> </horizontal-slider>
+        <horizontal-slider
+            (selectionChanged)="selectedCategoriesChanged($event)"
+            [arrayList]="categories"
+        >
+        </horizontal-slider>
 
         <div class="list-wrapper">
             <ion-list *ngFor="let exercise of results">

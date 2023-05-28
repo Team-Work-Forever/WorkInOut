@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { Exercise } from '../models/exercise.model';
-import { Category } from '../models/category.model';
 
 @Injectable({
     providedIn: 'root',
@@ -20,5 +19,25 @@ export class ExerciseService {
         }
 
         return data as Exercise[];
+    }
+
+    public async getFilteredExercicies(
+        categoryindices: string[]
+    ): Promise<Exercise[]> {
+        console.log(categoryindices);
+
+        const { data: exercises, error } = await this.supabaseService
+            .getClient()
+            .rpc('getfilteredexercices', {
+                categoryindices,
+            });
+
+        console.log(exercises);
+
+        if (error) {
+            return [];
+        }
+
+        return exercises;
     }
 }

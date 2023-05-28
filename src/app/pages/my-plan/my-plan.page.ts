@@ -93,7 +93,7 @@ export class MyPlanPage implements ViewWillEnter {
                 selectedCategories
             );
 
-        if (filteredPlans.length === 0) {
+        if (filteredPlans.length === 0 && selectedCategories.length === 0) {
             this.results = this.cards;
             return;
         }

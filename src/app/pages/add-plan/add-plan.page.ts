@@ -69,6 +69,7 @@ export class AddPlanPage implements ViewWillEnter {
 
         this.categories = categories.map((cat) => {
             return {
+                id: cat.id,
                 title: cat.title,
                 color: cat.color,
             } as HorizontalItem;
@@ -91,6 +92,31 @@ export class AddPlanPage implements ViewWillEnter {
             (sum, item) => sum + item.duration,
             0
         );
+    }
+
+    async selectedCategoriesChanged(event: string[]) {
+        console.log(event);
+
+        const filtedExercises =
+            await this.exerciseService.getFilteredExercicies(event);
+
+        console.log(filtedExercises);
+
+        if (filtedExercises.length === 0 && event.length === 0) {
+            this.results = this.exercices;
+            return;
+        }
+
+        this.results = filtedExercises.map((exe) => {
+            return {
+                id: exe.id,
+                category: exe.category,
+                duration: exe.duration,
+                index: exe.index,
+                title: exe.title,
+                video_url: exe.video_url,
+            } as ExerciseItem;
+        });
     }
 
     addToSelected(exercise: ExerciseItem) {

@@ -15,12 +15,9 @@ import { CategoryService } from 'src/app/services/category.service';
 export class CategoryPlanPage implements ViewWillEnter {
     public isLoading: boolean = false;
     cards: Card[];
+    results: Card[];
 
     constructor(private categoryService: CategoryService) {}
-
-    handleClick(card: Card) {
-        // this.nav.navigateForward('/detalhe', { state: card });
-    }
 
     async ionViewWillEnter() {
         const options: OrientationLockOptions = { orientation: 'portrait' };
@@ -39,6 +36,11 @@ export class CategoryPlanPage implements ViewWillEnter {
             } as Card;
         });
 
+        this.results = this.cards;
         this.isLoading = false;
+    }
+
+    handleResult(filteredResults: Card[]) {
+        this.results = filteredResults;
     }
 }

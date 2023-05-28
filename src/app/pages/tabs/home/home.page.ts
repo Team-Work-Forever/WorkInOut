@@ -124,7 +124,6 @@ export class HomePage implements OnInit, ViewWillEnter {
 
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
-        console.log(this.results);
     }
 
     goToMyPlans() {

@@ -59,8 +59,6 @@ export class FlagDisplayerComponent implements OnInit, OnChanges {
 
             this.displayDuration = convertToMinutesSeconds(this.duration);
 
-            console.log(x);
-
             if (this.categories.length === 0) return;
 
             let category: Category = null;

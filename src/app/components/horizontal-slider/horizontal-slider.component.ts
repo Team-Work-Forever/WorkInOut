@@ -3,7 +3,6 @@ import {
     EventEmitter,
     Input,
     OnChanges,
-    OnInit,
     Output,
     SimpleChanges,
 } from '@angular/core';
@@ -23,7 +22,7 @@ export class HorizontalSliderComponent implements OnChanges {
     @Output()
     public selectionChanged: EventEmitter<string[]> = new EventEmitter();
 
-    ngOnChanges(changes: SimpleChanges): void {
+    public ngOnChanges(changes: SimpleChanges): void {
         if ('arrayList' in changes) {
             const currentList: HorizontalItem[] =
                 changes['arrayList'].currentValue;
@@ -36,42 +35,45 @@ export class HorizontalSliderComponent implements OnChanges {
                 };
 
                 currentList.splice(0, 0, newHorizontalItem);
+                this.eventChecked(true, 0);
             }
         }
     }
 
     public eventChecked(event: boolean, index: number) {
         if (index === 0) {
-            if (event) {
-                this.arrayList.forEach((elem) => (elem.isChecked = true));
-            } else {
-                this.arrayList.forEach((elem) => (elem.isChecked = false));
-            }
+            this.arrayList.forEach((elem) => {
+                elem.isChecked = event;
+
+                if (elem.id != '') {
+                    if (elem.isChecked) {
+                        this.addToSelectedCategory(elem.id);
+                    } else {
+                        this.removeSelectedCategory(elem.id);
+                    }
+                }
+            });
         } else {
-            this.arrayList[index].isChecked = event;
             if (!event && this.arrayList[0].isChecked) {
                 this.arrayList[0].isChecked = false;
             }
+            this.arrayList[index].isChecked = event;
+
+            if (event) {
+                this.addToSelectedCategory(this.arrayList[index].id);
+            } else {
+                this.removeSelectedCategory(this.arrayList[index].id);
+            }
         }
 
-        this.arrayList.forEach((btn) => {
-            if (btn.id != '') {
-                if (btn.isChecked) {
-                    this.addToSelectedCategory(btn.id);
-                } else {
-                    this.removeSelectedCategory(btn.id);
-                }
-            }
-        });
+        if (this.selectedCategories.length === this.arrayList.length - 1) {
+            this.arrayList[0].isChecked = true;
+        }
 
         this.selectionChanged.emit(this.selectedCategories);
     }
 
     addToSelectedCategory(newValue) {
-        const index = this.selectedCategories.findIndex(
-            (item) => item === newValue
-        );
-
         if (!this.selectedCategories.includes(newValue)) {
             this.selectedCategories.push(newValue);
         }

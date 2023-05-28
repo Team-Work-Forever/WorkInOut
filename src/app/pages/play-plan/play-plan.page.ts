@@ -119,7 +119,6 @@ export class PlayPlanPage implements ViewWillEnter {
                 await this.resumePlayback();
             }
         } else {
-            console.log('Exercise sequence completed.');
             this.isPlaying = false;
         }
         this.currentValue = 0;

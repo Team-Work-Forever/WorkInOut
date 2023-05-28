@@ -24,15 +24,11 @@ export class ExerciseService {
     public async getFilteredExercicies(
         categoryindices: string[]
     ): Promise<Exercise[]> {
-        console.log(categoryindices);
-
         const { data: exercises, error } = await this.supabaseService
             .getClient()
             .rpc('getfilteredexercices', {
                 categoryindices,
             });
-
-        console.log(exercises);
 
         if (error) {
             return [];

@@ -34,7 +34,6 @@ export class SchedualSelectionComponent {
     async confirm() {
         if (!this.isSelectedDate) {
             // Se nenhuma data foi selecionada, exiba uma mensagem de erro ou realize a ação adequada.
-            console.log('Selecione uma data para agendar o plano');
             return;
         }
         await this.notificationService.addNotification({

@@ -34,8 +34,6 @@ export class ItemVisualizerComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.duration);
-
         this.displayer = convertToMinutesSeconds(this.duration).concat(' min');
     }
 }

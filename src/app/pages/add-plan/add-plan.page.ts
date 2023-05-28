@@ -53,8 +53,6 @@ export class AddPlanPage implements ViewWillEnter {
         this.selectedItems = plan.exercises;
         this.checkDuration();
 
-        console.log(this.selectedItems);
-
         const exercices = await this.exerciseService.getAllExercises();
         const categories = await this.categoryService.getAllCategories();
 
@@ -95,15 +93,11 @@ export class AddPlanPage implements ViewWillEnter {
     }
 
     async selectedCategoriesChanged(event: string[]) {
-        console.log(event);
-
         const filtedExercises =
             await this.exerciseService.getFilteredExercicies(event);
 
-        console.log(filtedExercises);
-
-        if (filtedExercises.length === 0 && event.length === 0) {
-            this.results = this.exercices;
+        if (event.length === 0) {
+            this.results = [];
             return;
         }
 
@@ -151,8 +145,6 @@ export class AddPlanPage implements ViewWillEnter {
         });
 
         toast.present();
-
-        console.log(this.selectedItems);
 
         if (this.selectedItems.length === 0) return;
 

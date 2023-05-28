@@ -78,7 +78,8 @@ export class MyPlanPage implements ViewWillEnter {
             } as HorizontalItem;
         });
 
-        this.results = this.cards;
+        // this.results = this.cards;
+        await this.selectedCategoriesChanged([]);
         this.isLoading = false;
     }
 
@@ -93,8 +94,8 @@ export class MyPlanPage implements ViewWillEnter {
                 selectedCategories
             );
 
-        if (filteredPlans.length === 0 && selectedCategories.length === 0) {
-            this.results = this.cards;
+        if (selectedCategories.length === 0) {
+            this.results = [];
             return;
         }
 

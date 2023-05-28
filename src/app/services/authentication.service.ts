@@ -71,8 +71,5 @@ export class AuthenticationService {
             .auth.signInWithOAuth({
                 provider: 'google',
             });
-
-        console.log('Data: ' + data);
-        console.log('Error: ' + error);
     }
 }

@@ -55,10 +55,6 @@ export class CardHintComponent implements OnInit {
         } as Hint);
     }
 
-    pressEvent(event) {
-        console.log(event);
-    }
-
     toggleFavorite(event) {
         event.stopPropagation();
         this.isFavorite = !this.isFavorite;

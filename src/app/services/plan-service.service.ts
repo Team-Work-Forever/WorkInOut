@@ -243,8 +243,6 @@ export class PlanService {
             .delete()
             .eq('plan', plan.id)
             .eq('exercise', exerciseId);
-
-        console.log(error);
     }
 
     public async addCategories(
@@ -265,8 +263,6 @@ export class PlanService {
         plan: Plan,
         { categoryId, qty }
     ): Promise<PostgrestError> {
-        console.log('Ola=' + qty);
-
         const { error } = await this.supabaseService
             .getClient()
             .rpc('func_add_cat', {
@@ -274,8 +270,6 @@ export class PlanService {
                 category_id: categoryId,
                 category_qty: qty,
             } as AddCategoryProps);
-
-        console.log(error);
 
         return error;
     }

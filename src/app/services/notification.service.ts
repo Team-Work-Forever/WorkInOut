@@ -44,8 +44,6 @@ export class NotificationService {
                 notification_id: notification_id,
                 notification_is_active: is_active,
             } as SwitchNotificationProps);
-
-        console.log(error);
     }
 
     public async getAllMyNotifications(

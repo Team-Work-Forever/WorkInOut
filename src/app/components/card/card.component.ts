@@ -56,10 +56,6 @@ export class CardComponent implements OnInit {
         } as Card);
     }
 
-    pressEvent(event) {
-        console.log(event);
-    }
-
     toggleFavorite(event) {
         event.stopPropagation();
         this.isFavorite = !this.isFavorite;

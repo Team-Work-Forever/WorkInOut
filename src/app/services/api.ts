@@ -5,5 +5,11 @@ export function getMaterial(): Material[] {
         {
             name: 'Tapete',
         },
+        {
+            name: 'Pesos',
+        },
+        {
+            name: 'Banco',
+        },
     ];
 }

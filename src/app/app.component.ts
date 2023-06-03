@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AppStorageService } from './services/app-storage.service';
-import { ViewWillEnter } from '@ionic/angular';
-import { getTheme } from 'src/utils/theme.utils';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-root',

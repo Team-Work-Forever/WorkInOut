@@ -1,6 +1,6 @@
-import { NgModule, OnInit, importProvidersFrom } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy, Router, provideRouter } from '@angular/router';
+import { RouteReuseStrategy, Router } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -15,7 +15,6 @@ import { Drivers } from '@ionic/storage';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { AuthGuard } from './core/guard/auth.guard';
 import { getTheme } from 'src/utils/theme.utils';
-import { AuthenticationService } from './services/authentication.service';
 import { AppStorageService } from './services/app-storage.service';
 
 registerLocaleData(localePt);

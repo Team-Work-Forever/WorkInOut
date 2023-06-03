@@ -56,6 +56,10 @@ export class CardComponent implements OnInit {
         } as Card);
     }
 
+    /**
+     * Button to became a plan favorite (is it is already favorite then the star is unselected)
+     * @param event
+     */
     toggleFavorite(event) {
         event.stopPropagation();
         this.isFavorite = !this.isFavorite;

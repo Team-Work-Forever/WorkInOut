@@ -36,6 +36,10 @@ export class SettingsPage implements OnInit, ViewWillEnter {
 
     ngOnInit() {}
 
+    /**
+     * Change color theme (light mode or dark mode)
+     * @param event
+     */
     onToggleColorTheme(event) {
         document.body.setAttribute(
             'color-theme',
@@ -44,6 +48,9 @@ export class SettingsPage implements OnInit, ViewWillEnter {
         this.appStorage.setValue('theme', event.detail.checked);
     }
 
+    /**
+     * Finish user session
+     */
     async logOut() {
         await this.authenticationService.logOut();
         this.router.navigate(['/tabs/settings'], {

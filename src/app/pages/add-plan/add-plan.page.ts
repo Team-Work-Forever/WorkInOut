@@ -85,6 +85,9 @@ export class AddPlanPage implements ViewWillEnter {
         this.isLoading = false;
     }
 
+    /**
+     * Change the duration of the plan by the exercises selected
+     */
     checkDuration() {
         this.duration = this.selectedItems.reduce(
             (sum, item) => sum + item.duration,
@@ -92,6 +95,11 @@ export class AddPlanPage implements ViewWillEnter {
         );
     }
 
+    /**
+     * Change presentation of exercises by categories selected
+     * @param event
+     * @returns
+     */
     async selectedCategoriesChanged(event: string[]) {
         const filtedExercises =
             await this.exerciseService.getFilteredExercicies(event);
@@ -115,28 +123,46 @@ export class AddPlanPage implements ViewWillEnter {
         });
     }
 
+    /**
+     * Add or remove exercises by theirs state of selection
+     * @param exercise
+     */
     addToSelected(exercise: ExerciseItem) {
         const index = this.selectedItems.findIndex(
             (item) => item.id === exercise.id
         );
 
         if (index !== -1) {
-            this.selectedItems.splice(index, 1); // Remove o exercício se ele já estiver selecionado
+            this.selectedItems.splice(index, 1);
         } else {
-            this.selectedItems.push(exercise); // Adiciona o exercício se ele ainda não estiver selecionado
+            this.selectedItems.push(exercise);
         }
 
         this.checkDuration();
     }
 
+    /**
+     * Verify if there are selected exercises
+     * @returns
+     */
     isEmpty() {
         return this.selectedItems.length === 0;
     }
 
+    /**
+     * Change the title of the plan
+     * @param event
+     */
     planTitleChanged(event: string) {
         this.title = event;
     }
 
+    /**
+     * Present a notification
+     * @param position
+     * @param title
+     * @returns
+     */
     async presentToast(position, title) {
         const toast = await this.toastController.create({
             message: title,

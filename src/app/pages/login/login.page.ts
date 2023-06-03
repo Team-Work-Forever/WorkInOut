@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -38,6 +38,10 @@ export class LoginPage implements ViewWillEnter {
         this.authForm.reset();
     }
 
+    /**
+     * Log in
+     * @returns
+     */
     async handleClick() {
         if (!this.authForm.valid) {
             this.showToast(
@@ -70,6 +74,10 @@ export class LoginPage implements ViewWillEnter {
         await this.authenticationService.authenticateWithGoogle();
     }
 
+    /**
+     * Present notification
+     * @param title
+     */
     async showToast(title: string) {
         const toast = await this.toastController.create({
             message: title,

@@ -77,6 +77,9 @@ export class FlagDisplayerComponent implements OnInit, OnChanges {
         });
     }
 
+    /**
+     * Open a modal
+     */
     openSchedule() {
         this.open.emit();
     }

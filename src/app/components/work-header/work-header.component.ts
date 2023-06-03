@@ -45,10 +45,18 @@ export class WorkHeaderComponent implements OnInit {
         }
     }
 
+    /**
+     * Change the title
+     * @param event
+     */
     titleChanged(event) {
         this.editValue.emit(event.target.value);
     }
 
+    /**
+     * Searchbar
+     * @param event
+     */
     handleChange(event: any) {
         const searchTerm = event.target.value;
         if (searchTerm && searchTerm.trim() !== '') {
@@ -57,8 +65,7 @@ export class WorkHeaderComponent implements OnInit {
             );
 
             this.result.emit(filteredResults);
-
-            // Verificar a string de pesquisa e redirecionar se necessário
+            // If the user write one of this words the application send the user to the hints page
             if (
                 searchTerm.toLowerCase() === 'dicas' ||
                 searchTerm.toLowerCase() === 'dicas de treino' ||
@@ -66,7 +73,6 @@ export class WorkHeaderComponent implements OnInit {
             ) {
                 this.router.navigate(['tabs/home/hints']);
             }
-            // Adicione outras palavras-chave e redirecionamentos conforme necessário
         } else {
             this.result.emit(this.arrayList);
         }

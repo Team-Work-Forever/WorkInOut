@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
-import { IonicModule, NavController, ViewWillEnter } from '@ionic/angular';
+import { IonicModule, ViewWillEnter } from '@ionic/angular';
 import { CardModule } from 'src/app/components/card/card.components.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { HorizontalSliderModule } from 'src/app/components/horizontal-slider/horizontal-slider.module';
@@ -13,7 +13,6 @@ import { WorkHeaderModule } from 'src/app/components/work-header/work-header.mod
 import { Card } from 'src/app/interfaces/card.inteface';
 import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
 import { Plan } from 'src/app/models/plan.model';
-import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
@@ -81,10 +80,19 @@ export class MyPlanPage implements ViewWillEnter {
         this.isLoading = false;
     }
 
+    /**
+     * Make the results be the plans filtered
+     * @param filteredResults
+     */
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
     }
 
+    /**
+     * Show plans by categories selected
+     * @param selectedCategories
+     * @returns
+     */
     async selectedCategoriesChanged(selectedCategories: string[]) {
         const filteredPlans =
             await this.planService.getAllPlanOfUserFilterWithCategories(
@@ -108,10 +116,17 @@ export class MyPlanPage implements ViewWillEnter {
         });
     }
 
+    /**
+     * Send the user to the create plan page
+     */
     createPlan() {
         this.router.navigate(['/tabs/home/mine/create/nocontent']);
     }
 
+    /**
+     * If plan became favorite or not
+     * @param param0
+     */
     async selectionChanged({ id, image, isFavorite, time, title }: Card) {
         await this.planService.changeFav(
             {
@@ -125,6 +140,10 @@ export class MyPlanPage implements ViewWillEnter {
         );
     }
 
+    /**
+     * Navigate to the info page of the card selected
+     * @param card
+     */
     handleClick(card: Card) {
         this.router.navigate(['/tabs/home/info/' + card.id]);
     }

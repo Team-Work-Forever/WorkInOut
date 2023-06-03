@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
 import {
-    IonBackButton,
     ItemReorderEventDetail,
     ToastController,
     ViewWillEnter,
@@ -83,16 +82,27 @@ export class CreatePlanPage implements ViewWillEnter {
         }
     }
 
+    /**
+     * Reorder exercises
+     * @param ev
+     */
     handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
         this.choosenExercises[ev.detail.from].index = ev.detail.to;
         this.choosenExercises = ev.detail.complete(this.choosenExercises);
         this.choosenExercises.forEach((exe, index) => (exe.index = index));
     }
 
+    /**
+     * Change title of the plan
+     * @param event
+     */
     planTitleChanged(event: string) {
         this.planTitle = event;
     }
 
+    /**
+     * Send the user to the page where he can add exercises to his plan
+     */
     addExercise() {
         this.router.navigate(
             [
@@ -110,6 +120,10 @@ export class CreatePlanPage implements ViewWillEnter {
         );
     }
 
+    /**
+     * Present notification
+     * @param title
+     */
     async showToast(title: string) {
         const toast = await this.toastController.create({
             message: title,
@@ -120,6 +134,10 @@ export class CreatePlanPage implements ViewWillEnter {
         toast.present();
     }
 
+    /**
+     * Create a plan
+     * @returns
+     */
     async createPlan() {
         if (this.planTitle.length === 0) {
             this.showToast(

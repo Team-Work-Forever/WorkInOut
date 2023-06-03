@@ -14,10 +14,18 @@ export class HintModalComponent implements OnInit {
 
     ngOnInit() {}
 
+    /**
+     * Cancel the Modal
+     * @returns
+     */
     cancel() {
         return this.modalCtrl.dismiss(null, 'cancel');
     }
 
+    /**
+     * Close the modal with a result
+     * @param result
+     */
     async closeModal(result?: string) {
         await this.modalCtrl.dismiss(result);
     }

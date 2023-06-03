@@ -34,6 +34,9 @@ export class SchedualNotificationComponent implements OnInit {
         this.color = this.isSelected ? 'lightblue' : 'black';
     }
 
+    /**
+     * Select or unselect a notification
+     */
     toggleButton() {
         this.isSelected = !this.isSelected;
         this.icon = this.isSelected ? 'notifications' : 'notifications-outline';
@@ -44,6 +47,11 @@ export class SchedualNotificationComponent implements OnInit {
         });
     }
 
+    /**
+     * Present a notification
+     * @param position
+     * @param title
+     */
     async presentToast(position, title) {
         const toast = await this.toastController.create({
             message: title,

@@ -49,6 +49,10 @@ export class HintsPage implements OnInit, ViewWillEnter {
         this.calculateMaxCardsPerRow();
     }
 
+    /**
+     * Show description the the hint by a modal
+     * @param description
+     */
     async handleClick(description) {
         const modal = await this.modalCtrl.create({
             component: HintModalComponent,
@@ -59,6 +63,9 @@ export class HintsPage implements OnInit, ViewWillEnter {
         modal.present();
     }
 
+    /**
+     * Open the modal
+     */
     async openModal() {
         const modal = await this.modalCtrl.create({
             component: HintModalComponent,
@@ -66,15 +73,18 @@ export class HintsPage implements OnInit, ViewWillEnter {
         modal.present();
     }
 
+    /**
+     * Calculate the maximum number of cards in a row
+     */
     calculateMaxCardsPerRow(): void {
-        const cardWidth = 164; // Largura fixa do card em pixels
-        const margin = 10; // Margem em pixels
-        const gap = 2; // Espaçamento mínimo entre os cards em pixels
+        const cardWidth = 164;
+        const margin = 10;
+        const gap = 2;
 
         const containerWidth =
             document.querySelector('.card-row')?.clientWidth ?? 0;
         const availableWidth = containerWidth - margin * 2;
         const maxCards = Math.floor(availableWidth / (cardWidth + gap));
-        this.maxCardsPerRow = Math.max(1, maxCards); // Define o mínimo de 1 card por linha
+        this.maxCardsPerRow = Math.max(1, maxCards);
     }
 }

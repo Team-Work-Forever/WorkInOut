@@ -40,6 +40,11 @@ export class HorizontalSliderComponent implements OnChanges {
         }
     }
 
+    /**
+     *
+     * @param event
+     * @param index
+     */
     public eventChecked(event: boolean, index: number) {
         if (index === 0) {
             this.arrayList.forEach((elem) => {
@@ -73,12 +78,20 @@ export class HorizontalSliderComponent implements OnChanges {
         this.selectionChanged.emit(this.selectedCategories);
     }
 
+    /**
+     * Add a category to the selected categories
+     * @param newValue
+     */
     addToSelectedCategory(newValue) {
         if (!this.selectedCategories.includes(newValue)) {
             this.selectedCategories.push(newValue);
         }
     }
 
+    /**
+     * Remove a category to the selected categories
+     * @param oldValue
+     */
     removeSelectedCategory(oldValue) {
         const index = this.selectedCategories.findIndex(
             (category) => category === oldValue

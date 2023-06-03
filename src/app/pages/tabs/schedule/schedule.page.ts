@@ -37,10 +37,18 @@ export class SchedulePage implements ViewWillEnter {
         const date = info ? (JSON.parse(info) as string) : '';
     }
 
+    /**
+     * Active or disable notification of plan
+     * @param event
+     */
     handleNotification(event) {
         this.notificationService.switchNotification(event.id, event.isActive);
     }
 
+    /**
+     * Get the current date to be the minimum date on the schedule
+     * @returns
+     */
     getMinDate() {
         return currentDate();
     }
@@ -49,9 +57,13 @@ export class SchedulePage implements ViewWillEnter {
         return this.tabDate || this.getMinDate();
     }
 
+    /**
+     * Get all plans schedule to the day selected
+     * @param event
+     */
     async getSelectedDate(event) {
         const selectedDateTime = event.detail.value;
-        const selectedDate = selectedDateTime.split('T')[0]; // Extrair a parte da data
+        const selectedDate = selectedDateTime.split('T')[0];
 
         const notifications =
             await this.notificationService.getAllMyNotifications(

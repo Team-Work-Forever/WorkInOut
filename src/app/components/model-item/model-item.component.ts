@@ -15,6 +15,10 @@ export class ModelItemComponent implements OnInit {
 
     ngOnInit() {}
 
+    /**
+     * Close the Modal
+     * @returns
+     */
     cancel() {
         return this.modalCtrl.dismiss(null, 'cancel');
     }

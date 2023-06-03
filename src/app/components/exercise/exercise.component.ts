@@ -27,6 +27,9 @@ export class ExerciseComponent implements OnInit {
         this.displayer = convertToMinutesSeconds(this.duration).concat(' min');
     }
 
+    /**
+     * Create or remove a border in the component
+     */
     handleClick() {
         this.selected = !this.selected;
     }

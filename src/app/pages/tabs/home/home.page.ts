@@ -1,11 +1,6 @@
-import { CommonModule, PlatformLocation } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
-import {
-    IonBackButton,
-    IonicModule,
-    NavController,
-    ViewWillEnter,
-} from '@ionic/angular';
+import { IonBackButton, IonicModule, ViewWillEnter } from '@ionic/angular';
 import { SwiperModule } from 'src/app/components/swiper/swiper.module';
 import { CheckButtonModule } from 'src/app/components/check-button/components.module';
 import { Card } from 'src/app/interfaces/card.inteface';
@@ -106,6 +101,10 @@ export class HomePage implements OnInit, ViewWillEnter {
         this.calculateMaxCardsPerRow();
     }
 
+    /**
+     * Change cards and title on swipe
+     * @param event
+     */
     handleChangeIndex(event: number) {
         switch (event) {
             case 0:
@@ -122,22 +121,40 @@ export class HomePage implements OnInit, ViewWillEnter {
         this.results = this.cards;
     }
 
+    /**
+     * Make the results be the plans filtered
+     * @param filteredResults
+     */
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
     }
 
+    /**
+     * Navigate to my plans
+     */
     goToMyPlans() {
         this.router.navigate(['/tabs/home/mine']);
     }
 
+    /**
+     * Navigate to categories
+     */
     goToPlans() {
         this.router.navigate(['/tabs/home/category']);
     }
 
+    /**
+     * Navigate to info of plan selected
+     * @param event
+     */
     handleClick(event: Card) {
         this.router.navigate(['/tabs/home/info/' + event.id]);
     }
 
+    /**
+     * If plan became favorite or not
+     * @param event
+     */
     selectionChanged(event: Card) {
         this.planService.changeFav(
             {
@@ -148,15 +165,18 @@ export class HomePage implements OnInit, ViewWillEnter {
         );
     }
 
+    /**
+     * Calculate the maximum number of cards in a row
+     */
     calculateMaxCardsPerRow(): void {
-        const cardWidth = 164; // Largura fixa do card em pixels
-        const margin = 10; // Margem em pixels
-        const gap = 2; // Espaçamento mínimo entre os cards em pixels
+        const cardWidth = 164;
+        const margin = 10;
+        const gap = 2;
 
         const containerWidth =
             document.querySelector('.card-row')?.clientWidth ?? 0;
         const availableWidth = containerWidth - margin * 2;
         const maxCards = Math.floor(availableWidth / (cardWidth + gap));
-        this.maxCardsPerRow = Math.max(1, maxCards); // Define o mínimo de 1 card por linha
+        this.maxCardsPerRow = Math.max(1, maxCards);
     }
 }

@@ -64,6 +64,9 @@ export class PlayPlanPage implements ViewWillEnter {
         this.isLoading = false;
     }
 
+    /**
+     * Make the plan play and stop
+     */
     togglePlayback() {
         this.isPlaying = !this.isPlaying;
 
@@ -74,6 +77,10 @@ export class PlayPlanPage implements ViewWillEnter {
         }
     }
 
+    /**
+     * Make the plan play
+     * @returns
+     */
     async resumePlayback() {
         if (this.intervalId) {
             return;
@@ -104,6 +111,9 @@ export class PlayPlanPage implements ViewWillEnter {
         }, 100);
     }
 
+    /**
+     * Pause the plan
+     */
     pausePlayback() {
         if (this.intervalId) {
             clearInterval(this.intervalId);
@@ -112,6 +122,9 @@ export class PlayPlanPage implements ViewWillEnter {
         }
     }
 
+    /**
+     * Change to the next exercise of the plan
+     */
     async nextExercise() {
         this.currentExercise++;
         if (this.currentExercise < this.exercises.length) {

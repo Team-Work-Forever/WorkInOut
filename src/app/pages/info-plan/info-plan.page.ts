@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
     OrientationLockOptions,
@@ -102,6 +102,10 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         this.isLoading = false;
     }
 
+    /**
+     * Open modal of materials necessary to the plan
+     * @param material
+     */
     async handleClick(material) {
         const modal = await this.modalCtrl.create({
             component: ModelItemComponent,
@@ -112,18 +116,27 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         modal.present();
     }
 
+    /**
+     * Navigate to the page where is possible to begin the plan
+     */
     startPlan() {
         this.router.navigate(['/tabs/home/play/' + this.plan.id]);
     }
 
+    /**
+     * Calculate the maximum number of cards in a row
+     */
     calculateMaxCardsPerRow(): void {
         const containerWidth =
             document.querySelector('.card-wrapper')?.clientWidth ?? 0;
-        const cardWidth = 318 + 2 + 24; // Largura fixa do card + 2px de espaçamento + 24px de margem
-        const maxCards = Math.floor((containerWidth - 44) / cardWidth); // Subtrai as margens laterais do container
-        this.maxCardsPerRow = Math.max(1, maxCards); // Define o mínimo de 1 card por linha
+        const cardWidth = 318 + 2 + 24;
+        const maxCards = Math.floor((containerWidth - 44) / cardWidth);
+        this.maxCardsPerRow = Math.max(1, maxCards);
     }
 
+    /**
+     * Open the modal
+     */
     async openModal() {
         const modal = await this.modalCtrl.create({
             component: SchedualSelectionComponent,
@@ -134,10 +147,11 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         modal.present();
     }
 
-    isEmpty() {
-        return this.selectedItems.length === 0;
-    }
-
+    /**
+     * Present a notification
+     * @param position
+     * @param title
+     */
     async presentToast(position, title) {
         const toast = await this.toastController.create({
             message: title,
@@ -146,22 +160,4 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         });
         toast.present();
     }
-
-    isActionSheetOpen = false;
-    public actionSheetButtons = [
-        {
-            text: 'Remover',
-            role: 'destructive',
-            data: {
-                action: 'delete',
-            },
-        },
-        {
-            text: 'Cancelar',
-            role: 'cancel',
-            data: {
-                action: 'cancel',
-            },
-        },
-    ];
 }

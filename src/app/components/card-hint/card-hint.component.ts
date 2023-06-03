@@ -55,6 +55,10 @@ export class CardHintComponent implements OnInit {
         } as Hint);
     }
 
+    /**
+     * Button to became a plan favorite (is it is already favorite then the flag is unselected)
+     * @param event
+     */
     toggleFavorite(event) {
         event.stopPropagation();
         this.isFavorite = !this.isFavorite;

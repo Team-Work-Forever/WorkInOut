@@ -40,6 +40,10 @@ export class CategoryPlanPage implements ViewWillEnter {
         this.isLoading = false;
     }
 
+    /**
+     * Show the categories
+     * @param filteredResults
+     */
     handleResult(filteredResults: Card[]) {
         this.results = filteredResults;
     }

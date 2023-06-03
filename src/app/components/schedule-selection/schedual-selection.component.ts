@@ -27,13 +27,20 @@ export class SchedualSelectionComponent {
         private router: Router
     ) {}
 
+    /**
+     * Close the modal
+     * @returns
+     */
     cancel() {
         return this.modalCtrl.dismiss(null, 'cancel');
     }
 
+    /**
+     * When is selected a date on the model and then confirm, the schedule date is stored
+     * @returns
+     */
     async confirm() {
         if (!this.isSelectedDate) {
-            // Se nenhuma data foi selecionada, exiba uma mensagem de erro ou realize a ação adequada.
             return;
         }
         await this.notificationService.addNotification({
@@ -51,20 +58,37 @@ export class SchedualSelectionComponent {
         ]);
     }
 
+    /**
+     * Get the current date to be the minimum date on the schedule
+     * @returns
+     */
     getMinDate() {
         return currentDate();
     }
 
+    /**
+     * Close the modal
+     * @param result
+     */
     async closeModal(result?: string) {
         await this.modalCtrl.dismiss(result);
     }
 
+    /**
+     * Collect the selected date
+     * @param event
+     */
     getSelectedDate(event) {
         const selectedDateTime = event.detail.value;
         this.isSelectedDate = true;
         this.selectedDate = selectedDateTime;
     }
 
+    /**
+     * Present a notification
+     * @param position
+     * @param title
+     */
     async presentToast(position, title) {
         const toast = await this.toastController.create({
             message: title,

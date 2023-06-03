@@ -22,6 +22,9 @@ export class CheckButtonComponent implements OnInit {
 
     ngOnInit() {}
 
+    /**
+     * Change the button from selected and unselected
+     */
     handleClick() {
         this.isChecked = !this.isChecked;
         this.checkedChanged.emit(this.isChecked);

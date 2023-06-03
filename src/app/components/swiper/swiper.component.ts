@@ -34,6 +34,9 @@ export class SwiperComponent implements OnInit {
 
     ngOnInit() {}
 
+    /**
+     * Change on slide
+     */
     public onSlideChange() {
         this.currentIndex = this.swiperRef?.nativeElement.swiper.activeIndex;
         this.realIndex.emit(this.currentIndex);

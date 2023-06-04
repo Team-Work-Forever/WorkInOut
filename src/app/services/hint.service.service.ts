@@ -13,6 +13,10 @@ type AddHint = {
 export class HintService {
     constructor(private supabaseService: SupabaseService) {}
 
+    /**
+     * Get All Hints
+     * @returns Promise\<Hint[]\>
+     */
     public async getAllHints(): Promise<Hint[]> {
         const { data, error } = await this.supabaseService
             .getClient()

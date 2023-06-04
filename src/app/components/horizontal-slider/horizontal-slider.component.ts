@@ -41,7 +41,9 @@ export class HorizontalSliderComponent implements OnChanges {
     }
 
     /**
-     *
+     * When the button "Todos" is selected all the categories are also selected
+     * If one category is unselected by the user the button "Todos" is unselected
+     * And if the user unselected the button "Todos" all the categories became unselected
      * @param event
      * @param index
      */

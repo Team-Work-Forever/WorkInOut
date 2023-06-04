@@ -7,6 +7,12 @@ import { ToastController } from '@ionic/angular';
 export class ToastService {
     constructor(private toastController: ToastController) {}
 
+    /**
+     * Create an notification toast
+     * @param title
+     * @param position top | middle | bottom
+     * @param duration
+     */
     public async showToast(
         title: string,
         position: 'top' | 'middle' | 'bottom' = 'top',

@@ -14,6 +14,7 @@ export class StatisticsPage implements ViewWillEnter {
     constructor() {}
 
     ionViewWillEnter(): void {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
     }

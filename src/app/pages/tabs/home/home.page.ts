@@ -52,18 +52,23 @@ export class HomePage implements OnInit, ViewWillEnter {
     async ionViewWillEnter() {
         IonBackButton['defaultHref'] = '';
 
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Present the symbol of loading
         this.isLoading = true;
 
+        // Get all favorite plans from the user
         const fav_plan = await this.planService.getAllPlanOfUserFavorite(
             this.authService.getAuthUser()
         );
 
+        // Get all Recommended e Popular Plans
         const rec_plan = await this.planService.getAllRecomendedPlan();
         const pop_plan = await this.planService.getAllPopularPlan();
 
+        // Define the plans of all swipes
         this.planFav = fav_plan.map((plan) => {
             return {
                 id: plan.id,
@@ -94,6 +99,8 @@ export class HomePage implements OnInit, ViewWillEnter {
             } as Card;
         });
         this.handleChangeIndex(0);
+
+        // End the loading
         this.isLoading = false;
     }
 

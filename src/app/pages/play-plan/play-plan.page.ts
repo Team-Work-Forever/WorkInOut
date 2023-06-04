@@ -92,6 +92,7 @@ export class PlayPlanPage implements ViewWillEnter {
             return;
         }
 
+        // Define the time of the exercise in the progress bar
         const exercise = this.exercises[this.currentExercise];
         if (this.currentExercise === 0) {
             this.startTime = Date.now();

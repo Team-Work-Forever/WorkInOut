@@ -24,11 +24,14 @@ export class SettingsPage implements OnInit, ViewWillEnter {
     ) {}
 
     async ionViewWillEnter() {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Collect a boolean of the stored theme
         const theme = (await this.appStorage.getValue('theme')) as boolean;
 
+        // Define the theme of the application the theme stored
         if (theme) {
             this.value = theme;
         }

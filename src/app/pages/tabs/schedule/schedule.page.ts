@@ -29,12 +29,9 @@ export class SchedulePage implements ViewWillEnter {
     ) {}
 
     async ionViewWillEnter() {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
-
-        const info = this.activeRoute.snapshot.paramMap.get('date');
-
-        const date = info ? (JSON.parse(info) as string) : '';
     }
 
     /**
@@ -53,10 +50,6 @@ export class SchedulePage implements ViewWillEnter {
         return currentDate();
     }
 
-    getDateFromTab(): string {
-        return this.tabDate || this.getMinDate();
-    }
-
     /**
      * Get all plans schedule to the day selected
      * @param event
@@ -65,12 +58,14 @@ export class SchedulePage implements ViewWillEnter {
         const selectedDateTime = event.detail.value;
         const selectedDate = selectedDateTime.split('T')[0];
 
+        // Get all notifications from the user
         const notifications =
             await this.notificationService.getAllMyNotifications(
                 this.authenticationService.getAuthUser(),
                 selectedDate
             );
 
+        // Define Notifications
         this.notifications = notifications.map((notification) => {
             return {
                 id: notification.id,

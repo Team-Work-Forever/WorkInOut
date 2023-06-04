@@ -22,6 +22,10 @@ type SwitchNotificationProps = {
 export class NotificationService {
     constructor(private supabaseService: SupabaseService) {}
 
+    /**
+     * Add Notification into Supabase Backend
+     * @param notification
+     */
     public async addNotification(notification: Notification): Promise<void> {
         const { error } = await this.supabaseService
             .getClient()
@@ -34,6 +38,11 @@ export class NotificationService {
             } as AddNotificationProps);
     }
 
+    /**
+     * Switch the state of an given notification id, to isActive or !isActive
+     * @param notification_id
+     * @param is_active
+     */
     public async switchNotification(
         notification_id: string,
         is_active: boolean
@@ -46,6 +55,12 @@ export class NotificationService {
             } as SwitchNotificationProps);
     }
 
+    /**
+     * Get All My Notifications of and given User and date
+     * @param user
+     * @param date
+     * @returns Promise\<Notification[]\>
+     */
     public async getAllMyNotifications(
         user: User,
         date: string

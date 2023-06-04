@@ -8,6 +8,10 @@ import { Exercise } from '../models/exercise.model';
 export class ExerciseService {
     constructor(private supabaseService: SupabaseService) {}
 
+    /**
+     * Get All Exercices
+     * @returns Promise\<Exercise[]\>
+     */
     public async getAllExercises(): Promise<Exercise[]> {
         const { data, error } = await this.supabaseService
             .getClient()
@@ -21,6 +25,11 @@ export class ExerciseService {
         return data as Exercise[];
     }
 
+    /**
+     * Get FielteredExercices by category indexing
+     * @param categoryindices
+     * @returns Promise\<Exercise[]\>
+     */
     public async getFilteredExercicies(
         categoryindices: string[]
     ): Promise<Exercise[]> {

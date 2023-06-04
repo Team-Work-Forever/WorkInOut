@@ -18,6 +18,10 @@ export class SupabaseService {
         );
     }
 
+    /**
+     * Get the Supabase Client
+     * @returns SupabaseClient
+     */
     public getClient(): SupabaseClient {
         return this.supabaseClient;
     }

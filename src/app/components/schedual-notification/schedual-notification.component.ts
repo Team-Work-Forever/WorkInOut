@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
     selector: 'schedual-notification',
@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular';
     styleUrls: ['./schedual-notification.component.scss'],
 })
 export class SchedualNotificationComponent implements OnInit {
-    constructor(public toastController: ToastController) {}
+    constructor(public toastService: ToastService) {}
 
     @Input()
     public id: string;
@@ -53,11 +53,6 @@ export class SchedualNotificationComponent implements OnInit {
      * @param title
      */
     async presentToast(position, title) {
-        const toast = await this.toastController.create({
-            message: title,
-            duration: 2000,
-            position: position,
-        });
-        toast.present();
+        await this.toastService.showToast(title, position);
     }
 }

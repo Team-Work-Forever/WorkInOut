@@ -65,6 +65,7 @@ export class WorkHeaderComponent implements OnInit {
             );
 
             this.result.emit(filteredResults);
+
             // If the user write one of this words the application send the user to the hints page
             if (
                 searchTerm.toLowerCase() === 'dicas' ||

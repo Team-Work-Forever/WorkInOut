@@ -4,11 +4,7 @@ import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
-import {
-    ItemReorderEventDetail,
-    ToastController,
-    ViewWillEnter,
-} from '@ionic/angular';
+import { ItemReorderEventDetail, ViewWillEnter } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
@@ -17,6 +13,7 @@ import { Plan } from 'src/app/models/plan.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { PlanService } from 'src/app/services/plan-service.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
     selector: 'app-create-plan',
@@ -32,11 +29,11 @@ export class CreatePlanPage implements ViewWillEnter {
     duration: number = 0;
 
     constructor(
-        public toastController: ToastController,
         private planService: PlanService,
         private activeRoute: ActivatedRoute,
         private categoryService: CategoryService,
         private authenticationService: AuthenticationService,
+        private toastService: ToastService,
         private router: Router
     ) {}
 
@@ -121,33 +118,19 @@ export class CreatePlanPage implements ViewWillEnter {
     }
 
     /**
-     * Present notification
-     * @param title
-     */
-    async showToast(title: string) {
-        const toast = await this.toastController.create({
-            message: title,
-            duration: 2000,
-            position: 'top',
-        });
-
-        toast.present();
-    }
-
-    /**
      * Create a plan
      * @returns
      */
     async createPlan() {
         if (this.planTitle.length === 0) {
-            this.showToast(
+            this.toastService.showToast(
                 'Erro ao salvar o plano: é necessário adicionar um título.'
             );
             return;
         }
 
         if (this.choosenExercises.length === 0) {
-            this.showToast(
+            this.toastService.showToast(
                 'Atenção: É necessário adicionar um exercício antes de prosseguir.'
             );
             return;
@@ -178,14 +161,14 @@ export class CreatePlanPage implements ViewWillEnter {
         );
 
         if (!createdPlan) {
-            this.showToast(
+            this.toastService.showToast(
                 'Desculpe, ocorreu um erro ao criar o plano. Por favor, tente novamente mais tarde.'
             );
             return;
         }
 
         if (this.choosenExercises.length === 0) {
-            this.showToast(
+            this.toastService.showToast(
                 'Erro ao criar o plano: É necessário adicionar pelo menos um exercício.'
             );
             return;
@@ -211,7 +194,7 @@ export class CreatePlanPage implements ViewWillEnter {
             })
         );
 
-        this.showToast('Plano criado com sucesso!');
+        this.toastService.showToast('Plano criado com sucesso!');
 
         this.router.navigate(['tabs/home/mine'], {
             skipLocationChange: true,

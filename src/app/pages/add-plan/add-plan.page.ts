@@ -4,7 +4,7 @@ import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
-import { ToastController, ViewWillEnter } from '@ionic/angular';
+import { ViewWillEnter } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { CreateRouteProps } from 'src/app/interfaces/create-route.interface';
 import { ExerciseItem } from 'src/app/interfaces/exercise-item.interface';
@@ -12,6 +12,7 @@ import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ExerciseService } from 'src/app/services/exercise.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
     selector: 'app-add-plan',
@@ -32,7 +33,7 @@ export class AddPlanPage implements ViewWillEnter {
     duration: number = 0;
 
     constructor(
-        public toastController: ToastController,
+        public toastService: ToastService,
         private categoryService: CategoryService,
         private exerciseService: ExerciseService,
         private router: Router,
@@ -40,11 +41,14 @@ export class AddPlanPage implements ViewWillEnter {
     ) {}
 
     async ionViewWillEnter() {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Present the symbol of loading
         this.isLoading = true;
 
+        // Collect the id of the plan
         const plan = JSON.parse(
             this.activeRoute.snapshot.paramMap.get('plan')
         ) as CreateRouteProps;
@@ -53,9 +57,11 @@ export class AddPlanPage implements ViewWillEnter {
         this.selectedItems = plan.exercises;
         this.checkDuration();
 
+        // Get all Exercises and Categories
         const exercices = await this.exerciseService.getAllExercises();
         const categories = await this.categoryService.getAllCategories();
 
+        // Define all Exercises
         this.exercices = exercices.map((exe) => {
             return {
                 id: exe.id,
@@ -65,6 +71,7 @@ export class AddPlanPage implements ViewWillEnter {
             } as ExerciseItem;
         });
 
+        // Define all Categories
         this.categories = categories.map((cat) => {
             return {
                 id: cat.id,
@@ -73,6 +80,7 @@ export class AddPlanPage implements ViewWillEnter {
             } as HorizontalItem;
         });
 
+        // Make the exercises selected be with a border
         this.exercices.forEach((exe) => {
             if (this.selectedItems.find((item) => item.id === exe.id)) {
                 exe.isSelected = true;
@@ -82,6 +90,7 @@ export class AddPlanPage implements ViewWillEnter {
         this.title = plan.title;
         this.results = this.exercices;
 
+        // End the loading
         this.isLoading = false;
     }
 
@@ -104,6 +113,7 @@ export class AddPlanPage implements ViewWillEnter {
         const filtedExercises =
             await this.exerciseService.getFilteredExercicies(event);
 
+        // If all categories are unselected, present all the exercises
         if (event.length === 0) {
             this.results = [];
             return;
@@ -164,13 +174,7 @@ export class AddPlanPage implements ViewWillEnter {
      * @returns
      */
     async presentToast(position, title) {
-        const toast = await this.toastController.create({
-            message: title,
-            duration: 2000,
-            position: position,
-        });
-
-        toast.present();
+        await this.toastService.showToast(title, position);
 
         if (this.selectedItems.length === 0) return;
 

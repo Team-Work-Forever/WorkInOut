@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Notification as Notify } from '../../models/notification.model';
 import { getMinDate as currentDate } from 'src/utils/time-date.utils';
 import { Router } from '@angular/router';
 import { Plan } from 'src/app/models/plan.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
     selector: 'schedual-selection',
@@ -21,7 +22,7 @@ export class SchedualSelectionComponent {
 
     constructor(
         private modalCtrl: ModalController,
-        public toastController: ToastController,
+        public toastService: ToastService,
         private notificationService: NotificationService,
         private authenticationService: AuthenticationService,
         private router: Router
@@ -90,11 +91,6 @@ export class SchedualSelectionComponent {
      * @param title
      */
     async presentToast(position, title) {
-        const toast = await this.toastController.create({
-            message: title,
-            duration: 2000,
-            position: position,
-        });
-        toast.present();
+        await this.toastService.showToast(title, position);
     }
 }

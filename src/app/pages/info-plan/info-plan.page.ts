@@ -5,12 +5,7 @@ import {
     OrientationLockOptions,
     ScreenOrientation,
 } from '@capacitor/screen-orientation';
-import {
-    IonicModule,
-    ModalController,
-    ToastController,
-    ViewWillEnter,
-} from '@ionic/angular';
+import { IonicModule, ModalController, ViewWillEnter } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { ExerciseModule } from 'src/app/components/exercise/exercise.module';
 import { FlagDisplayerModule } from 'src/app/components/flag-displayer/flag-displayer.module';
@@ -23,6 +18,7 @@ import { Category } from 'src/app/models/category.model';
 import { Exercise } from 'src/app/models/exercise.model';
 import { Plan } from 'src/app/models/plan.model';
 import { PlanService } from 'src/app/services/plan-service.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
     selector: 'app-info-plan',
@@ -54,7 +50,7 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
 
     constructor(
         private modalCtrl: ModalController,
-        public toastController: ToastController,
+        public toastService: ToastService,
         private planService: PlanService,
         private activeRoute: ActivatedRoute,
         private router: Router
@@ -153,11 +149,6 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
      * @param title
      */
     async presentToast(position, title) {
-        const toast = await this.toastController.create({
-            message: title,
-            duration: 2000,
-            position: position,
-        });
-        toast.present();
+        await this.toastService.showToast(title, position);
     }
 }

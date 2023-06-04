@@ -8,6 +8,9 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 export class AppStorageService {
     constructor(private storage: Storage) {}
 
+    /**
+     * Initializes the storage
+     */
     public async initializeStorage(): Promise<Storage> {
         await this.storage.defineDriver(CordovaSQLiteDriver);
         return await this.storage.create();

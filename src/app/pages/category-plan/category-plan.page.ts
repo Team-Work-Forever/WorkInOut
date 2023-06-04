@@ -20,13 +20,17 @@ export class CategoryPlanPage implements ViewWillEnter {
     constructor(private categoryService: CategoryService) {}
 
     async ionViewWillEnter() {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Present the symbol of loading
         this.isLoading = true;
 
+        // Get all Categories
         const categories = await this.categoryService.getAllCategories();
 
+        // Define all Categories
         this.cards = categories.map((cat) => {
             return {
                 id: cat.id,
@@ -37,14 +41,17 @@ export class CategoryPlanPage implements ViewWillEnter {
         });
 
         this.results = this.cards;
+
+        // End the loading
         this.isLoading = false;
     }
 
     /**
-     * Show the categories
+     * Show the categories by filter
      * @param filteredResults
      */
     handleResult(filteredResults: Card[]) {
+        // Make the results be the filteredResults
         this.results = filteredResults;
     }
 }

@@ -7,6 +7,7 @@ import {
 } from '@capacitor/screen-orientation';
 import { ViewWillEnter } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { MessageManagerService } from 'src/app/services/message-manager.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class LoginPage implements ViewWillEnter {
     constructor(
         private authenticationService: AuthenticationService,
         private toastService: ToastService,
+        private messageManager: MessageManagerService,
         private router: Router
     ) {}
 
@@ -46,7 +48,8 @@ export class LoginPage implements ViewWillEnter {
     async handleClick() {
         if (!this.authForm.valid) {
             this.toastService.showToast(
-                'Por favor, faça login fornecendo suas credenciais de acesso'
+                this.messageManager.getMessages().login.failNotification
+                    .ApplyCredentials
             );
             return;
         }
@@ -60,7 +63,8 @@ export class LoginPage implements ViewWillEnter {
 
         if (result) {
             this.toastService.showToast(
-                'Email ou palavra-passe incorretos. Por favor, verifique suas credenciais e tente novamente.'
+                this.messageManager.getMessages().login.failNotification
+                    .IncorrentCrentials
             );
             return;
         }

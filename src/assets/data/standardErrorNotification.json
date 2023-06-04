@@ -1,0 +1,34 @@
+{
+    "objects": {
+        "login": {
+            "successNotification": {},
+            "failNotification": {
+                "ApplyCredentials": "Por favor, faça login fornecendo suas credenciais de acesso",
+                "IncorrentCrentials": "Email ou palavra-passe incorretos. Por favor, verifique suas credenciais e tente novamente."
+            }
+        },
+        "plan": {
+            "successNotification": {
+                "CreatePlan": "Plano criado com sucesso!",
+                "SelectedPlan": "O plano de treino foi marcado com sucesso.",
+                "UnSelectedPlan": "O plano de treino foi desmarcado com sucesso.",
+                "PlanSchedualed": "Selecione uma data!"
+            },
+            "failNotification": {
+                "SchedualPlan": "O plano de treino foi agendado!",
+                "FailToSavePlan": "Erro ao salvar o plano: é necessário adicionar um título.",
+                "AddExercise": "Atenção: É necessário adicionar um exercício antes de prosseguir.",
+                "ErrorCreatingPlan": "Desculpe, ocorreu um erro ao criar o plano. Por favor, tente novamente mais tarde.",
+                "NecessaryToAddPlan": "Erro ao criar o plano: É necessário adicionar pelo menos um exercício."
+            }
+        },
+        "exercise": {
+            "successNotification": {
+                "TheExercisesWereAdded": "Os exercícios foram adicionados ao Plano!"
+            },
+            "failNotification": {
+                "PleaseSelectAnExercise": "Não tem nenhum exercício selecionado!"
+            }
+        }
+    }
+}

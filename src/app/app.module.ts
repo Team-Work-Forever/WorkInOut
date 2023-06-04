@@ -16,6 +16,7 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 import { AuthGuard } from './core/guard/auth.guard';
 import { getTheme } from 'src/utils/theme.utils';
 import { AppStorageService } from './services/app-storage.service';
+import { MessageManagerService } from './services/message-manager.service';
 
 registerLocaleData(localePt);
 register();
@@ -41,7 +42,10 @@ register();
     bootstrap: [AppComponent],
 })
 export class AppModule {
-    constructor(private _storage: AppStorageService, private router: Router) {
+    constructor(
+        private _storage: AppStorageService,
+        private _messageManager: MessageManagerService
+    ) {
         this.init().then();
     }
 
@@ -50,5 +54,7 @@ export class AppModule {
 
         const theme = (await storage.get('theme')) as boolean;
         document.body.setAttribute('color-theme', getTheme(theme));
+
+        this._messageManager.initializeMessageContext();
     }
 }

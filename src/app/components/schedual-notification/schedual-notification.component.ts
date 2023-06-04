@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MessageManagerService } from 'src/app/services/message-manager.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -7,7 +8,10 @@ import { ToastService } from 'src/app/services/toast.service';
     styleUrls: ['./schedual-notification.component.scss'],
 })
 export class SchedualNotificationComponent implements OnInit {
-    constructor(public toastService: ToastService) {}
+    constructor(
+        public toastService: ToastService,
+        private messageManager: MessageManagerService
+    ) {}
 
     @Input()
     public id: string;
@@ -52,7 +56,19 @@ export class SchedualNotificationComponent implements OnInit {
      * @param position
      * @param title
      */
-    async presentToast(position, title) {
-        await this.toastService.showToast(title, position);
+    async presentToast() {
+        if (!this.isSelected) {
+            await this.toastService.showToast(
+                this.messageManager.getMessages().plan.successNotification
+                    .UnSelectedPlan,
+                'top'
+            );
+        } else {
+            await this.toastService.showToast(
+                this.messageManager.getMessages().plan.successNotification
+                    .SelectedPlan,
+                'top'
+            );
+        }
     }
 }

@@ -12,6 +12,7 @@ import { HorizontalItem } from 'src/app/interfaces/horizontal-item.interface';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { ExerciseService } from 'src/app/services/exercise.service';
+import { MessageManagerService } from 'src/app/services/message-manager.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -37,6 +38,7 @@ export class AddPlanPage implements ViewWillEnter {
         private categoryService: CategoryService,
         private exerciseService: ExerciseService,
         private router: Router,
+        private messageManager: MessageManagerService,
         private activeRoute: ActivatedRoute
     ) {}
 
@@ -119,6 +121,7 @@ export class AddPlanPage implements ViewWillEnter {
             return;
         }
 
+        // Make the results be the filtered exercises
         this.results = filtedExercises.map((exe) => {
             return {
                 id: exe.id,
@@ -142,12 +145,14 @@ export class AddPlanPage implements ViewWillEnter {
             (item) => item.id === exercise.id
         );
 
+        // If the exercise exists in the selected exercises, it is removed
         if (index !== -1) {
             this.selectedItems.splice(index, 1);
         } else {
             this.selectedItems.push(exercise);
         }
 
+        // Change the duration of the plan
         this.checkDuration();
     }
 
@@ -168,16 +173,30 @@ export class AddPlanPage implements ViewWillEnter {
     }
 
     /**
-     * Present a notification
+     * Present a notification when button "Adicionar" is pressed
      * @param position
      * @param title
      * @returns
      */
-    async presentToast(position, title) {
-        await this.toastService.showToast(title, position);
+    async presentToast() {
+        if (this.isEmpty()) {
+            await this.toastService.showToast(
+                this.messageManager.getMessages().exercise.failNotification
+                    .PleaseSelectAnExercise,
+                'top'
+            );
+        } else {
+            await this.toastService.showToast(
+                this.messageManager.getMessages().exercise.successNotification
+                    .TheExercisesWereAdded,
+                'top'
+            );
+        }
 
+        // If the plan don't have any exercise selected return void
         if (this.selectedItems.length === 0) return;
 
+        // If the plan have selected exercices, navigate to the create page of the plan
         this.router.navigate(
             [
                 '/tabs/home/mine/create/' +

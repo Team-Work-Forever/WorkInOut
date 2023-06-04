@@ -40,10 +40,7 @@
             </ion-list>
         </div>
 
-        <ion-button
-            (click)="isEmpty() ? presentToast('top', 'Não tem nenhum exercício selecionado!') : presentToast('top', 'Os exercícios foram adicionados ao Plano!')"
-            class="create-btn"
-            expand="block"
+        <ion-button (click)="presentToast()" class="create-btn" expand="block"
             >Adicionar</ion-button
         >
     </div>

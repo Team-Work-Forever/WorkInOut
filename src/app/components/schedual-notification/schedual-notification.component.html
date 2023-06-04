@@ -1,15 +1,4 @@
-<div
-    (click)="toggleButton()"
-    (click)="
-        presentToast(
-            'top',
-            !isSelected
-                ? 'O plano de treino foi desmarcado com sucesso.'
-                : 'O plano de treino foi marcado com sucesso.'
-        )
-    "
-    class="notify"
->
+<div (click)="toggleButton()" (click)="presentToast()" class="notify">
     <div class="content">
         <span>{{ title }}</span>
         <span>{{ startDate }}</span>

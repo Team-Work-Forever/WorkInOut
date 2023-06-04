@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Plan } from 'src/app/models/plan.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { MessageManagerService } from 'src/app/services/message-manager.service';
 
 @Component({
     selector: 'schedual-selection',
@@ -25,6 +26,7 @@ export class SchedualSelectionComponent {
         public toastService: ToastService,
         private notificationService: NotificationService,
         private authenticationService: AuthenticationService,
+        private messageManager: MessageManagerService,
         private router: Router
     ) {}
 
@@ -90,7 +92,19 @@ export class SchedualSelectionComponent {
      * @param position
      * @param title
      */
-    async presentToast(position, title) {
-        await this.toastService.showToast(title, position);
+    async presentToast() {
+        if (this.selectedDate) {
+            await this.toastService.showToast(
+                this.messageManager.getMessages().plan.successNotification
+                    .PlanSchedualed,
+                'top'
+            );
+        } else {
+            await this.toastService.showToast(
+                this.messageManager.getMessages().plan.failNotification
+                    .SchedualPlan,
+                'top'
+            );
+        }
     }
 }

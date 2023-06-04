@@ -6,11 +6,7 @@
         <ion-buttons slot="end">
             <ion-button
                 (click)="confirm()"
-                (click)="
-                    selectedDate
-                        ? presentToast('top', 'O plano de treino foi agendado!')
-                        : presentToast('top', 'Selecione uma data!')
-                "
+                (click)="presentToast()"
                 [strong]="true"
                 >Agendar</ion-button
             >

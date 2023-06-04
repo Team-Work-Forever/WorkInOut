@@ -12,6 +12,7 @@ import { Category } from 'src/app/models/category.model';
 import { Plan } from 'src/app/models/plan.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { MessageManagerService } from 'src/app/services/message-manager.service';
 import { PlanService } from 'src/app/services/plan-service.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -34,10 +35,12 @@ export class CreatePlanPage implements ViewWillEnter {
         private categoryService: CategoryService,
         private authenticationService: AuthenticationService,
         private toastService: ToastService,
+        private messageManager: MessageManagerService,
         private router: Router
     ) {}
 
     async ionViewWillEnter() {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
@@ -124,14 +127,16 @@ export class CreatePlanPage implements ViewWillEnter {
     async createPlan() {
         if (this.planTitle.length === 0) {
             this.toastService.showToast(
-                'Erro ao salvar o plano: é necessário adicionar um título.'
+                this.messageManager.getMessages().plan.failNotification
+                    .FailToSavePlan
             );
             return;
         }
 
         if (this.choosenExercises.length === 0) {
             this.toastService.showToast(
-                'Atenção: É necessário adicionar um exercício antes de prosseguir.'
+                this.messageManager.getMessages().plan.failNotification
+                    .AddExercise
             );
             return;
         }
@@ -162,14 +167,16 @@ export class CreatePlanPage implements ViewWillEnter {
 
         if (!createdPlan) {
             this.toastService.showToast(
-                'Desculpe, ocorreu um erro ao criar o plano. Por favor, tente novamente mais tarde.'
+                this.messageManager.getMessages().plan.failNotification
+                    .ErrorCreatingPlan
             );
             return;
         }
 
         if (this.choosenExercises.length === 0) {
             this.toastService.showToast(
-                'Erro ao criar o plano: É necessário adicionar pelo menos um exercício.'
+                this.messageManager.getMessages().plan.failNotification
+                    .NecessaryToAddPlan
             );
             return;
         }
@@ -194,7 +201,10 @@ export class CreatePlanPage implements ViewWillEnter {
             })
         );
 
-        this.toastService.showToast('Plano criado com sucesso!');
+        this.toastService.showToast(
+            this.messageManager.getMessages().plan.successNotification
+                .CreatePlan
+        );
 
         this.router.navigate(['tabs/home/mine'], {
             skipLocationChange: true,

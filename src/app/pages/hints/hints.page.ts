@@ -25,13 +25,17 @@ export class HintsPage implements OnInit, ViewWillEnter {
     ) {}
 
     async ionViewWillEnter() {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Present the symbol of loading
         this.isLoading = true;
 
+        // Get all Hints
         const hints = await this.hintsService.getAllHints();
 
+        // Define all Hints
         this.hints = hints.map((hint) => {
             return {
                 id: hint.id,
@@ -42,6 +46,7 @@ export class HintsPage implements OnInit, ViewWillEnter {
             } as Hint;
         });
 
+        // End the loading
         this.isLoading = false;
     }
 
@@ -50,7 +55,7 @@ export class HintsPage implements OnInit, ViewWillEnter {
     }
 
     /**
-     * Show description the the hint by a modal
+     * Show description of the hint by a modal
      * @param description
      */
     async handleClick(description) {

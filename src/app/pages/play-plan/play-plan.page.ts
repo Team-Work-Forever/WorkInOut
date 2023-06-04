@@ -41,13 +41,17 @@ export class PlayPlanPage implements ViewWillEnter {
     ) {}
 
     async ionViewWillEnter() {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Present the symbol of loading
         this.isLoading = true;
 
+        // Collect the id of the plan
         const planId = this.activeRoute.snapshot.paramMap.get('id');
 
+        // Get plan of user by id collected
         this.plan = await this.planService.getPlanOfUserById(
             planId,
             this.authenticationService.getAuthUser()
@@ -57,10 +61,12 @@ export class PlayPlanPage implements ViewWillEnter {
             await this.planService.getCategoriesFromPlan(planId)
         );
 
+        // Get Exercises from plan collected
         this.exercises = await this.planService.getExercisesFromPlanById(
             planId
         );
 
+        // End the loading
         this.isLoading = false;
     }
 

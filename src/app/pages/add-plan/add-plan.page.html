@@ -21,6 +21,7 @@
         <ion-searchbar
             placeholder="Pesquisar"
             [debounce]="1000"
+            (ionInput)="handleChange($event)"
         ></ion-searchbar>
 
         <horizontal-slider

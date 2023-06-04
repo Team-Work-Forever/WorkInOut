@@ -56,9 +56,7 @@ export class SchedualSelectionComponent {
 
         await this.closeModal('confirm');
 
-        this.router.navigate([
-            '/tabs/schedule/' + JSON.stringify(this.selectedDate),
-        ]);
+        this.router.navigate(['/tabs/schedule']);
     }
 
     /**

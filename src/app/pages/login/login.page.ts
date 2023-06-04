@@ -35,6 +35,7 @@ export class LoginPage implements ViewWillEnter {
     ) {}
 
     ionViewWillEnter(): void {
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
@@ -53,22 +54,28 @@ export class LoginPage implements ViewWillEnter {
             );
             return;
         }
+
+        // Present the symbol of loading
         this.isLoading = true;
 
         const result = await this.authenticationService.authenticate(
             this.authForm.value.email,
             this.authForm.value.password
         );
+
+        // End the loading
         this.isLoading = false;
 
+        // If credentials are't valid
         if (result) {
             this.toastService.showToast(
                 this.messageManager.getMessages().login.failNotification
-                    .IncorrentCrentials
+                    .IncorrentCredentials
             );
             return;
         }
 
+        // Navigate to home page of user authenticated
         this.router.navigate(['/tabs/home'], {
             skipLocationChange: true,
             replaceUrl: true,

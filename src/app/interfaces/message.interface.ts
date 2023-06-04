@@ -3,7 +3,7 @@ export interface Message {
         successNotification: {};
         failNotification: {
             ApplyCredentials: string;
-            IncorrentCrentials: string;
+            IncorrentCredentials: string;
         };
     };
     plan: {

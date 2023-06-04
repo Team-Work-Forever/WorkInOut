@@ -60,23 +60,30 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
     }
 
     async ionViewWillEnter() {
-        this.isLoading = true;
-
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Present the symbol of loading
+        this.isLoading = true;
+
+        // Collect the id of the plan
         const planId = this.activeRoute.snapshot.paramMap.get('id');
 
+        // Get plan by id collected
         this.plan = await this.planService.getPlanById(planId);
 
+        // Get categories from plan
         this.categories.next(
             await this.planService.getCategoriesFromPlan(planId)
         );
 
+        // Get exercises from plan
         this.exercises = await this.planService.getExercisesFromPlanById(
             planId
         );
 
+        // Get all materials
         const getMaterials = await fetch('./assets/data/materials.json');
 
         this.imageContainer = [
@@ -95,6 +102,7 @@ export class InfoPlanPage implements OnInit, ViewWillEnter {
         this.results = this.exercises;
         this.resultsImageCont = this.imageContainer;
 
+        // End the loading
         this.isLoading = false;
     }
 

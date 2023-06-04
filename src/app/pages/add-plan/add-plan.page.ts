@@ -211,4 +211,16 @@ export class AddPlanPage implements ViewWillEnter {
             }
         );
     }
+
+    handleChange(event: any) {
+        const searchTerm = event.target.value;
+        if (searchTerm && searchTerm.trim() !== '') {
+            const filteredResults = this.results.filter((option) =>
+                option.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            this.results = filteredResults;
+        } else {
+            this.results = this.exercices;
+        }
+    }
 }

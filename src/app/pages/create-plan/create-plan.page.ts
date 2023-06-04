@@ -44,8 +44,10 @@ export class CreatePlanPage implements ViewWillEnter {
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Collect the id of the plan
         const info = this.activeRoute.snapshot.paramMap.get('plan');
 
+        // If route paramter is 'nocontent' ignore the value else accepts the paramter value
         const plan =
             info != 'nocontent' ? (JSON.parse(info) as CreateRouteProps) : '';
 
@@ -73,11 +75,14 @@ export class CreatePlanPage implements ViewWillEnter {
                 });
             }
 
+            // Change the duration of the plan by the exercises choosen
             this.duration = this.choosenExercises.reduce(
                 (sum, item) => sum + item.duration,
                 0
             );
             this.sendCategories.next(this.categories);
+
+            // If the user don't give any title to the plan, the plan is crated with title 'Novo Plano'
             this.planTitle = plan ? plan.title : 'Novo Plano';
         }
     }
@@ -143,6 +148,7 @@ export class CreatePlanPage implements ViewWillEnter {
 
         let bestCategory: Category | null = null;
 
+        // Tries to collect the Category with more quantity of exercices
         this.categories.forEach((cat) => {
             if (!bestCategory || cat.qty > bestCategory.qty) {
                 bestCategory = cat;
@@ -151,6 +157,7 @@ export class CreatePlanPage implements ViewWillEnter {
 
         const cat = await this.categoryService.getCategoryById(bestCategory.id);
 
+        // Create's an plan with the sum of the duration of the exercises added to the plan
         const createdPlan = await this.planService.createPlan(
             {
                 badge: cat.badge,
@@ -181,6 +188,7 @@ export class CreatePlanPage implements ViewWillEnter {
             return;
         }
 
+        // Add Exercises to the plan
         await this.planService.addExercises(
             createdPlan,
             this.choosenExercises.map((item) => {
@@ -191,6 +199,7 @@ export class CreatePlanPage implements ViewWillEnter {
             })
         );
 
+        // Add Categories to the plan
         await this.planService.addCategories(
             createdPlan,
             this.categories.map((cat) => {
@@ -206,6 +215,7 @@ export class CreatePlanPage implements ViewWillEnter {
                 .CreatePlan
         );
 
+        // When plan created the user is send to my plans page
         this.router.navigate(['tabs/home/mine'], {
             skipLocationChange: true,
             replaceUrl: true,

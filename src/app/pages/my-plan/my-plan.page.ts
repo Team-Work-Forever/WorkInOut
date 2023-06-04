@@ -47,18 +47,23 @@ export class MyPlanPage implements ViewWillEnter {
     ) {}
 
     async ionViewWillEnter() {
-        this.isLoading = true;
-
+        // This lock the device on the portrait orientation
         const options: OrientationLockOptions = { orientation: 'portrait' };
         ScreenOrientation.lock(options);
 
+        // Present the symbol of loading
+        this.isLoading = true;
+
+        // Collect all Categories
         const categories = await this.categoryService.getAllCategories();
 
+        // Collect all Plans from user
         const plans = await this.planService.getAllPlanOfUser({
             userId: this.authenticationService.getAuthUser().userId,
             email: '',
         });
 
+        // Define all Plans
         this.cards = plans.map((plan) => {
             return {
                 id: plan.id,
@@ -69,6 +74,7 @@ export class MyPlanPage implements ViewWillEnter {
             } as Card;
         });
 
+        // Define all Categories
         this.categories = categories.map((cat) => {
             return {
                 id: cat.id,
@@ -77,6 +83,7 @@ export class MyPlanPage implements ViewWillEnter {
             } as HorizontalItem;
         });
 
+        // End the loading
         this.isLoading = false;
     }
 
@@ -100,11 +107,13 @@ export class MyPlanPage implements ViewWillEnter {
                 selectedCategories
             );
 
+        // If all categories are unselected, present all the plans
         if (selectedCategories.length === 0) {
             this.results = [];
             return;
         }
 
+        // Make the results be the filtered plans
         this.results = filteredPlans.map((plan) => {
             return {
                 id: plan.id,

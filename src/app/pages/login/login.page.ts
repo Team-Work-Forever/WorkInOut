@@ -81,8 +81,4 @@ export class LoginPage implements ViewWillEnter {
             replaceUrl: true,
         });
     }
-
-    async handleGoogle() {
-        await this.authenticationService.authenticateWithGoogle();
-    }
 }
